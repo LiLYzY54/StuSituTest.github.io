@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教培机构新生入学综合评估系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .score-btn {
+            transition: all 0.2s ease;
+        }
+        .score-btn.selected {
+            background-color: #d97706;
+            color: white;
+            border-color: #d97706;
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .tab-btn.active {
+            border-bottom: 4px solid #d97706;
+            color: #d97706;
+            font-weight: 600;
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fcf8f3',
+                            100: '#f8efe3',
+                            500: '#d97706',
+                            600: '#b45309',
+                            900: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-50 text-stone-800 font-sans antialiased min-h-screen pb-12">
+
+    <!-- Chosen Palette: Warm Neutrals with Amber Accents (Brand 50-900, Stone 800) to convey a supportive, professional, and calm educational environment. -->
+
+    <!-- Application Structure Plan: A two-column interactive dashboard structure was chosen. The left column acts as the operational assessment tool (the "input"), allowing evaluators to score items dynamically. The right column is the insights dashboard (the "output"), providing real-time visual feedback via a Radar chart and dynamically updating the pedagogical recommendations based on the live score. This structure transforms a static report into an actionable, real-time diagnostic tool, making the complex data instantly comprehensible and ready for parent consultations. -->
+
+    <!-- Visualization & Content Choices:
+         - Goal: Compare dimensions / Show profile -> Radar Chart (Chart.js, Canvas). Justification: A radar chart is ideal for showing a student's multi-dimensional skill profile (e.g., strong in logic, weak in focus), making strengths and weaknesses visually obvious at a glance.
+         - Goal: Inform / Actionable Insights -> Dynamic Text Blocks (Vanilla JS). Justification: Translates the numerical score instantly into the "Cultivation Plan" from the source report, ensuring the evaluator immediately has the right language for parent communication.
+         - Interaction -> Clickable scoring buttons updating state. Justification: Encourages active engagement from the evaluator and provides an immediate sense of cause-and-effect as the chart and recommendations morph. -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header class="bg-white shadow-sm border-b border-stone-200 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-3xl">🌱</span>
+                <h1 class="text-xl md:text-2xl font-bold text-brand-900">新生入学综合评估系统</h1>
+            </div>
+            <div class="text-sm text-stone-500 hidden md:block">科学评估 • 发现优势 • 定制方案</div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+
+        <div class="bg-white rounded-t-xl shadow-sm border-b border-stone-200 px-6 py-2 flex gap-8">
+            <button id="tab-toddler" class="tab-btn active py-4 text-lg text-stone-500 hover:text-brand-500 transition-colors" onclick="switchTab('toddler')">
+                👶 幼儿阶段 (3-6岁)
+            </button>
+            <button id="tab-primary" class="tab-btn py-4 text-lg text-stone-500 hover:text-brand-500 transition-colors" onclick="switchTab('primary')">
+                🏫 小学阶段 (7-12岁)
+            </button>
+        </div>
+
+        <main class="bg-white rounded-b-xl shadow-sm p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-10 min-h-[600px]">
+
+            <section class="lg:col-span-7 flex flex-col h-full">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-stone-800 mb-2" id="section-title">测评项目交互面板</h2>
+                    <p class="text-stone-600 leading-relaxed" id="section-desc">
+                        本区域为核心评估操作区。请测评师根据互动观察结果，为每个能力维度下的具体指标进行客观打分（1分:萌芽, 2分:发展, 3分:优势）。您的每一次点击都将实时更新右侧的能力画像与培养建议。
+                    </p>
+                </div>
+
+                <div class="bg-brand-50 p-4 rounded-lg border border-brand-100 mb-6 flex justify-between items-center">
+                    <span class="font-medium text-brand-900">评估说明：</span>
+                    <div class="flex gap-4 text-sm">
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-stone-200"></span> 1分: 萌芽/蓄能</span>
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-brand-100"></span> 2分: 发展/成长期</span>
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-brand-500"></span> 3分: 优势闪光点</span>
+                    </div>
+                </div>
+
+                <div id="assessment-container" class="space-y-8 overflow-y-auto pr-2 pb-8 fade-in">
+                </div>
+            </section>
+
+            <aside class="lg:col-span-5 flex flex-col gap-6 lg:border-l border-stone-100 lg:pl-10">
+
+                <div>
+                    <h2 class="text-2xl font-bold text-stone-800 mb-2">多维能力动态画像</h2>
+                    <p class="text-stone-500 text-sm mb-4">本区域实时呈现各项指标的雷达图谱与综合得分，帮助直观定位孩子的优势与待发力点。</p>
+
+                    <div class="bg-white border border-stone-200 rounded-xl p-4 shadow-sm relative">
+                        <div class="absolute top-4 right-4 text-center">
+                            <div class="text-xs text-stone-500 mb-1">当前总分</div>
+                            <div class="text-3xl font-bold text-brand-500" id="total-score-display">0<span class="text-sm text-stone-400 font-normal">/75</span></div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-grow">
+                    <h3 class="text-xl font-bold text-stone-800 mb-3 flex items-center gap-2">
+                        <span>🎯</span> 专属培养规划与建议
+                    </h3>
+                    <div id="recommendation-panel" class="bg-stone-50 border border-stone-200 rounded-xl p-6 h-full transition-all duration-300">
+                        <div class="flex flex-col items-center justify-center h-full text-stone-400 text-center space-y-3 py-10" id="empty-state">
+                            <span class="text-4xl">📝</span>
+                            <p>请在左侧完成各项指标的评估打分<br>系统将自动生成定制化的培养规划</p>
+                        </div>
+                        <div id="result-content" class="hidden fade-in">
+                            <div class="inline-block px-3 py-1 rounded-full text-sm font-bold mb-4" id="result-badge"></div>
+                            <h4 class="font-bold text-lg text-stone-800 mb-2">评估结果剖析：</h4>
+                            <p class="text-stone-600 mb-4 leading-relaxed" id="result-analysis"></p>
+                            <h4 class="font-bold text-lg text-stone-800 mb-2">定制培养建议：</h4>
+                            <p class="text-stone-600 leading-relaxed" id="result-advice"></p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script>
+        const appData = {
+            toddler: {
+                title: "幼儿阶段（3-6岁）学前核心能力与行为观察表",
+                desc: "测试形式：一对一游戏化互动。测评师通过趣味教具引导孩子完成任务，全程在轻松无压力的氛围中进行。重点观察孩子的认知发展、专注力、表达能力与情绪适应。",
+                dimensions: [
+                    {
+                        name: "基础认知与逻辑",
+                        items: ["颜色与形状辨识", "数量与对应", "大小与排序", "类概念分类", "规律发现(新增)"]
+                    },
+                    {
+                        name: "语言与听觉加工",
+                        items: ["多步指令记忆", "图画表达力", "因果逻辑表达", "故事排序(新增)", "发音与清晰度"]
+                    },
+                    {
+                        name: "精细动作与空间",
+                        items: ["手眼协调（穿珠）", "空间拼搭模仿", "运笔与握姿", "折纸模仿(新增)", "轨迹控制（迷宫）"]
+                    },
+                    {
+                        name: "专注力与行为习惯",
+                        items: ["持续专注时长", "抗干扰能力", "指令转换抑制(新增)", "面对挑战的韧性", "规则与配合度"]
+                    },
+                    {
+                        name: "社交与情绪发展",
+                        items: ["目光与互动", "情绪认知(新增)", "环境适应力", "情绪稳定性", "延迟满足与等待"]
+                    }
+                ],
+                thresholds: [
+                    {
+                        min: 65, max: 75,
+                        label: "能力卓越 / 优势突显",
+                        color: "bg-green-100 text-green-800",
+                        analysis: "孩子在认知发展、专注时间以及规则理解上展现出了非常棒的成熟度。TA拥有一颗充满好奇的心，逻辑思维清晰，语言表达生动，具备了极佳的求知欲和学习起点。",
+                        advice: "针对这样具备优势的孩子，我们建议提供更具启发性和探索性的课程（如高阶思维拓展、绘本戏剧表达）。我们的目标是保护TA宝贵的好奇心，提供更广阔的知识视野，让孩子在充满挑战的乐趣中持续闪耀。"
+                    },
+                    {
+                        min: 48, max: 64,
+                        label: "稳步发展 / 潜力待发",
+                        color: "bg-blue-100 text-blue-800",
+                        analysis: "孩子的整体发育非常符合适龄标准，活泼可爱，性格阳光。在大部分环节表现优良，同时我们在某些特定领域看到了孩子巨大的进步空间。",
+                        advice: "孩子就像一块吸收力极强的海绵，只需稍加引导就能突飞猛进。我们建议在趣味常规课程中，有意识地融入专项能力的锻炼。例如通过有趣的动手游戏增强手指力量，通过“阶梯式专注力游戏”延长孩子的专注时长，帮助孩子从容自信地向小学阶段过渡。"
+                    },
+                    {
+                        min: 0, max: 47,
+                        label: "习惯萌芽期 / 需耐心引导",
+                        color: "bg-orange-100 text-orange-800",
+                        analysis: "孩子目前正处于各项能力快速发育的萌芽阶段，在注意力集中时长、指令理解或集体规则意识方面，还需要我们给予更多的支持和耐心。此时的TA更需要一个充满鼓励的环境来建立安全感。",
+                        advice: "现阶段不宜急于进行知识层面的灌输。我们建议从最基础的“习惯养成”和“感觉统合游戏”入手，优先安排互动性强、充满鼓励的基础学能课程。让我们与家庭携手，通过温柔而坚定的引导，先帮孩子建立起良好的倾听习惯和充足的学习自信心。"
+                    }
+                ]
+            },
+            primary: {
+                title: "小学阶段（7-12岁）学力基础与学习习惯测评表",
+                desc: "测试形式：微型素养体验卷结合深度观察与互动面谈。不以分数论英雄，更看重孩子的解题思维过程、学习习惯细节及面对新知的态度，挖掘隐性学习素养。",
+                dimensions: [
+                    {
+                        name: "视觉与听觉信息处理",
+                        items: ["视觉追踪与流畅度", "视觉分辨与细节捕捉", "视觉广度与记忆(新增)", "听觉工作记忆", "听觉理解与提炼"]
+                    },
+                    {
+                        name: "学科核心素养",
+                        items: ["计算流畅与准确度", "生活应用计算", "图文信息提取(新增)", "阅读复述与概括", "书写规范与卷面"]
+                    },
+                    {
+                        name: "逻辑思维与规划",
+                        items: ["规律推理", "空间想象力(新增)", "多步任务规划(新增)", "草稿纸使用习惯", "逻辑归纳与总结(补充)"]
+                    },
+                    {
+                        name: "专注力与执行功能",
+                        items: ["任务启动效率", "作业沉浸度", "自我复查意识", "体态与核心力量", "抗疲劳与持续力(补充)"]
+                    },
+                    {
+                        name: "情绪管理与内驱力",
+                        items: ["面对挑战的韧性", "学习归因与认知(面谈)", "纠错心态与修复", "时间观念测评", "目标感与自信度(面谈)"]
+                    }
+                ],
+                thresholds: [
+                    {
+                        min: 64, max: 75,
+                        label: "自驱型学习者 / 基础扎实",
+                        color: "bg-green-100 text-green-800",
+                        analysis: "孩子不仅基础知识扎实，更难得的是具备了非常优秀的视听信息处理效率和成熟的学习习惯。TA思维活跃，拥有良好的时间观念和自我管理能力，学习的内在驱动力很强。",
+                        advice: "简单的重复练习会浪费TA的才华。我们将为其匹配“培优与素养拔高”体系，重点提供思维深度拓展、跨学科知识融合及高阶题型解析，帮助孩子开阔视野，在更高维度的竞争中建立绝对优势。"
+                    },
+                    {
+                        min: 45, max: 63,
+                        label: "潜力蓄力股 / 优化方法",
+                        color: "bg-blue-100 text-blue-800",
+                        analysis: "孩子的理解能力和智力基础都非常棒，是一支充满希望的“潜力股”。但目前在某些“深层学习习惯”或“执行效率”上存在一些干扰项，导致成绩未能完全反映其实际水平。",
+                        advice: "知识的梳理与好习惯的养成需要双管齐下。我们的课程在巩固学科知识的同时，将督促并强化其“规范使用草稿”、“定时专注法”和“主动复查纠错”等高效学习习惯。只要稍微调整方法，孩子一定会带来惊喜。"
+                    },
+                    {
+                        min: 0, max: 44,
+                        label: "蓄力成长阶段 / 系统引导",
+                        color: "bg-orange-100 text-orange-800",
+                        analysis: "孩子目前在学习上感受到了一些压力。这并非不够聪明，往往是因为底层的视觉/听觉加工效率有待提升，或是尚未掌握适合的方法，导致注意力涣散，产生了畏难情绪。",
+                        advice: "盲目增加作业量会增加心理负担。建议从基础“学能唤醒”做起，通过拆解学习任务、降低初期门槛，先帮孩子找回成就感和自信心。我们将逐步规范课堂纪律与作业习惯，陪伴孩子跨过这道坎。"
+                    }
+                ]
+            }
+        };
+
+        let currentTab = 'toddler';
+        let scores = {};
+        let radarChartInstance = null;
+
+        function initApp() {
+            initChart();
+            switchTab('toddler');
+        }
+
+        function switchTab(tabId) {
+            currentTab = tabId;
+
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+
+            const data = appData[tabId];
+            document.getElementById('section-title').textContent = data.title;
+            document.getElementById('section-desc').textContent = data.desc;
+
+            scores = {};
+            data.dimensions.forEach((dim, dIdx) => {
+                scores[dIdx] = {};
+                dim.items.forEach((item, iIdx) => {
+                    scores[dIdx][iIdx] = 0;
+                });
+            });
+
+            renderAssessmentTable();
+            updateDashboard();
+        }
+
+        function renderAssessmentTable() {
+            const container = document.getElementById('assessment-container');
+            container.innerHTML = '';
+            container.classList.remove('fade-in');
+            void container.offsetWidth;
+            container.classList.add('fade-in');
+
+            appData[currentTab].dimensions.forEach((dim, dimIndex) => {
+                const section = document.createElement('div');
+                section.className = 'bg-white border border-stone-200 rounded-xl overflow-hidden';
+
+                const header = document.createElement('div');
+                header.className = 'bg-stone-50 px-5 py-3 border-b border-stone-200 font-bold text-stone-800 flex justify-between items-center';
+                header.innerHTML = `<span>维度 ${dimIndex + 1}: ${dim.name}</span> <span class="text-brand-600 text-sm font-normal" id="dim-score-${dimIndex}">0/15 分</span>`;
+                section.appendChild(header);
+
+                const list = document.createElement('ul');
+                list.className = 'divide-y divide-stone-100';
+
+                dim.items.forEach((item, itemIndex) => {
+                    const li = document.createElement('li');
+                    li.className = 'p-4 sm:px-5 hover:bg-stone-50 transition-colors flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3';
+
+                    const itemText = document.createElement('div');
+                    itemText.className = 'text-stone-700 font-medium';
+                    itemText.textContent = item;
+
+                    const btnGroup = document.createElement('div');
+                    btnGroup.className = 'flex gap-2';
+
+                    [1, 2, 3].forEach(val => {
+                        const btn = document.createElement('button');
+                        btn.className = `score-btn flex-1 sm:flex-none w-12 h-10 rounded border border-stone-300 text-stone-600 font-medium hover:border-brand-500 hover:text-brand-500`;
+                        btn.textContent = val;
+                        btn.onclick = () => handleScoreSelect(dimIndex, itemIndex, val, btnGroup);
+                        btnGroup.appendChild(btn);
+                    });
+
+                    li.appendChild(itemText);
+                    li.appendChild(btnGroup);
+                    list.appendChild(li);
+                });
+
+                section.appendChild(list);
+                container.appendChild(section);
+            });
+        }
+
+        function handleScoreSelect(dimIndex, itemIndex, value, btnGroup) {
+            Array.from(btnGroup.children).forEach(btn => btn.classList.remove('selected'));
+            btnGroup.children[value - 1].classList.add('selected');
+
+            scores[dimIndex][itemIndex] = value;
+
+            let dimTotal = 0;
+            for(let key in scores[dimIndex]) {
+                dimTotal += scores[dimIndex][key];
+            }
+            document.getElementById(`dim-score-${dimIndex}`).textContent = `${dimTotal}/15 分`;
+
+            updateDashboard();
+        }
+
+        function calculateDimensionScores() {
+            const data = appData[currentTab];
+            return data.dimensions.map((dim, index) => {
+                let total = 0;
+                for (let i in scores[index]) {
+                    total += scores[index][i];
+                }
+                return total;
+            });
+        }
+
+        function updateDashboard() {
+            const dimScores = calculateDimensionScores();
+            const totalScore = dimScores.reduce((a, b) => a + b, 0);
+
+            document.getElementById('total-score-display').innerHTML = `${totalScore}<span class="text-sm text-stone-400 font-normal">/75</span>`;
+
+            radarChartInstance.data.labels = appData[currentTab].dimensions.map(d => d.name.split("与")[0]);
+            radarChartInstance.data.datasets[0].data = dimScores;
+            radarChartInstance.update();
+
+            updateRecommendation(totalScore);
+        }
+
+        function updateRecommendation(totalScore) {
+            const emptyState = document.getElementById('empty-state');
+            const resultContent = document.getElementById('result-content');
+
+            if (totalScore === 0) {
+                emptyState.style.display = 'flex';
+                resultContent.classList.add('hidden');
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            resultContent.classList.remove('hidden');
+
+            const thresholds = appData[currentTab].thresholds;
+            let currentLevel = thresholds[thresholds.length - 1];
+
+            for (let t of thresholds) {
+                if (totalScore >= t.min && totalScore <= t.max) {
+                    currentLevel = t;
+                    break;
+                }
+            }
+
+            const badge = document.getElementById('result-badge');
+            badge.className = `inline-block px-3 py-1 rounded-full text-sm font-bold mb-4 ${currentLevel.color}`;
+            badge.textContent = currentLevel.label;
+
+            document.getElementById('result-analysis').textContent = currentLevel.analysis;
+            document.getElementById('result-advice').textContent = currentLevel.advice;
+
+            resultContent.classList.remove('fade-in');
+            void resultContent.offsetWidth;
+            resultContent.classList.add('fade-in');
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+
+            Chart.defaults.font.family = "'system-ui', '-apple-system', 'sans-serif'";
+            Chart.defaults.color = '#78716c';
+
+            radarChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['', '', '', '', ''],
+                    datasets: [{
+                        label: '能力评估值',
+                        data: [0, 0, 0, 0, 0],
+                        backgroundColor: 'rgba(217, 119, 6, 0.2)',
+                        borderColor: 'rgba(217, 119, 6, 0.8)',
+                        pointBackgroundColor: '#d97706',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#d97706',
+                        borderWidth: 2,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.05)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                            pointLabels: {
+                                font: { size: 12, weight: '600' },
+                                color: '#57534e'
+                            },
+                            ticks: {
+                                min: 0,
+                                max: 15,
+                                stepSize: 5,
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(28, 25, 23, 0.9)',
+                            titleFont: { size: 13 },
+                            bodyFont: { size: 13 },
+                            padding: 10,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    return `得分: ${context.raw} / 15`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
