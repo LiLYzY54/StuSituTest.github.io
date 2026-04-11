@@ -345,6 +345,83 @@
         .print-report {
             display: none;
         }
+        #print-report .print-shell {
+            border: 1px solid #eadfd2 !important;
+            background: linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(255, 255, 255, 1)) !important;
+            box-shadow: 0 24px 54px -44px rgba(120, 53, 15, 0.3) !important;
+        }
+        #print-report .print-card,
+        #print-report .print-grid-card {
+            border: 1.4px solid #e7d7c7 !important;
+            background: linear-gradient(180deg, rgba(255, 251, 235, 0.92), rgba(255, 255, 255, 0.98)) !important;
+            box-shadow: 0 18px 34px -30px rgba(120, 53, 15, 0.28) !important;
+        }
+        #print-report #print-dimensions > div,
+        #print-report #print-interactive-list > div,
+        #print-report #print-strengths-list > div,
+        #print-report #print-evidence-list > div,
+        #print-report #print-course-list > div {
+            border: 1.2px solid #ead7c2 !important;
+            background: #fffaf5 !important;
+            box-shadow: 0 12px 22px -24px rgba(120, 53, 15, 0.22) !important;
+        }
+        #print-report .rounded-2xl.bg-brand-50 {
+            border: 1.2px solid #f0d8b3 !important;
+            background: linear-gradient(180deg, rgba(255, 247, 237, 1), rgba(255, 252, 247, 1)) !important;
+        }
+        #print-report .print-shell .mt-6 {
+            margin-top: 1rem !important;
+        }
+        #print-report .print-shell .mt-5 {
+            margin-top: 0.9rem !important;
+        }
+        #print-report .print-shell .mt-4 {
+            margin-top: 0.75rem !important;
+        }
+        #print-report .print-shell .gap-6 {
+            gap: 1rem !important;
+        }
+        #print-report .print-shell .gap-4 {
+            gap: 0.8rem !important;
+        }
+        #print-report .print-shell .p-6 {
+            padding: 1rem !important;
+        }
+        #print-report .print-shell .p-5 {
+            padding: 0.95rem !important;
+        }
+        #print-report .print-shell .p-4 {
+            padding: 0.82rem !important;
+        }
+        #print-report #print-chart-image {
+            max-width: 260px !important;
+            padding: 0.75rem !important;
+        }
+        body.pdf-exporting {
+            background: white !important;
+        }
+        body.pdf-exporting > header,
+        body.pdf-exporting > .max-w-7xl {
+            visibility: hidden;
+        }
+        body.pdf-exporting #print-report {
+            display: block !important;
+            position: fixed;
+            inset: 0;
+            overflow: auto;
+            padding: 16px;
+            background: white;
+            z-index: 60;
+        }
+        body.pdf-exporting #print-report .print-shell {
+            max-width: 960px;
+            margin: 0 auto 18px;
+        }
+        body.pdf-exporting #print-report .print-card,
+        body.pdf-exporting #print-report .print-grid-card {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -372,13 +449,11 @@
             }
             #print-report {
                 display: block !important;
-                padding: 24px;
+                padding: 16px;
                 color: #1c1917;
             }
             #print-report .print-shell {
-                border: none !important;
-                box-shadow: none !important;
-                padding: 0 !important;
+                padding: 1rem !important;
                 margin: 0 !important;
             }
             #print-report .print-card,
@@ -482,7 +557,7 @@
             <div class="lg:col-span-5 grid gap-4">
                 <div class="trust-card">
                     <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">本次测评如何进行</div>
-                    <div class="mt-3 text-lg font-bold text-stone-900" id="trust-method">观察量表 + 游戏互动 + 教师现场记录</div>
+                    <div class="mt-3 text-lg font-bold text-stone-900" id="trust-method">观察量表 + 游戏互动 + 家长自主记录</div>
                     <div class="mt-3 space-y-2 text-sm leading-7 text-stone-600" id="trust-points"></div>
                 </div>
                 <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
@@ -506,7 +581,7 @@
                             <div class="section-kicker">测评执行区</div>
                             <h2 class="mt-3 text-2xl font-bold text-stone-900" id="section-title">测评项目交互面板</h2>
                             <p class="mt-3 max-w-3xl text-sm leading-7 text-stone-600" id="section-desc">
-                                本区域为核心评估操作区。请测评师根据互动观察结果，为每个能力维度下的具体指标进行客观打分。系统会同步整合观察量表、互动题表现和结果说明。
+                                本区域为核心评估操作区。请家长根据孩子本次作答表现，为每个能力维度下的具体指标进行评分。系统会同步整合作答分值、互动题表现和结果说明。
                             </p>
                         </div>
                         <div class="summary-card max-w-sm">
@@ -519,19 +594,19 @@
 
                     <div class="mt-6 rounded-2xl border border-brand-100 bg-brand-50/80 p-4">
                         <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                            <span class="font-medium text-brand-900">老师现场记录方式：</span>
+                            <span class="font-medium text-brand-900">分值说明：</span>
                             <div class="grid gap-3 md:grid-cols-3">
                                 <div class="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm">
-                                    <div class="font-bold text-stone-800">需支持</div>
-                                    <div class="mt-1 text-stone-500">需要更多引导或提醒</div>
+                                    <div class="font-bold text-stone-800">1 分</div>
+                                    <div class="mt-1 text-stone-500">完成较困难或不够稳定</div>
                                 </div>
                                 <div class="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm">
-                                    <div class="font-bold text-stone-800">发展中</div>
-                                    <div class="mt-1 text-stone-500">能力正在建立和稳定</div>
+                                    <div class="font-bold text-stone-800">2 分</div>
+                                    <div class="mt-1 text-stone-500">基本完成，但稳定度一般</div>
                                 </div>
                                 <div class="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm">
-                                    <div class="font-bold text-stone-800">表现较好</div>
-                                    <div class="mt-1 text-stone-500">本次表现更成熟稳定</div>
+                                    <div class="font-bold text-stone-800">3 分</div>
+                                    <div class="mt-1 text-stone-500">完成较好，表现更稳定</div>
                                 </div>
                             </div>
                         </div>
@@ -558,7 +633,7 @@
                             <div class="mt-4 progress-track">
                                 <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
                             </div>
-                            <p class="mt-3 text-sm leading-7 text-stone-600" id="progress-tip">完成任一模块后，系统会同步更新现场观察摘要。</p>
+                            <p class="mt-3 text-sm leading-7 text-stone-600" id="progress-tip">完成任一模块后，系统会同步更新本次测评摘要。</p>
                         </div>
 
                         <div class="summary-card">
@@ -575,7 +650,7 @@
                             <div class="flex items-start justify-between gap-4">
                                 <div>
                                     <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">能力图谱</div>
-                                    <div class="mt-2 text-sm leading-7 text-stone-600">图谱仅反映本次现场表现，会受到熟悉度、情绪和兴趣影响。</div>
+                                    <div class="mt-2 text-sm leading-7 text-stone-600">图谱仅反映本次测评中的作答表现，会受到熟悉度、情绪和兴趣影响。</div>
                                 </div>
                                 <div class="text-right">
                                     <div class="text-xs text-stone-500">当前记录得分</div>
@@ -602,7 +677,7 @@
             <div>
                 <div class="section-kicker">正式成长报告</div>
                 <h2 class="mt-3 text-2xl font-bold text-stone-900">本次成长观察结论</h2>
-                <p class="mt-3 max-w-3xl text-sm leading-7 text-stone-600">系统会结合观察量表、游戏互动题和教师现场记录，整理出更容易被家长理解和信任的结论、依据与建议。</p>
+                <p class="mt-3 max-w-3xl text-sm leading-7 text-stone-600">系统会结合观察量表、游戏互动题和家长填写记录，整理出更容易理解和回顾的结论、依据与建议。</p>
             </div>
 
             <div id="recommendation-panel" class="mt-6">
@@ -665,7 +740,7 @@
                             <div>
                                 <h3 class="text-2xl font-bold text-stone-900">更适合优先安排的课程方向</h3>
                                 <p class="mt-3 max-w-3xl text-sm leading-7 text-stone-600" id="course-match-intro">
-                                    基于本次观察，下面这些方向更适合作为后续系统支持的优先选择，也更方便老师持续跟进孩子的变化。
+                                    基于本次测评，下面这些方向更适合作为后续系统支持的优先选择，也更方便后续安排更有针对性的课程支持。
                                 </p>
                             </div>
                             <div class="rounded-2xl bg-brand-50 px-4 py-3 text-sm font-bold text-brand-700">
@@ -731,8 +806,16 @@
             </div>
 
             <div class="print-card mt-6 rounded-2xl border border-stone-200 bg-white p-6">
-                <h2 class="text-xl font-bold text-stone-900">更适合优先安排的课程方向</h2>
-                <div id="print-course-list" class="mt-4 space-y-3"></div>
+                <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-stone-900">更适合优先安排的课程方向</h2>
+                        <p id="print-course-intro" class="mt-3 max-w-3xl text-sm leading-7 text-stone-600"></p>
+                    </div>
+                    <div class="rounded-2xl bg-brand-50 px-4 py-3 text-sm font-bold text-brand-700">
+                        建议优先做阶段性系统支持
+                    </div>
+                </div>
+                <div id="print-course-list" class="mt-5 grid gap-4 md:grid-cols-2"></div>
             </div>
 
             <div class="mt-6 grid grid-cols-1 gap-4">
@@ -764,7 +847,7 @@
                     },
                     {
                         name: "精细动作与空间",
-                        items: ["手眼协调（穿珠）", "空间拼搭模仿", "运笔与握姿", "折纸模仿(新增)", "轨迹控制（迷宫）"]
+                        items: ["手眼协调（穿珠）", "空间拼搭模仿", "运笔与握姿", "折纸模仿(新增)", "轨迹控制（迷宫）", "双手协同操作(新增)"]
                     },
                     {
                         name: "专注力与行为习惯",
@@ -890,21 +973,21 @@
                 ],
                 thresholds: [
                     {
-                        min: 76, max: 87,
+                        min: 79, max: 90,
                         label: "能力卓越 / 优势突显",
                         color: "bg-green-100 text-green-800",
                         analysis: "孩子在认知发展、专注保持和规则理解上展现出了很好的成熟度。TA好奇心强，学习投入感足，面对任务时愿意主动尝试并持续跟进。",
                         advice: "针对这样具备优势的孩子，建议提供更具启发性和探索性的课程，如高阶思维拓展、绘本戏剧表达、规则型专注游戏等，让孩子在富有挑战的体验中持续成长。"
                     },
                     {
-                        min: 56, max: 75,
+                        min: 59, max: 78,
                         label: "稳步发展 / 潜力待发",
                         color: "bg-blue-100 text-blue-800",
                         analysis: "孩子整体发展符合适龄标准，在多数任务中愿意配合并能逐步进入状态。部分能力已经显现出不错的基础，同时也存在一些可以继续强化的关键环节。",
                         advice: "建议在趣味常规课程中继续融入专项训练，例如通过节奏类记忆游戏、视觉搜索游戏和手眼协调活动，帮助孩子把已有基础逐步稳定下来，更从容地衔接后续学习。"
                     },
                     {
-                        min: 0, max: 55,
+                        min: 0, max: 58,
                         label: "习惯萌芽期 / 需耐心引导",
                         color: "bg-orange-100 text-orange-800",
                         analysis: "孩子目前仍处于能力和习惯的萌芽阶段，在注意保持、连续信息记忆或规则切换上还需要更多支持。这个阶段更需要安全感、鼓励和低压力的互动体验。",
@@ -914,7 +997,7 @@
             },
             primary: {
                 title: "小学阶段（7-12岁）学力基础与学习习惯测评表",
-                desc: "测试形式：量化题卡、小任务体验与现场观察结合。老师会用更细的切入口记录孩子的准确率、启动速度、复查习惯和情绪恢复情况，让结果更容易量化、更方便和家长沟通。",
+                desc: "测试形式：量化题卡、小任务体验与自主记录结合。通过更细的切入口记录孩子的准确率、启动速度、复查习惯和情绪恢复情况，让结果更容易量化，也更方便家长理解。",
                 dimensions: [
                     {
                         name: "视觉与听觉信息处理",
@@ -943,7 +1026,7 @@
                         min: 64, max: 75,
                         label: "自驱型学习者 / 基础扎实",
                         color: "bg-green-100 text-green-800",
-                        analysis: "孩子不仅基础知识扎实，更难得的是在信息处理效率、任务启动和自我检查上表现出较成熟的节奏。现场记录显示，TA能够较快进入状态，并在完成过程中维持较好的准确度与条理性，说明已经具备较清晰的学习方法基础。",
+                        analysis: "孩子不仅基础知识扎实，更难得的是在信息处理效率、任务启动和自我检查上表现出较成熟的节奏。从本次测评结果看，TA能够较快进入状态，并在完成过程中维持较好的准确度与条理性，说明已经具备较清晰的学习方法基础。",
                         advice: "建议后续不要停留在重复练习，而是尽快进入更高层次的思维训练和方法深化。机构课程可优先安排培优拔高、阅读理解深挖和策略型训练，让孩子把已有优势稳定成长期竞争力，同时避免因为练习过浅而消耗学习兴趣。"
                     },
                     {
@@ -957,8 +1040,8 @@
                         min: 0, max: 44,
                         label: "蓄力成长阶段 / 系统引导",
                         color: "bg-orange-100 text-orange-800",
-                        analysis: "孩子目前在学习任务中已经感受到一定压力，这并不等同于能力不足，更可能是底层加工效率、任务拆解方法和情绪恢复机制还没有建立起来。现场表现往往会出现“启动慢、容易乱、做完不查”这一类连锁反应，久而久之也会影响自信心。",
-                        advice: "建议先通过系统性的学能唤醒和低门槛阶段训练，帮助孩子把任务拆解、持续专注和错误修复一步步建立起来。比起盲目增加作业量，更适合由老师持续跟踪与反馈，用一段时间把学习节奏扶稳，再逐步提升难度。"
+                        analysis: "孩子目前在学习任务中已经感受到一定压力，这并不等同于能力不足，更可能是底层加工效率、任务拆解方法和情绪恢复机制还没有建立起来。本次测评中如果反复出现“启动慢、容易乱、做完不查”这一类连锁反应，久而久之也会影响自信心。",
+                        advice: "建议先通过系统性的学能唤醒和低门槛阶段训练，帮助孩子把任务拆解、持续专注和错误修复一步步建立起来。比起盲目增加作业量，更适合配合持续性的课程跟进，用一段时间把学习节奏扶稳，再逐步提升难度。"
                     }
                 ]
             }
@@ -968,14 +1051,14 @@
             toddler: {
                 trustKicker: '一对一探索式测评',
                 trustTitle: '儿童成长探索式入学测评',
-                trustIntro: '通过观察量表、动画互动与教师记录，帮助发现孩子的优势表现与当前支持点，为后续课程匹配提供更有依据的建议。',
+                trustIntro: '通过观察量表、动画互动与家长记录，帮助发现孩子的优势表现与当前支持点，为后续课程匹配提供更有依据的建议。',
                 ageRange: '3-6 岁',
                 duration: '约 20-30 分钟',
                 purpose: '成长建议与课程匹配',
-                method: '观察量表 + 动画互动 + 教师现场记录',
-                executionNote: '家长可在旁陪同了解过程，老师会边互动边记录，不以答对多少题作为唯一判断标准。',
+                method: '观察量表 + 动画互动 + 家长自主记录',
+                executionNote: '家长可根据孩子本次互动、回应方式和完成过程进行记录，不以答对多少题作为唯一判断标准。',
                 privacyNote: '本次测评数据仅用于成长建议与课程沟通，不对外共享，也不替代医学诊断。',
-                workspaceTitle: '幼儿组现场测评执行区',
+                workspaceTitle: '幼儿组家庭测评执行区',
                 reassurance: '当前环节更关注理解过程、参与状态和规则跟随，不以刷题经验作为唯一标准。',
                 trustPoints: [
                     '全程以轻松互动和观察为主，不给孩子贴标签。',
@@ -986,19 +1069,19 @@
             primary: {
                 trustKicker: '学习习惯与学能探索',
                 trustTitle: '小学阶段学习基础与习惯测评',
-                trustIntro: '通过量化题卡、短时任务和教师记录，帮助家长更清楚地看到孩子在准确率、启动速度、复查习惯和执行稳定度上的真实状态。',
+                trustIntro: '通过量化题卡、短时任务和家长记录，帮助家长更清楚地看到孩子在准确率、启动速度、复查习惯和执行稳定度上的真实状态。',
                 ageRange: '7-12 岁',
                 duration: '约 25-35 分钟',
                 purpose: '学习建议与课程匹配',
-                method: '量化题卡 + 小任务体验 + 教师现场记录',
-                executionNote: '更看重孩子的准确率、启动节奏、复查动作和修正过程，家长可同步看到老师的判断依据，而不是只听一个结论。',
+                method: '量化题卡 + 小任务体验 + 家长自主记录',
+                executionNote: '更看重孩子的准确率、启动节奏、复查动作和修正过程，家长可以直接看到系统整理出的判断依据，而不是只看一个结论。',
                 privacyNote: '本次测评数据仅用于学习建议与课程沟通，不对外共享，也不替代学校成绩或医学诊断。',
-                workspaceTitle: '小学组现场测评执行区',
+                workspaceTitle: '小学组家庭测评执行区',
                 reassurance: '当前环节更关注思路、执行效率和学习习惯，不以一次分数代替长期能力判断。',
                 trustPoints: [
-                    '题目切口更细，更方便老师量化记录和向家长解释。',
+                    '题目切口更细，更方便家长量化记录和理解结果。',
                     '结果可追溯到准确率、复查次数、启动速度等具体表现。',
-                    '现场可生成正式报告，便于家长理解后续提升方向。'
+                    '完成后可生成正式报告，便于家长理解后续提升方向。'
                 ]
             }
         };
@@ -1007,23 +1090,23 @@
             toddler: [
                 { summary: '本环节主要观察孩子对颜色、数量、大小规律和顺序关系的理解。', reassure: '重点看理解和尝试过程，不考刷题经验。' },
                 { summary: '本环节主要观察孩子听懂指令、讲述顺序和表达清晰度。', reassure: '允许孩子边想边说，更看表达过程是否自然。' },
-                { summary: '本环节主要观察孩子的手眼协调、空间模仿和精细动作控制。', reassure: '老师会结合动作过程来判断，不会只看最终成品。' },
+                { summary: '本环节主要观察孩子的手眼协调、空间模仿和精细动作控制。', reassure: '建议结合动作过程综合判断，不只看最终成品。' },
                 { summary: '本环节主要观察孩子持续专注、规则切换和面对挑战时的状态。', reassure: '更关注参与节奏和恢复能力，而不是要求孩子一直完美表现。' },
-                { summary: '本环节主要观察孩子的情绪识别、互动意愿和环境适应情况。', reassure: '老师会结合表情、回应和等待表现综合判断，不做简单贴标签。' }
+                { summary: '本环节主要观察孩子的情绪识别、互动意愿和环境适应情况。', reassure: '建议结合表情、回应和等待表现综合判断，不做简单贴标签。' }
             ],
             primary: [
                 { summary: '本环节主要记录视觉追踪、听觉保持和信息提取是否准确、稳定。', reassure: '会结合准确率和完成方式判断，不只看快慢。' },
-                { summary: '本环节主要记录口算、条件提取、复述和书写等基础学科表现。', reassure: '老师会尽量把切口做细，方便量化记录和后续对比。' },
+                { summary: '本环节主要记录口算、条件提取、复述和书写等基础学科表现。', reassure: '题目切口较细，便于量化记录和后续对比。' },
                 { summary: '本环节主要记录规律判断、空间旋转和多步规划是否完整、有条理。', reassure: '更关注思路有没有落地成步骤，而不是一句“会不会”。' },
                 { summary: '本环节主要记录启动速度、持续投入、复查动作和疲劳控制。', reassure: '这是学习习惯观察，不等同于一次考试分数。' },
-                { summary: '本环节主要记录孩子在出错、被提醒和限时情境下的情绪与调整方式。', reassure: '老师会结合现场反应综合判断，不用一次表现定义孩子。' }
+                { summary: '本环节主要记录孩子在出错、被提醒和限时情境下的情绪与调整方式。', reassure: '建议结合实际反应综合判断，不用一次表现定义孩子。' }
             ]
         };
 
         const scoreOptionMeta = {
-            1: { label: '需支持', hint: '需要更多引导' },
-            2: { label: '发展中', hint: '能力正在建立' },
-            3: { label: '表现较好', hint: '本次表现稳定' }
+            1: { label: '1 分', hint: '完成较困难' },
+            2: { label: '2 分', hint: '基本完成' },
+            3: { label: '3 分', hint: '完成较稳定' }
         };
 
         const courseDirectionMap = {
@@ -1177,7 +1260,7 @@
         function getDimensionGuide(dimIndex) {
             return dimensionGuides[currentTab][dimIndex] || {
                 summary: '本环节用于综合观察孩子的过程表现。',
-                reassure: '请放心，老师会结合现场状态综合判断。'
+                reassure: '请结合孩子本次作答状态综合判断。'
             };
         }
 
@@ -1270,7 +1353,7 @@
                         <div>
                             <div class="interactive-chip">游戏化互动测评</div>
                             <h3 class="mt-2 text-xl font-bold text-stone-900">让孩子在“玩中测”，不再只停留在文字题目</h3>
-                            <p class="mt-2 text-sm leading-relaxed text-stone-600">多道动画题和舒尔特方块会同步计入总分，并反映在最终测评建议中，帮助老师更直观看到孩子在动态记忆、故事理解、情绪识别和专注控制中的真实表现。</p>
+                            <p class="mt-2 text-sm leading-relaxed text-stone-600">多道动画题和舒尔特方块会同步计入总分，并反映在最终测评建议中，帮助家长更直观看到孩子在动态记忆、故事理解、情绪识别和专注控制中的真实表现。</p>
                         </div>
                         <div id="interactive-suite-score" class="task-stat bg-white text-brand-700 shadow-sm">0/${getInteractiveMaxScore()} 分</div>
                     </div>
@@ -1322,7 +1405,7 @@
                     itemText.className = 'max-w-xl';
                     itemText.innerHTML = `
                         <div class="font-medium text-stone-800">${item}</div>
-                        <div class="mt-1 text-sm text-stone-500">请结合现场互动、回应方式和完成过程进行记录。</div>
+                        <div class="mt-1 text-sm text-stone-500">请结合孩子本次作答、回应方式和完成过程进行评分。</div>
                     `;
 
                     const btnGroup = document.createElement('div');
@@ -1653,12 +1736,12 @@
 
             const ratio = score / max;
             if (ratio >= 0.72) {
-                return { label: '表现较稳定', className: 'bg-green-100 text-green-700' };
+                return { label: '得分较高', className: 'bg-green-100 text-green-700' };
             }
             if (ratio >= 0.45) {
-                return { label: '发展中', className: 'bg-blue-100 text-blue-700' };
+                return { label: '中等区间', className: 'bg-blue-100 text-blue-700' };
             }
-            return { label: '需继续观察', className: 'bg-orange-100 text-orange-700' };
+            return { label: '仍可提升', className: 'bg-orange-100 text-orange-700' };
         }
 
         function updateDimensionHeaders(dimScores) {
@@ -1683,21 +1766,21 @@
 
             const progressTip = document.getElementById('progress-tip');
             if (totalScore === 0) {
-                progressTip.textContent = '完成任一模块后，系统会同步更新现场观察摘要。';
+                progressTip.textContent = '完成任一模块后，系统会同步更新本次测评摘要。';
                 return;
             }
             if (completed < total) {
                 progressTip.textContent = `建议继续完成剩余 ${total - completed} 个步骤，正式报告会更完整、更有说服力。`;
                 return;
             }
-            progressTip.textContent = '主要模块已完成，可以结合右侧摘要与下方正式报告和家长进行沟通。';
+            progressTip.textContent = '主要模块已完成，可以结合右侧摘要与下方正式报告查看完整结论。';
         }
 
         function buildLiveSnapshotItems(dimScores, totalScore) {
             if (totalScore === 0) {
                 return [
-                    '从任一模块开始记录，系统会边测边生成现场观察摘要。',
-                    '建议至少完成两个模块后再与家长进行初步沟通。',
+                    '从任一模块开始记录，系统会边测边生成本次测评摘要。',
+                    '建议至少完成两个模块后再查看初步结论。',
                     getInteractiveTasks().length ? '幼儿组的动画题和专注力任务也会一并纳入后续结论。' : '当前阶段更偏向过程观察与学习习惯记录。'
                 ];
             }
@@ -1723,9 +1806,9 @@
             const tasks = getInteractiveTasks();
             const completedTasks = tasks.filter(task => interactiveState[task.id]?.completed);
             if (completedTasks.length) {
-                items.push(`已完成 ${completedTasks.length}/${tasks.length} 项互动任务，结论里会加入更具体的现场表现依据。`);
+                items.push(`已完成 ${completedTasks.length}/${tasks.length} 项互动任务，结论里会加入更具体的作答表现依据。`);
             } else if (tasks.length) {
-                items.push('建议补全互动任务，这样家长会更容易理解老师的判断依据。');
+                items.push('建议补全互动任务，这样系统给出的判断依据会更完整。');
             }
 
             const nextStep = buildModuleStates().find(step => !step.completed);
@@ -1779,7 +1862,7 @@
 
             if (currentTab === 'primary') {
                 if (strongest.index === weakest.index) {
-                    return ` 从目前已完成的模块看，孩子在「${strongestName}」上的表现相对更稳定，说明已有一定方法基础。建议继续补全其余模块，这样老师可以更准确地区分“基础不错但方法未稳”和“底层能力确实需要加强”这两种不同情况。`;
+                    return ` 从目前已完成的模块看，孩子在「${strongestName}」上的表现相对更稳定，说明已有一定方法基础。建议继续补全其余模块，这样结果会更清楚地区分“基础不错但方法未稳”和“底层能力确实需要加强”这两种不同情况。`;
                 }
                 return ` 从本次已完成的模块看，孩子在「${strongestName}」上的表现相对更稳定，而「${weakestName}」仍是当前更需要重点关注的环节。这样的差异往往意味着孩子并非全面落后，而是某些关键方法或执行细节还没有稳定下来，所以需要更有针对性的支持。`;
             }
@@ -1800,10 +1883,10 @@
             const focusText = focusNames.join('和');
 
             if (currentTab === 'primary') {
-                return ` 建议接下来优先围绕${focusText}做阶段性系统支持，把孩子当前最容易波动的几个关键动作拆开训练，例如启动速度、信息提取、复查动作或情绪恢复。比起单纯增加作业量，更适合由老师持续跟踪方法执行过程，这样更容易把短期提升沉淀成稳定习惯。`;
+                return ` 建议接下来优先围绕${focusText}做阶段性系统支持，把孩子当前最容易波动的几个关键动作拆开训练，例如启动速度、信息提取、复查动作或情绪恢复。比起单纯增加作业量，更适合配合连续性的课程跟进，这样更容易把短期提升沉淀成稳定习惯。`;
             }
 
-            return ` 建议接下来优先围绕${focusText}安排更连续的游戏化支持，让孩子在低压力、强反馈的节奏里逐步把能力稳定下来。相比零散练习，由老师持续跟进和设计任务节奏，往往更容易让孩子建立成功体验和学习自信。`;
+            return ` 建议接下来优先围绕${focusText}安排更连续的游戏化支持，让孩子在低压力、强反馈的节奏里逐步把能力稳定下来。相比零散练习，配合连续性的课程引导往往更容易让孩子建立成功体验和学习自信。`;
         }
 
         function buildStrengthItems(dimScores) {
@@ -1821,7 +1904,7 @@
 
             dimensionRank.slice(0, 2).forEach(item => {
                 const label = getDimensionStatusMeta(item.score, item.max).label;
-                items.push(`${appData[currentTab].dimensions[item.index].name}：${label}，当前已记录 ${item.answered}/${appData[currentTab].dimensions[item.index].items.length} 项，其中“表现较好” ${item.counts[3]} 项。`);
+                items.push(`${appData[currentTab].dimensions[item.index].name}：${label}，当前已记录 ${item.answered}/${appData[currentTab].dimensions[item.index].items.length} 项，其中 3 分 ${item.counts[3]} 项。`);
             });
 
             getInteractiveTasks()
@@ -1847,7 +1930,7 @@
                     counts: getScoreCounts(index)
                 }))
                 .filter(item => item.answered > 0)
-                .map(item => `观察量表 · ${appData[currentTab].dimensions[item.index].name}：已记录 ${item.answered}/${appData[currentTab].dimensions[item.index].items.length} 项，其中“表现较好” ${item.counts[3]} 项、“发展中” ${item.counts[2]} 项。`);
+                .map(item => `观察量表 · ${appData[currentTab].dimensions[item.index].name}：已记录 ${item.answered}/${appData[currentTab].dimensions[item.index].items.length} 项，其中 3 分 ${item.counts[3]} 项、2 分 ${item.counts[2]} 项、1 分 ${item.counts[1]} 项。`);
 
             const taskItems = getInteractiveTasks()
                 .filter(task => interactiveState[task.id]?.completed)
@@ -1855,7 +1938,7 @@
 
             const items = [...taskItems, ...dimensionItems];
             if (!items.length) {
-                items.push('完成至少一个模块后，这里会自动列出支持结论的现场观察依据。');
+                items.push('完成至少一个模块后，这里会自动列出支持结论的测评依据。');
             }
 
             return items.slice(0, 6);
@@ -1886,7 +1969,7 @@
                 return {
                     badge: '优先支持方向',
                     title: course.title,
-                    body: `当前在「${dimName}」这一块更需要系统巩固。建议把支持重点放在${course.focus}，由老师持续跟进会更容易把单次表现稳定成方法和习惯。`
+                    body: `当前在「${dimName}」这一块更需要系统巩固。建议把支持重点放在${course.focus}，配合阶段性的课程跟进会更容易把单次表现稳定成方法和习惯。`
                 };
             });
 
@@ -1922,8 +2005,8 @@
         function renderCourseMatches(dimScores) {
             const items = buildCourseMatchItems(dimScores);
             document.getElementById('course-match-intro').textContent = dimScores.some(score => score > 0)
-                ? '基于本次观察，下面这些方向更适合作为后续系统支持的优先选择。如果希望孩子的变化更稳定，建议交由老师做阶段性跟进。'
-                : '基于本次观察，下面这些方向更适合作为后续系统支持的优先选择，也更方便老师持续跟进孩子的变化。';
+                ? '基于本次测评，下面这些方向更适合作为后续系统支持的优先选择。如果希望孩子的变化更稳定，建议尽早配合阶段性课程跟进。'
+                : '基于本次测评，下面这些方向更适合作为后续系统支持的优先选择，也更方便后续安排更有针对性的课程支持。';
             document.getElementById('course-match-list').innerHTML = items.map(item => `
                 <div class="course-card">
                     <div class="course-badge">${item.badge}</div>
@@ -1959,6 +2042,8 @@
             const chartMax = Math.max(...appData[currentTab].dimensions.map((dim, index) => getDimensionMaxScore(index)));
             radarChartInstance.data.labels = appData[currentTab].dimensions.map(d => d.name.replace('与', ' / '));
             radarChartInstance.data.datasets[0].data = dimScores;
+            radarChartInstance.data.datasets[0].rawScores = dimScores;
+            radarChartInstance.data.datasets[0].maxScores = appData[currentTab].dimensions.map((dim, index) => getDimensionMaxScore(index));
             radarChartInstance.options.scales.r.max = chartMax;
             radarChartInstance.options.scales.r.ticks.stepSize = chartMax > 15 ? 6 : 5;
             radarChartInstance.update();
@@ -2051,7 +2136,7 @@
                 return ` 当前游戏化互动题完成 ${completed}/${total} 项，现阶段结论会更偏向基础观察结果，补全动画题与舒尔特方块后能获得更完整的动态记忆、故事理解与专注画像。`;
             }
             if (score >= max - 1) {
-                return ' 在游戏化互动题中，孩子对动画顺序观察、故事理解、表情识别和按序搜索任务的投入度都比较高，短时保持、情绪识别与持续专注表现较好。';
+                return ' 在游戏化互动题中，孩子对动画顺序观察、故事理解、表情识别和按序搜索任务的投入度都比较高，短时保持、情绪识别与持续专注得分也相对更高。';
             }
             if (score >= Math.ceil(max * 0.6)) {
                 return ' 游戏化任务显示孩子在动画观察、故事先后理解和视觉搜索中能够逐步进入状态，这部分能力正处在稳定发展过程中。';
@@ -2107,39 +2192,68 @@
             return `${stageName}-测评报告-${stamp}.pdf`;
         }
 
+        async function waitForPDFRenderReady() {
+            if (document.fonts?.ready) {
+                try {
+                    await document.fonts.ready;
+                } catch (error) {
+                    console.warn('字体加载等待失败，继续导出 PDF。', error);
+                }
+            }
+
+            const chartImage = document.getElementById('print-chart-image');
+            if (chartImage?.src && !chartImage.complete) {
+                await new Promise(resolve => {
+                    const cleanup = () => {
+                        chartImage.removeEventListener('load', cleanup);
+                        chartImage.removeEventListener('error', cleanup);
+                        resolve();
+                    };
+                    chartImage.addEventListener('load', cleanup, { once: true });
+                    chartImage.addEventListener('error', cleanup, { once: true });
+                });
+            }
+
+            await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+            await new Promise(resolve => setTimeout(resolve, 120));
+        }
+
         async function downloadPDFReport() {
             const source = document.querySelector('#print-report .print-shell');
-            const tempWrapper = document.createElement('div');
-            tempWrapper.style.position = 'fixed';
-            tempWrapper.style.left = '-100000px';
-            tempWrapper.style.top = '0';
-            tempWrapper.style.width = '1120px';
-            tempWrapper.style.background = '#ffffff';
-            tempWrapper.style.padding = '24px';
-            tempWrapper.style.zIndex = '-1';
-
-            const clone = source.cloneNode(true);
-            clone.style.maxWidth = 'none';
-            clone.style.width = '100%';
-            clone.style.margin = '0';
-            clone.style.border = 'none';
-            clone.style.boxShadow = 'none';
-            tempWrapper.appendChild(clone);
-            document.body.appendChild(tempWrapper);
+            document.body.classList.add('pdf-exporting');
+            await waitForPDFRenderReady();
 
             const options = {
-                margin: [8, 8, 8, 8],
+                margin: [6, 6, 6, 6],
                 filename: buildExportFilename(),
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff',
+                    scrollX: 0,
+                    scrollY: 0,
+                    windowWidth: 1280
+                },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak: { mode: ['css', 'legacy'] }
+                pagebreak: {
+                    mode: ['css', 'legacy'],
+                    avoid: [
+                        '.print-card',
+                        '.print-grid-card',
+                        '#print-dimensions > div',
+                        '#print-interactive-list > div',
+                        '#print-strengths-list > div',
+                        '#print-evidence-list > div',
+                        '#print-course-list > div'
+                    ]
+                }
             };
 
             try {
-                await window.html2pdf().set(options).from(clone).save();
+                await window.html2pdf().set(options).from(source).save();
             } finally {
-                tempWrapper.remove();
+                document.body.classList.remove('pdf-exporting');
             }
         }
 
@@ -2230,6 +2344,7 @@
                 <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4 text-sm leading-relaxed text-stone-600">${item}</div>
             `).join('');
 
+            document.getElementById('print-course-intro').textContent = document.getElementById('course-match-intro').textContent;
             document.getElementById('print-course-list').innerHTML = courseMatches.map(item => `
                 <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4">
                     <div class="text-sm font-bold text-stone-900">${item.title}</div>
@@ -2299,7 +2414,7 @@
                 return `按顺序顺利完成了 1 到 9 的搜索，用时 ${seconds} 秒、错误 ${state.errors} 次，持续专注和视觉搜索表现优秀。`;
             }
             if (state.score === 2) {
-                return `完成了舒尔特方块挑战，用时 ${seconds} 秒、错误 ${state.errors} 次，说明孩子能逐步进入状态，专注力正在发展中。`;
+                return `完成了舒尔特方块挑战，用时 ${seconds} 秒、错误 ${state.errors} 次，说明孩子能逐步进入状态，专注力处于逐步建立阶段。`;
             }
             return `已完成挑战，用时 ${seconds} 秒、错误 ${state.errors} 次，目标搜索和按序执行还需要更多短时、高反馈的练习。`;
         }
@@ -2404,6 +2519,8 @@
                     datasets: [{
                         label: '能力评估值',
                         data: [0, 0, 0, 0, 0],
+                        rawScores: [0, 0, 0, 0, 0],
+                        maxScores: [0, 0, 0, 0, 0],
                         backgroundColor: 'rgba(217, 119, 6, 0.18)',
                         borderColor: 'rgba(217, 119, 6, 0.85)',
                         pointBackgroundColor: '#d97706',
@@ -2447,7 +2564,9 @@
                             callbacks: {
                                 label: function(context) {
                                     const index = context.dataIndex;
-                                    return `得分: ${context.raw} / ${getDimensionMaxScore(index)}`;
+                                    const rawScore = context.dataset.rawScores?.[index] ?? 0;
+                                    const maxScore = context.dataset.maxScores?.[index] ?? getDimensionMaxScore(index);
+                                    return `得分: ${rawScore} / ${maxScore}`;
                                 }
                             }
                         }
