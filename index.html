@@ -1390,7 +1390,7 @@
                         <div class="text-sm font-bold text-brand-700" id="dim-score-${dimIndex}">0/${getDimensionMaxScore(dimIndex)} 分</div>
                     </div>
                     <p class="mt-3 text-sm leading-7 text-stone-600">${guide.summary}</p>
-                    <p class="mt-2 rounded-2xl bg-white px-3 py-2 text-xs leading-6 text-stone-500">${guide.reassure}</p>
+                    <p class="mt-2 rounded-2xl bg-white px-3 py-2 text-xs leading-6 text-stone-500">请基于对孩子的日常观察与近期表现填写本模块。${guide.reassure}</p>
                 `;
                 section.appendChild(header);
 
@@ -1405,7 +1405,6 @@
                     itemText.className = 'max-w-xl';
                     itemText.innerHTML = `
                         <div class="font-medium text-stone-800">${item}</div>
-                        <div class="mt-1 text-sm text-stone-500">请结合孩子本次作答、回应方式和完成过程进行评分。</div>
                     `;
 
                     const btnGroup = document.createElement('div');
