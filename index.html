@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>教培机构新生入学综合评估系统</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         .chart-container {
@@ -342,86 +342,7 @@
             font-size: 0.74rem;
             font-weight: 800;
         }
-        .print-report {
-            display: none;
-        }
-        #print-report .print-shell {
-            border: 1px solid #eadfd2 !important;
-            background: linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(255, 255, 255, 1)) !important;
-            box-shadow: 0 24px 54px -44px rgba(120, 53, 15, 0.3) !important;
-        }
-        #print-report .print-card,
-        #print-report .print-grid-card {
-            border: 1.4px solid #e7d7c7 !important;
-            background: linear-gradient(180deg, rgba(255, 251, 235, 0.92), rgba(255, 255, 255, 0.98)) !important;
-            box-shadow: 0 18px 34px -30px rgba(120, 53, 15, 0.28) !important;
-        }
-        #print-report #print-dimensions > div,
-        #print-report #print-interactive-list > div,
-        #print-report #print-strengths-list > div,
-        #print-report #print-evidence-list > div,
-        #print-report #print-course-list > div {
-            border: 1.2px solid #ead7c2 !important;
-            background: #fffaf5 !important;
-            box-shadow: 0 12px 22px -24px rgba(120, 53, 15, 0.22) !important;
-        }
-        #print-report .rounded-2xl.bg-brand-50 {
-            border: 1.2px solid #f0d8b3 !important;
-            background: linear-gradient(180deg, rgba(255, 247, 237, 1), rgba(255, 252, 247, 1)) !important;
-        }
-        #print-report .print-shell .mt-6 {
-            margin-top: 1rem !important;
-        }
-        #print-report .print-shell .mt-5 {
-            margin-top: 0.9rem !important;
-        }
-        #print-report .print-shell .mt-4 {
-            margin-top: 0.75rem !important;
-        }
-        #print-report .print-shell .gap-6 {
-            gap: 1rem !important;
-        }
-        #print-report .print-shell .gap-4 {
-            gap: 0.8rem !important;
-        }
-        #print-report .print-shell .p-6 {
-            padding: 1rem !important;
-        }
-        #print-report .print-shell .p-5 {
-            padding: 0.95rem !important;
-        }
-        #print-report .print-shell .p-4 {
-            padding: 0.82rem !important;
-        }
-        #print-report #print-chart-image {
-            max-width: 260px !important;
-            padding: 0.75rem !important;
-        }
-        body.pdf-exporting {
-            background: white !important;
-        }
-        body.pdf-exporting > header,
-        body.pdf-exporting > .max-w-7xl {
-            visibility: hidden;
-        }
-        body.pdf-exporting #print-report {
-            display: block !important;
-            position: fixed;
-            inset: 0;
-            overflow: auto;
-            padding: 16px;
-            background: white;
-            z-index: 60;
-        }
-        body.pdf-exporting #print-report .print-shell {
-            max-width: 960px;
-            margin: 0 auto 18px;
-        }
-        body.pdf-exporting #print-report .print-card,
-        body.pdf-exporting #print-report .print-grid-card {
-            break-inside: avoid;
-            page-break-inside: avoid;
-        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -437,72 +358,129 @@
             50% { transform: translateX(4px); }
             75% { transform: translateX(-2px); }
         }
+
+        /* ------------------ PDF 导出状态的专属样式 ------------------ */
+        .print-report { display: none; }
+
+        #print-report {
+            display: block !important;
+            position: relative;
+            background: #ffffff;
+            z-index: 60;
+            width: 100%;
+            margin: 0 auto;
+            color: #1f2937;
+        }
+
+        #print-report .print-shell {
+            background: #ffffff !important;
+            width: 100%;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 36px;
+            font-family: 'system-ui', '-apple-system', 'sans-serif';
+        }
+
+        /* 优化边框模块容器：引入柔和渐变、更精细的圆角和轻微阴影质感 */
+        #print-report .print-module {
+            border: 1px solid #fed7aa !important; /* 边框变细，显得更精致 */
+            border-radius: 16px !important; /* 加大圆角 */
+            margin-bottom: 24px !important;
+            background: linear-gradient(145deg, #fffcf8, #ffffff) !important; /* 引入微渐变背景 */
+            box-shadow: 0 4px 20px -10px rgba(217, 119, 6, 0.08) !important;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            overflow: hidden !important;
+        }
+
+        #print-report .module-header {
+            background: linear-gradient(to right, #fff7ed, #ffffff) !important;
+            border-bottom: 1px solid #fed7aa !important;
+            padding: 14px 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            font-size: 1.15rem !important;
+            font-weight: bold !important;
+            color: #9a3412 !important;
+        }
+
+        #print-report .module-header-accent {
+            width: 4px !important;
+            height: 18px !important;
+            background-color: #f59e0b !important;
+            margin-right: 10px !important;
+            border-radius: 4px !important;
+        }
+
+        #print-report .module-body {
+            padding: 24px 20px !important;
+        }
+
+        #print-report .top-score-box,
+        #print-report .top-level-box {
+            border: 1px solid #fed7aa !important;
+            background: linear-gradient(135deg, #fffcf8, #fff7ed) !important;
+            border-radius: 16px !important;
+            padding: 24px !important;
+            text-align: center;
+            box-shadow: 0 4px 12px -8px rgba(217, 119, 6, 0.08) !important;
+        }
+
+        #print-report .avoid-break-item {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            margin-bottom: 16px !important;
+        }
+        #print-report .avoid-break-item:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        #print-report #print-chart-image {
+            width: 100% !important;
+            max-width: 320px !important;
+            height: auto !important;
+            margin: 0 auto;
+            display: block;
+        }
+
         @media print {
-            body {
-                background: white !important;
-                padding: 0 !important;
-                margin: 0 !important;
+            /* 【关键修复】：强制浏览器在打印时渲染所有背景色、渐变和阴影 */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
-            header,
-            .max-w-7xl {
-                display: none !important;
-            }
-            #print-report {
-                display: block !important;
-                padding: 16px;
-                color: #1c1917;
-            }
-            #print-report .print-shell {
-                padding: 1rem !important;
-                margin: 0 !important;
-            }
-            #print-report .print-card,
-            #print-report .print-grid-card {
-                break-inside: avoid;
-                page-break-inside: avoid;
-            }
+            body { background: white !important; padding: 0 !important; margin: 0 !important; }
+            header, .max-w-7xl { display: none !important; }
+            #print-report { display: block !important; color: #1f2937; }
         }
     </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#fcf8f3',
-                            100: '#f8efe3',
-                            500: '#d97706',
-                            600: '#b45309',
-                            900: '#78350f',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 <body class="min-h-screen bg-brand-50 font-sans antialiased text-stone-800 pb-12">
 
     <header class="sticky top-0 z-20 border-b border-stone-200/80 bg-white/90 backdrop-blur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-2xl shadow-sm">🌱</div>
-                    <div>
-                        <div class="text-xs font-bold uppercase tracking-[0.22em] text-brand-600">Growth Assessment</div>
-                        <h1 class="text-xl font-bold text-brand-900 md:text-2xl">新生入学综合评估系统</h1>
+
+                <div class="flex items-center gap-5">
+                    <div class="flex h-[3.25rem] w-[3.25rem] flex-shrink-0 items-center justify-center rounded-[14px] border border-[#eadfd2] bg-[rgba(255,251,235,0.9)] text-2xl shadow-sm">🌱</div>
+                    <div class="hidden h-9 w-[1.5px] bg-stone-300 rounded-full sm:block"></div>
+                    <div class="flex flex-col justify-center">
+                        <div class="text-[0.65rem] font-black uppercase tracking-[0.2em] text-brand-600 mb-0.5">Growth Assessment</div>
+                        <h1 class="text-xl font-extrabold text-stone-800 tracking-tight md:text-2xl leading-none">新生入学综合评估系统</h1>
                     </div>
                 </div>
+
                 <div class="hidden xl:flex flex-wrap items-center gap-2">
                     <span class="meta-chip">一对一互动测评</span>
                     <span class="meta-chip" id="header-stage-chip">适龄阶段</span>
                     <span class="meta-chip" id="header-progress-chip">进度 0%</span>
                     <span class="meta-chip">结果可导出正式 PDF</span>
                 </div>
+
                 <button
                     id="export-pdf-btn"
                     data-export-action="true"
-                    class="export-btn inline-flex items-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-brand-600 disabled:cursor-not-allowed disabled:bg-stone-300"
+                    class="export-btn inline-flex items-center justify-center gap-2 rounded-full border border-[#eadfd2] bg-[rgba(255,251,235,0.9)] px-5 py-2.5 text-sm font-bold text-[#92400e] shadow-sm hover:bg-[#ffedd5] hover:border-[#d97706] transition-colors disabled:cursor-not-allowed disabled:opacity-50 min-w-[180px]"
                     onclick="exportPDF()"
                     disabled
                 >
@@ -574,7 +552,7 @@
         </section>
 
         <section class="trust-shell p-6 md:p-8">
-            <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+            <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
                 <section class="lg:col-span-8 flex flex-col">
                     <div class="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                         <div>
@@ -589,6 +567,23 @@
                             <p class="mt-3 text-sm leading-7 text-stone-600" id="section-reassurance">
                                 当前环节更关注理解过程和参与状态，不以刷题经验作为唯一标准。
                             </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 rounded-2xl border border-brand-100 bg-white p-5 shadow-sm relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-brand-500"></div>
+                        <h3 class="text-sm font-bold text-stone-800 mb-4 flex items-center gap-2">
+                            <span>📝</span> 学员基本信息录入 <span class="text-xs text-stone-400 font-normal ml-2">（此信息将自动展示在生成的正式报告中）</span>
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold text-stone-500 mb-1.5">学员姓名</label>
+                                <input type="text" id="input-student-name" placeholder="例如：张小明" class="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-brand-500 transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-stone-500 mb-1.5">学员年龄</label>
+                                <input type="text" id="input-student-age" placeholder="例如：5岁半" class="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-brand-500 transition-colors">
+                            </div>
                         </div>
                     </div>
 
@@ -621,7 +616,7 @@
                 </section>
 
                 <aside class="lg:col-span-4">
-                    <div class="sticky top-28 space-y-4">
+                    <div class="sticky top-24 space-y-4">
                         <div class="summary-card">
                             <div class="flex items-center justify-between">
                                 <div>
@@ -755,79 +750,96 @@
     </div>
 
     <section id="print-report" class="print-report">
-        <div class="print-shell mx-auto max-w-4xl rounded-3xl border border-stone-200 bg-white p-8 shadow-sm">
-            <div class="flex items-start justify-between gap-6 border-b border-stone-200 pb-6">
+        <div class="print-shell">
+
+            <div class="flex justify-between items-end border-b-[3px] border-stone-800 pb-4 mb-6">
                 <div>
-                    <div class="text-xs font-bold uppercase tracking-[0.3em] text-brand-600">Assessment Report</div>
-                    <h1 id="print-title" class="mt-3 text-3xl font-bold text-stone-900">新生入学综合评估系统</h1>
-                    <p id="print-subtitle" class="mt-2 text-sm text-stone-500"></p>
+                    <div class="text-xs font-black tracking-widest text-stone-400 uppercase">Assessment Report</div>
+                    <h1 id="print-title" class="mt-2 text-3xl font-black text-stone-900"></h1>
+
+                    <div class="mt-3 flex gap-5 text-sm font-bold text-stone-600 bg-stone-50 px-4 py-2 rounded-lg border border-stone-200">
+                        <span>学员姓名：<span id="print-student-name" class="text-brand-700 ml-1"></span></span>
+                        <span>测评年龄：<span id="print-student-age" class="text-stone-900 ml-1"></span></span>
+                    </div>
                 </div>
                 <div class="text-right">
-                    <div class="text-xs text-stone-500">导出时间</div>
-                    <div id="print-time" class="mt-1 text-sm font-semibold text-stone-800"></div>
+                    <div class="text-xs font-bold text-stone-400 uppercase tracking-wider">Generated On</div>
+                    <div id="print-time" class="mt-1 text-sm font-black text-stone-800"></div>
                 </div>
             </div>
 
-            <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div class="print-grid-card rounded-2xl border border-stone-200 bg-brand-50 p-5">
-                    <div class="text-xs text-stone-500">综合得分</div>
-                    <div id="print-total-score" class="mt-2 text-3xl font-bold text-brand-600"></div>
-                    <div id="print-breakdown" class="mt-2 text-sm text-stone-600"></div>
+            <div class="flex gap-6 mb-6 avoid-break-item">
+                <div class="top-score-box flex-1">
+                    <div class="text-xs font-bold text-stone-600 uppercase tracking-widest">综合评估得分</div>
+                    <div id="print-total-score" class="mt-2 text-4xl font-black text-brand-600"></div>
+                    <div id="print-breakdown" class="mt-2 text-xs font-medium text-stone-500"></div>
                 </div>
-                <div class="print-grid-card rounded-2xl border border-stone-200 bg-white p-5">
-                    <div class="text-xs text-stone-500">结论等级</div>
-                    <div id="print-level" class="mt-2 text-xl font-bold text-stone-900"></div>
-                    <div id="print-interactive-overview" class="mt-2 text-sm text-stone-600"></div>
-                </div>
-            </div>
-
-            <div class="print-card mt-6 rounded-2xl border border-stone-200 bg-white p-6">
-                <h2 class="text-xl font-bold text-stone-900">能力画像</h2>
-                <div class="mt-4 flex flex-col gap-6 lg:flex-row lg:items-start">
-                    <img id="print-chart-image" alt="能力雷达图" class="w-full max-w-sm rounded-2xl border border-stone-100 bg-stone-50 p-3">
-                    <div id="print-dimensions" class="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2"></div>
+                <div class="top-level-box flex-1">
+                    <div class="text-xs font-bold text-stone-600 uppercase tracking-widest">阶段结论等级</div>
+                    <div id="print-level" class="mt-2 text-2xl font-black text-stone-900"></div>
+                    <div id="print-interactive-overview" class="mt-2 text-xs font-medium text-stone-500"></div>
                 </div>
             </div>
 
-            <div id="print-interactive-section" class="print-card mt-6 rounded-2xl border border-stone-200 bg-white p-6 hidden">
-                <h2 class="text-xl font-bold text-stone-900">游戏化任务完成情况</h2>
-                <div id="print-interactive-list" class="mt-4 space-y-3"></div>
-            </div>
-
-            <div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
-                <div class="print-card rounded-2xl border border-stone-200 bg-white p-6">
-                    <h2 class="text-xl font-bold text-stone-900">本次表现较亮眼的部分</h2>
-                    <div id="print-strengths-list" class="mt-4 space-y-3"></div>
+            <div class="print-module avoid-break-item">
+                <div class="module-header">
+                    <div class="module-header-accent"></div>核心能力画像
                 </div>
-                <div class="print-card rounded-2xl border border-stone-200 bg-white p-6">
-                    <h2 class="text-xl font-bold text-stone-900">本次判断依据</h2>
-                    <div id="print-evidence-list" class="mt-4 space-y-3"></div>
-                </div>
-            </div>
-
-            <div class="print-card mt-6 rounded-2xl border border-stone-200 bg-white p-6">
-                <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                    <div>
-                        <h2 class="text-xl font-bold text-stone-900">更适合优先安排的课程方向</h2>
-                        <p id="print-course-intro" class="mt-3 max-w-3xl text-sm leading-7 text-stone-600"></p>
+                <div class="module-body flex items-center justify-between">
+                    <div class="w-2/5">
+                        <img id="print-chart-image" alt="能力雷达图">
                     </div>
-                    <div class="rounded-2xl bg-brand-50 px-4 py-3 text-sm font-bold text-brand-700">
-                        建议优先做阶段性系统支持
+                    <div class="w-3/5 grid grid-cols-2 gap-4 pl-4" id="print-dimensions"></div>
+                </div>
+            </div>
+
+            <div class="print-module">
+                <div class="module-header">
+                    <div class="module-header-accent"></div>评估结果剖析与培养建议
+                </div>
+                <div class="module-body space-y-6">
+                    <div class="avoid-break-item">
+                        <h3 class="text-base font-bold text-stone-900 mb-2">表现剖析</h3>
+                        <p id="print-analysis" class="text-sm leading-8 text-stone-700"></p>
+                    </div>
+                    <div class="avoid-break-item">
+                        <h3 class="text-base font-bold text-stone-900 mb-2">定制培养建议</h3>
+                        <p id="print-advice" class="text-sm leading-8 text-stone-700"></p>
                     </div>
                 </div>
-                <div id="print-course-list" class="mt-5 grid gap-4 md:grid-cols-2"></div>
             </div>
 
-            <div class="mt-6 grid grid-cols-1 gap-4">
-                <div class="print-card rounded-2xl border border-stone-200 bg-white p-6">
-                    <h2 class="text-xl font-bold text-stone-900">评估结果剖析</h2>
-                    <p id="print-analysis" class="mt-3 leading-relaxed text-stone-600"></p>
+            <div class="print-module">
+                <div class="module-header">
+                    <div class="module-header-accent"></div>本次表现亮眼点
                 </div>
-                <div class="print-card rounded-2xl border border-stone-200 bg-white p-6">
-                    <h2 class="text-xl font-bold text-stone-900">培养建议</h2>
-                    <p id="print-advice" class="mt-3 leading-relaxed text-stone-600"></p>
+                <div class="module-body space-y-4" id="print-strengths-list"></div>
+            </div>
+
+            <div class="print-module">
+                <div class="module-header">
+                    <div class="module-header-accent"></div>核心判断依据
+                </div>
+                <div class="module-body space-y-4" id="print-evidence-list"></div>
+            </div>
+
+            <div id="print-interactive-section" class="print-module hidden">
+                <div class="module-header">
+                    <div class="module-header-accent"></div>游戏化任务完成记录
+                </div>
+                <div class="module-body space-y-4" id="print-interactive-list"></div>
+            </div>
+
+            <div class="print-module avoid-break-item">
+                <div class="module-header">
+                    <div class="module-header-accent"></div>优先课程规划建议
+                </div>
+                <div class="module-body space-y-4">
+                    <p id="print-course-intro" class="text-sm text-stone-600 mb-4"></p>
+                    <div id="print-course-list" class="space-y-4"></div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -1130,7 +1142,7 @@
                     reassure: '更关注参与节奏和恢复能力，而不是要求孩子一直完美表现。',
                     performer: '主要完成：孩子参与，家长结合日常观察填写',
                     itemHints: [
-                        '观察孩子做一件事时能否持续投入一段时间，不总是频繁分心离开。',
+                        '观察孩子做一件事时能否持续投入一段时间，不总是频繁分心离开。（专注时长参考：3岁约10-15分钟，4岁约15-20分钟，5-6岁约20-30分钟）',
                         '观察孩子周围有人说话或环境有变化时，是否还能继续把事情做下去。',
                         '观察孩子规则变化后，能否在提醒下较快调整，而不是一直按原方式继续。',
                         '观察孩子遇到难题或做错时，是愿意继续尝试，还是很快放弃或情绪明显波动。',
@@ -1348,11 +1360,11 @@
         }
 
         function getInteractiveTotalScore() {
-            return getInteractiveTasks().reduce((sum, task) => sum + (interactiveState[task.id]?.score || 0), 0);
+            return getInteractiveTasks().reduce((sum, task) => sum + (interactiveState[task.id] ? interactiveState[task.id].score : 0), 0);
         }
 
         function getCompletedInteractiveCount() {
-            return getInteractiveTasks().filter(task => interactiveState[task.id]?.completed).length;
+            return getInteractiveTasks().filter(task => interactiveState[task.id] && interactiveState[task.id].completed).length;
         }
 
         function getAnsweredCountForDimension(dimIndex) {
@@ -1409,7 +1421,7 @@
                 states.push({
                     id: 'assessment-step-interactive',
                     label: '互动任务',
-                    completed: tasks.every(task => interactiveState[task.id]?.completed),
+                    completed: tasks.every(task => interactiveState[task.id] && interactiveState[task.id].completed),
                     detail: `${getCompletedInteractiveCount()}/${tasks.length} 项已完成`
                 });
             }
@@ -1514,29 +1526,30 @@
 
                 dim.items.forEach((item, itemIndex) => {
                     const li = document.createElement('li');
-                    li.className = 'flex flex-col gap-4 p-4 sm:px-5 lg:flex-row lg:items-center lg:justify-between';
+                    li.className = 'grid grid-cols-1 lg:grid-cols-12 gap-4 p-4 sm:px-5 lg:items-center';
 
                     const itemText = document.createElement('div');
-                    itemText.className = 'max-w-xl';
-                    const itemHint = guide.itemHints?.[itemIndex] || '请结合孩子在对应情境中的日常表现进行评分。';
+                    itemText.className = 'lg:col-span-6 pr-0 lg:pr-4';
+                    const itemHint = (guide.itemHints && guide.itemHints[itemIndex]) ? guide.itemHints[itemIndex] : '请结合孩子在对应情境中的日常表现进行评分。';
                     itemText.innerHTML = `
                         <div class="font-medium text-stone-800">${item}</div>
                         <div class="mt-1 text-sm leading-6 text-stone-500">${itemHint}</div>
                     `;
 
                     const btnGroup = document.createElement('div');
-                    btnGroup.className = 'flex flex-wrap gap-2 lg:justify-end';
+                    btnGroup.className = 'lg:col-span-6 grid grid-cols-3 gap-2';
 
                     [1, 2, 3].forEach(val => {
                         const meta = scoreOptionMeta[val];
                         const btn = document.createElement('button');
-                        btn.className = 'score-btn min-w-[104px] rounded-2xl border border-stone-300 px-3 py-3 text-left text-stone-600 hover:border-brand-500 hover:text-brand-500';
+                        btn.className = 'score-btn h-full flex flex-col justify-center items-center rounded-2xl border border-stone-300 px-1 sm:px-2 py-2.5 text-center text-stone-600 hover:border-brand-500 hover:text-brand-500';
                         if (scores[dimIndex][itemIndex] === val) {
                             btn.classList.add('selected');
                         }
+
                         btn.innerHTML = `
                             <span class="score-label block text-sm font-bold">${meta.label}</span>
-                            <span class="score-hint mt-1 block text-xs text-stone-400">${meta.hint}</span>
+                            <span class="score-hint mt-1 block text-[11px] xl:text-xs leading-tight text-stone-400 break-words">${meta.hint}</span>
                         `;
                         btn.onclick = () => handleScoreSelect(dimIndex, itemIndex, val, btnGroup);
                         btnGroup.appendChild(btn);
@@ -1840,7 +1853,7 @@
                 const baseTotal = dim.items.reduce((sum, item, itemIndex) => sum + scores[index][itemIndex], 0);
                 const interactiveBonus = getInteractiveTasks()
                     .filter(task => task.dimensionIndex === index)
-                    .reduce((sum, task) => sum + (interactiveState[task.id]?.score || 0), 0);
+                    .reduce((sum, task) => sum + (interactiveState[task.id] ? interactiveState[task.id].score : 0), 0);
                 return baseTotal + interactiveBonus;
             });
         }
@@ -1920,7 +1933,7 @@
             }
 
             const tasks = getInteractiveTasks();
-            const completedTasks = tasks.filter(task => interactiveState[task.id]?.completed);
+            const completedTasks = tasks.filter(task => interactiveState[task.id] && interactiveState[task.id].completed);
             if (completedTasks.length) {
                 items.push(`已完成 ${completedTasks.length}/${tasks.length} 项互动任务，结论里会加入更具体的作答表现依据。`);
             } else if (tasks.length) {
@@ -2024,7 +2037,10 @@
             });
 
             getInteractiveTasks()
-                .filter(task => interactiveState[task.id]?.completed && interactiveState[task.id]?.score >= Math.ceil(task.maxScore / 2))
+                .filter(task => {
+                    const state = interactiveState[task.id];
+                    return state && state.completed && state.score >= Math.ceil(task.maxScore / 2);
+                })
                 .slice(0, 2)
                 .forEach(task => {
                     items.push(`${task.name}：${buildTaskOutcome(task, interactiveState[task.id])}`);
@@ -2049,7 +2065,7 @@
                 .map(item => `观察量表 · ${appData[currentTab].dimensions[item.index].name}：已记录 ${item.answered}/${appData[currentTab].dimensions[item.index].items.length} 项，其中 3 分 ${item.counts[3]} 项、2 分 ${item.counts[2]} 项、1 分 ${item.counts[1]} 项。`);
 
             const taskItems = getInteractiveTasks()
-                .filter(task => interactiveState[task.id]?.completed)
+                .filter(task => interactiveState[task.id] && interactiveState[task.id].completed)
                 .map(task => `互动任务 · ${task.name}：${buildTaskOutcome(task, interactiveState[task.id])}`);
 
             const items = [...taskItems, ...dimensionItems];
@@ -2219,15 +2235,12 @@
             list.innerHTML = tasks.map(task => {
                 const state = interactiveState[task.id];
                 return `
-                    <div class="rounded-xl border border-stone-200 bg-white p-4">
-                        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                            <div>
-                                <div class="font-bold text-stone-800">${task.name}</div>
-                                <div class="text-sm text-stone-500">计入维度：${appData[currentTab].dimensions[task.dimensionIndex].name}</div>
-                            </div>
-                            <div class="${getSummaryPillClass(state, task)}">${state.completed ? `${state.score}/${task.maxScore} 分` : '未完成'}</div>
+                    <div class="avoid-break-item bg-stone-50 rounded-lg p-4 border border-stone-100">
+                        <div class="flex justify-between items-start">
+                            <div class="font-bold text-sm text-stone-800">${task.name}</div>
+                            <div class="text-xs font-bold text-brand bg-orange-100 px-2 py-0.5 rounded">${(state && state.completed) ? `${state.score}/${task.maxScore} 分` : '未完成'}</div>
                         </div>
-                        <p class="mt-3 text-sm leading-relaxed text-stone-600">${buildTaskOutcome(task, state)}</p>
+                        <p class="mt-2 text-xs leading-relaxed text-stone-600">${buildTaskOutcome(task, state)}</p>
                     </div>
                 `;
             }).join('');
@@ -2287,16 +2300,25 @@
                 button.disabled = totalScore === 0;
             });
             document.getElementById('report-ready-status').textContent = totalScore === 0
-                ? '完成至少一个模块后，请点击页面顶部按钮下载带有结论、观察依据与建议的正式 PDF。'
-                : '当前已有记录，请点击页面顶部按钮下载带有结论、观察依据与建议的正式 PDF。';
+                ? '完成至少一个模块后，请点击页面顶部按钮导出正式报告。'
+                : '当前已有记录，请点击页面顶部按钮打印/导出报告。';
         }
 
         function setExportBusyState(isBusy) {
-            document.querySelectorAll('[data-export-action="true"]').forEach(button => {
-                button.disabled = isBusy || calculateDimensionScores().reduce((a, b) => a + b, 0) === 0;
-            });
+            const btn = document.getElementById('export-pdf-btn');
+            const statusText = document.getElementById('report-ready-status');
+
             if (isBusy) {
-                document.getElementById('report-ready-status').textContent = '正在生成并下载 PDF，请稍候…';
+                btn.disabled = true;
+                btn.innerHTML = '<span>⏳</span><span>正在生成报告...</span>';
+                statusText.textContent = '正在生成并下载 PDF，请稍候…';
+            } else {
+                const totalScore = calculateDimensionScores().reduce((a, b) => a + b, 0);
+                btn.disabled = totalScore === 0;
+                btn.innerHTML = '<span>🖨️</span><span>下载正式测评报告</span>';
+                statusText.textContent = totalScore === 0
+                    ? '完成至少一个模块后，请点击页面顶部按钮导出正式报告。'
+                    : '当前已有记录，请点击页面顶部按钮打印/导出报告。';
             }
         }
 
@@ -2305,11 +2327,13 @@
             const date = new Date();
             const pad = value => String(value).padStart(2, '0');
             const stamp = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-            return `${stageName}-测评报告-${stamp}.pdf`;
+            const sName = document.getElementById('input-student-name').value.trim();
+            const namePrefix = sName ? `${sName}-` : '';
+            return `${namePrefix}${stageName}-测评报告-${stamp}.pdf`;
         }
 
         async function waitForPDFRenderReady() {
-            if (document.fonts?.ready) {
+            if (document.fonts && document.fonts.ready) {
                 try {
                     await document.fonts.ready;
                 } catch (error) {
@@ -2318,7 +2342,7 @@
             }
 
             const chartImage = document.getElementById('print-chart-image');
-            if (chartImage?.src && !chartImage.complete) {
+            if (chartImage && chartImage.src && !chartImage.complete) {
                 await new Promise(resolve => {
                     const cleanup = () => {
                         chartImage.removeEventListener('load', cleanup);
@@ -2331,43 +2355,39 @@
             }
 
             await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-            await new Promise(resolve => setTimeout(resolve, 120));
+            await new Promise(resolve => setTimeout(resolve, 250)); // 确保DOM完全静止
         }
 
         async function downloadPDFReport() {
             const source = document.querySelector('#print-report .print-shell');
             document.body.classList.add('pdf-exporting');
-            await waitForPDFRenderReady();
-
-            const options = {
-                margin: [6, 6, 6, 6],
-                filename: buildExportFilename(),
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: {
-                    scale: 2,
-                    useCORS: true,
-                    backgroundColor: '#ffffff',
-                    scrollX: 0,
-                    scrollY: 0,
-                    windowWidth: 1280
-                },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak: {
-                    mode: ['css', 'legacy'],
-                    avoid: [
-                        '.print-card',
-                        '.print-grid-card',
-                        '#print-dimensions > div',
-                        '#print-interactive-list > div',
-                        '#print-strengths-list > div',
-                        '#print-evidence-list > div',
-                        '#print-course-list > div'
-                    ]
-                }
-            };
 
             try {
+                await waitForPDFRenderReady();
+
+                const options = {
+                    margin: [10, 10, 10, 10], // 上右下左边距，单位毫米
+                    filename: buildExportFilename(),
+                    image: { type: 'jpeg', quality: 1.0 },
+                    html2canvas: {
+                        scale: 2, // 提高清晰度
+                        useCORS: true,
+                        backgroundColor: '#ffffff',
+                        windowWidth: 860 // 锁定视口宽度，防止栅格变形
+                    },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                    pagebreak: {
+                        mode: ['css', 'legacy'],
+                        avoid: ['.avoid-break-item', '.print-module'] // 精准保护不断行
+                    }
+                };
+
                 await window.html2pdf().set(options).from(source).save();
+                document.getElementById('report-ready-status').textContent = 'PDF 已成功下载！如未看到文件，请检查浏览器下载列表。';
+            } catch (error) {
+                console.error('PDF Export Error:', error);
+                document.getElementById('report-ready-status').textContent = '自动下载失败，已为您唤起浏览器打印（可选择另存为PDF）。';
+                setTimeout(() => window.print(), 300);
             } finally {
                 document.body.classList.remove('pdf-exporting');
             }
@@ -2376,28 +2396,20 @@
         async function exportPDF() {
             const totalScore = calculateDimensionScores().reduce((a, b) => a + b, 0);
             if (totalScore === 0) {
-                alert('请先完成至少一项测评内容后再导出 PDF。');
+                alert('请先完成至少一项测评内容后再导出。');
                 return;
             }
 
+            // 1. 准备打印数据，填充隐藏的打印专用 DOM
             preparePrintReport();
-            setExportBusyState(true);
 
-            try {
-                if (window.html2pdf) {
-                    await downloadPDFReport();
-                    document.getElementById('report-ready-status').textContent = 'PDF 已开始下载，如未看到文件，请检查浏览器下载列表。';
-                } else {
-                    document.getElementById('report-ready-status').textContent = '当前浏览器未加载到 PDF 组件，已切换为打印保存方式。';
-                    setTimeout(() => window.print(), 120);
-                }
-            } catch (error) {
-                console.error(error);
-                document.getElementById('report-ready-status').textContent = '自动下载 PDF 失败，已切换为打印保存方式。';
-                setTimeout(() => window.print(), 120);
-            } finally {
-                setExportBusyState(false);
-            }
+            // 2. 更新页面上的状态提示
+            document.getElementById('report-ready-status').textContent = '已为您唤起浏览器打印，请在打印界面中选择“另存为 PDF”。';
+
+            // 3. 延迟 300 毫秒，确保图表的 Base64 数据完全写入 img 标签，且 DOM 更新完毕
+            setTimeout(() => {
+                window.print();
+            }, 300);
         }
 
         function preparePrintReport() {
@@ -2409,28 +2421,50 @@
             const evidence = buildEvidenceItems(dimScores);
             const courseMatches = buildCourseMatchItems(dimScores);
 
+            // 获取填写的学员信息
+            const sName = document.getElementById('input-student-name').value.trim() || '未填写';
+            const sAge = document.getElementById('input-student-age').value.trim() || '未填写';
+
+            document.getElementById('print-student-name').textContent = sName;
+            document.getElementById('print-student-age').textContent = sAge;
+
+            // 头部信息
             document.getElementById('print-title').textContent = appData[currentTab].title;
-            document.getElementById('print-subtitle').textContent = `${stageProfiles[currentTab].trustTitle} · ${stageProfiles[currentTab].purpose}`;
+
+            // 【修复点】：增加元素存在性判断，避免因找不到 print-subtitle 导致程序崩溃
+            const subtitleEl = document.getElementById('print-subtitle');
+            if (subtitleEl) {
+                subtitleEl.textContent = `${stageProfiles[currentTab].trustTitle} · ${stageProfiles[currentTab].purpose}`;
+            }
+
             document.getElementById('print-time').textContent = new Date().toLocaleString('zh-CN', { hour12: false });
+
+            // 核心分数
             document.getElementById('print-total-score').textContent = `${totalScore} / ${getTotalMaxScore()}`;
             document.getElementById('print-breakdown').textContent = tasks.length
-                ? `观察量表 ${getTextTotalScore()}/${getTextMaxScore()} · 互动任务 ${getInteractiveTotalScore()}/${getInteractiveMaxScore()}`
-                : `观察量表 ${getTextTotalScore()}/${getTextMaxScore()} · 当前阶段无互动任务`;
+                ? `量表 ${getTextTotalScore()}/${getTextMaxScore()} · 互动 ${getInteractiveTotalScore()}/${getInteractiveMaxScore()}`
+                : `量表 ${getTextTotalScore()}/${getTextMaxScore()} · 当前无互动任务`;
             document.getElementById('print-level').textContent = threshold.label;
             document.getElementById('print-interactive-overview').textContent = tasks.length
                 ? `互动题完成 ${getCompletedInteractiveCount()}/${tasks.length} 项`
                 : '当前阶段未设置互动任务';
+
+            // 剖析与建议
             document.getElementById('print-analysis').textContent = document.getElementById('result-analysis').textContent;
             document.getElementById('print-advice').textContent = document.getElementById('result-advice').textContent;
+
+            // 雷达图
             document.getElementById('print-chart-image').src = radarChartInstance.toBase64Image();
 
+            // 维度得分
             document.getElementById('print-dimensions').innerHTML = appData[currentTab].dimensions.map((dim, index) => `
-                <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4">
-                    <div class="text-sm font-bold text-stone-800">${dim.name}</div>
-                    <div class="mt-2 text-2xl font-bold text-brand-600">${dimScores[index]} / ${getDimensionMaxScore(index)}</div>
+                <div class="bg-stone-50 rounded-lg p-4 border border-stone-100">
+                    <div class="text-xs font-bold text-stone-500">${dim.name}</div>
+                    <div class="mt-1 text-xl font-black text-stone-800">${dimScores[index]} <span class="text-xs font-normal text-stone-400">/ ${getDimensionMaxScore(index)}</span></div>
                 </div>
             `).join('');
 
+            // 互动任务记录
             const printInteractiveSection = document.getElementById('print-interactive-section');
             const printInteractiveList = document.getElementById('print-interactive-list');
             if (tasks.length) {
@@ -2438,12 +2472,12 @@
                 printInteractiveList.innerHTML = tasks.map(task => {
                     const state = interactiveState[task.id];
                     return `
-                        <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4">
-                            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                                <div class="font-bold text-stone-800">${task.name}</div>
-                                <div class="${getSummaryPillClass(state, task)}">${state.completed ? `${state.score}/${task.maxScore} 分` : '未完成'}</div>
+                        <div class="avoid-break-item bg-stone-50 rounded-lg p-4 border border-stone-100">
+                            <div class="flex justify-between items-start">
+                                <div class="font-bold text-sm text-stone-800">${task.name}</div>
+                                <div class="text-xs font-bold text-brand bg-orange-100 px-2 py-0.5 rounded">${(state && state.completed) ? `${state.score}/${task.maxScore} 分` : '未完成'}</div>
                             </div>
-                            <p class="mt-2 text-sm leading-relaxed text-stone-600">${buildTaskOutcome(task, state)}</p>
+                            <p class="mt-2 text-xs leading-relaxed text-stone-600">${buildTaskOutcome(task, state)}</p>
                         </div>
                     `;
                 }).join('');
@@ -2452,26 +2486,28 @@
                 printInteractiveList.innerHTML = '';
             }
 
+            // 亮点与依据
             document.getElementById('print-strengths-list').innerHTML = strengths.map(item => `
-                <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4 text-sm leading-relaxed text-stone-600">${item}</div>
+                <div class="avoid-break-item text-sm leading-relaxed text-stone-600 border-l-[3px] border-brand pl-3">${item}</div>
             `).join('');
 
             document.getElementById('print-evidence-list').innerHTML = evidence.map(item => `
-                <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4 text-sm leading-relaxed text-stone-600">${item}</div>
+                <div class="avoid-break-item text-sm leading-relaxed text-stone-600 border-l-[3px] border-stone-300 pl-3">${item}</div>
             `).join('');
 
+            // 课程规划
             document.getElementById('print-course-intro').textContent = document.getElementById('course-match-intro').textContent;
             document.getElementById('print-course-list').innerHTML = courseMatches.map(item => `
-                <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+                <div class="avoid-break-item bg-stone-50 rounded-lg p-4 border border-stone-100">
                     <div class="text-sm font-bold text-stone-900">${item.title}</div>
-                    <div class="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-600">${item.badge}</div>
-                    <div class="mt-3 text-sm leading-relaxed text-stone-600">${item.body}</div>
+                    <div class="mt-1 text-xs font-bold text-brand">${item.badge}</div>
+                    <div class="mt-2 text-xs leading-relaxed text-stone-600">${item.body}</div>
                 </div>
             `).join('');
         }
 
         function getAnimationOptionClass(state, index) {
-            if (state.selectedOption === null) {
+            if (!state || state.selectedOption === null) {
                 return '';
             }
             if (index === state.correctIndex) {
@@ -2484,8 +2520,9 @@
         }
 
         function getSchulteCellClass(state, number) {
+            if (!state) return '';
             const classes = [];
-            if (state.clickedNumbers.includes(number)) {
+            if (state.clickedNumbers && state.clickedNumbers.includes(number)) {
                 classes.push('correct');
             }
             if (state.lastWrong === number) {
@@ -2495,7 +2532,7 @@
         }
 
         function getSummaryPillClass(state, task) {
-            if (!state.completed) {
+            if (!state || !state.completed) {
                 return 'summary-pill bg-stone-100 text-stone-600';
             }
             if (state.score === task.maxScore) {
@@ -2508,7 +2545,7 @@
         }
 
         function buildTaskOutcome(task, state) {
-            if (!state.completed) {
+            if (!state || !state.completed) {
                 return '本项尚未完成，建议完成后再与家长沟通最终结论，这样会更完整。';
             }
 
@@ -2680,8 +2717,8 @@
                             callbacks: {
                                 label: function(context) {
                                     const index = context.dataIndex;
-                                    const rawScore = context.dataset.rawScores?.[index] ?? 0;
-                                    const maxScore = context.dataset.maxScores?.[index] ?? getDimensionMaxScore(index);
+                                    const rawScore = (context.dataset.rawScores && context.dataset.rawScores[index] !== undefined) ? context.dataset.rawScores[index] : 0;
+                                    const maxScore = (context.dataset.maxScores && context.dataset.maxScores[index] !== undefined) ? context.dataset.maxScores[index] : getDimensionMaxScore(index);
                                     return `得分: ${rawScore} / ${maxScore}`;
                                 }
                             }
