@@ -23,10 +23,8 @@
             }
         }
         .score-btn,
-        .sequence-option,
         .export-btn,
-        .task-btn,
-        .schulte-cell {
+        .task-btn {
             transition: all 0.2s ease;
         }
         .score-btn.selected {
@@ -46,153 +44,6 @@
         }
         .fade-in {
             animation: fadeIn 0.4s ease-in-out;
-        }
-        .interactive-card {
-            border: 1px solid #fed7aa;
-            background: linear-gradient(135deg, rgba(255, 251, 235, 0.9), rgba(255, 255, 255, 1));
-            border-radius: 1.25rem;
-            padding: 1.25rem;
-            box-shadow: 0 18px 40px -28px rgba(217, 119, 6, 0.55);
-        }
-        .interactive-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: 999px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: #9a3412;
-            background: #ffedd5;
-        }
-        .task-stat {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 5.5rem;
-            padding: 0.5rem 0.9rem;
-            border-radius: 999px;
-            font-size: 0.82rem;
-            font-weight: 700;
-        }
-        .animal-tile {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.35rem;
-            min-height: 6rem;
-            border-radius: 1rem;
-            border: 1px solid #e7e5e4;
-            background: white;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-        }
-        .animal-tile.active {
-            border-color: #f59e0b;
-            background: #fff7ed;
-            transform: translateY(-4px) scale(1.03);
-            animation: bounceGlow 0.55s ease;
-            box-shadow: 0 16px 30px -22px rgba(245, 158, 11, 0.8);
-        }
-        .sequence-option {
-            border-radius: 1rem;
-            border: 1px solid #d6d3d1;
-            background: white;
-            color: #44403c;
-            padding: 0.9rem 1rem;
-            text-align: left;
-            font-weight: 600;
-        }
-        .sequence-option:hover:not(:disabled) {
-            border-color: #d97706;
-            color: #b45309;
-            transform: translateY(-1px);
-        }
-        .sequence-option.correct {
-            border-color: #22c55e;
-            background: #f0fdf4;
-            color: #166534;
-        }
-        .sequence-option.wrong {
-            border-color: #f97316;
-            background: #fff7ed;
-            color: #9a3412;
-        }
-        .sequence-option:disabled {
-            cursor: not-allowed;
-            opacity: 0.65;
-        }
-        .task-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.45rem;
-            padding: 0.72rem 1rem;
-            border-radius: 0.95rem;
-            font-weight: 700;
-            border: 1px solid transparent;
-        }
-        .task-btn-primary {
-            background: #d97706;
-            color: white;
-        }
-        .task-btn-primary:hover {
-            background: #b45309;
-        }
-        .task-btn-secondary {
-            background: white;
-            color: #57534e;
-            border-color: #d6d3d1;
-        }
-        .task-btn-secondary:hover {
-            border-color: #d97706;
-            color: #b45309;
-        }
-        .task-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.55;
-        }
-        .schulte-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 0.8rem;
-        }
-        .schulte-cell {
-            min-height: 4.5rem;
-            border-radius: 1.15rem;
-            border: 1px solid #d6d3d1;
-            background: white;
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #44403c;
-            box-shadow: 0 12px 24px -24px rgba(120, 53, 15, 0.6);
-        }
-        .schulte-cell:hover:not(:disabled) {
-            border-color: #d97706;
-            color: #b45309;
-            transform: translateY(-2px);
-        }
-        .schulte-cell.correct {
-            background: #fef3c7;
-            border-color: #f59e0b;
-            color: #92400e;
-        }
-        .schulte-cell.error {
-            border-color: #f97316;
-            background: #fff7ed;
-            animation: shake 0.28s ease;
-        }
-        .schulte-cell:disabled {
-            cursor: default;
-        }
-        .summary-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: 999px;
-            font-size: 0.78rem;
-            font-weight: 700;
         }
         .trust-shell {
             position: relative;
@@ -347,23 +198,12 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes bounceGlow {
-            0% { transform: scale(1); }
-            35% { transform: translateY(-6px) scale(1.06); }
-            100% { transform: translateY(0) scale(1.02); }
-        }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-4px); }
-            50% { transform: translateX(4px); }
-            75% { transform: translateX(-2px); }
-        }
 
         /* ------------------ PDF 导出状态的专属样式 ------------------ */
         .print-report { display: none; }
 
         #print-report {
-            display: block !important;
+            display: none;
             position: relative;
             background: #ffffff;
             z-index: 60;
@@ -381,12 +221,11 @@
             font-family: 'system-ui', '-apple-system', 'sans-serif';
         }
 
-        /* 优化边框模块容器：引入柔和渐变、更精细的圆角和轻微阴影质感 */
         #print-report .print-module {
-            border: 1px solid #fed7aa !important; /* 边框变细，显得更精致 */
-            border-radius: 16px !important; /* 加大圆角 */
+            border: 1px solid #fed7aa !important;
+            border-radius: 16px !important;
             margin-bottom: 24px !important;
-            background: linear-gradient(145deg, #fffcf8, #ffffff) !important; /* 引入微渐变背景 */
+            background: linear-gradient(145deg, #fffcf8, #ffffff) !important;
             box-shadow: 0 4px 20px -10px rgba(217, 119, 6, 0.08) !important;
             page-break-inside: avoid !important;
             break-inside: avoid !important;
@@ -444,7 +283,6 @@
         }
 
         @media print {
-            /* 【关键修复】：强制浏览器在打印时渲染所有背景色、渐变和阴影 */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -460,7 +298,6 @@
     <header class="sticky top-0 z-20 border-b border-stone-200/80 bg-white/90 backdrop-blur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-
                 <div class="flex items-center gap-5">
                     <div class="flex h-[3.25rem] w-[3.25rem] flex-shrink-0 items-center justify-center rounded-[14px] border border-[#eadfd2] bg-[rgba(255,251,235,0.9)] text-2xl shadow-sm">🌱</div>
                     <div class="hidden h-9 w-[1.5px] bg-stone-300 rounded-full sm:block"></div>
@@ -471,7 +308,7 @@
                 </div>
 
                 <div class="hidden xl:flex flex-wrap items-center gap-2">
-                    <span class="meta-chip">一对一互动测评</span>
+                    <span class="meta-chip">家庭观察视角</span>
                     <span class="meta-chip" id="header-stage-chip">适龄阶段</span>
                     <span class="meta-chip" id="header-progress-chip">进度 0%</span>
                     <span class="meta-chip">结果可导出正式 PDF</span>
@@ -497,7 +334,7 @@
                     🏫 小学阶段 (7-12岁)
                 </button>
                 <div class="ml-auto hidden md:flex items-center gap-2 text-xs text-stone-500">
-                    <span class="rounded-full bg-white px-3 py-1.5" id="header-duration-chip">约 20-30 分钟</span>
+                    <span class="rounded-full bg-white px-3 py-1.5" id="header-duration-chip">约 10-15 分钟</span>
                     <span class="rounded-full bg-white px-3 py-1.5">数据仅用于成长建议</span>
                 </div>
             </div>
@@ -509,10 +346,10 @@
         <section class="grid grid-cols-1 gap-6 lg:grid-cols-12">
             <div class="trust-shell lg:col-span-7 p-7 md:p-8">
                 <div class="relative z-10">
-                    <div class="section-kicker" id="trust-kicker">一对一探索式测评</div>
-                    <h2 class="mt-4 text-3xl font-bold text-stone-900 md:text-4xl" id="trust-title">儿童成长探索式入学测评</h2>
+                    <div class="section-kicker" id="trust-kicker">家庭日常观察</div>
+                    <h2 class="mt-4 text-3xl font-bold text-stone-900 md:text-4xl" id="trust-title">儿童成长家长观察评估</h2>
                     <p class="mt-4 max-w-2xl text-base leading-8 text-stone-600" id="trust-intro">
-                        通过观察量表、游戏互动与教师记录，帮助发现孩子的优势表现与当前支持点，为后续课程匹配提供更有依据的建议。
+                        通过科学的维度梳理，帮助家长回顾孩子在日常家庭生活中的真实表现。无需刻意测试，第一印象往往最准确。
                     </p>
 
                     <div class="mt-6 grid gap-3 sm:grid-cols-3">
@@ -521,8 +358,8 @@
                             <div class="mt-3 text-lg font-bold text-stone-900" id="trust-age-range">3-6 岁</div>
                         </div>
                         <div class="trust-metric">
-                            <div class="text-xs font-bold uppercase tracking-[0.18em] text-stone-400">测评时长</div>
-                            <div class="mt-3 text-lg font-bold text-stone-900" id="trust-duration">约 20-30 分钟</div>
+                            <div class="text-xs font-bold uppercase tracking-[0.18em] text-stone-400">填写时长</div>
+                            <div class="mt-3 text-lg font-bold text-stone-900" id="trust-duration">约 10-15 分钟</div>
                         </div>
                         <div class="trust-metric">
                             <div class="text-xs font-bold uppercase tracking-[0.18em] text-stone-400">结果用途</div>
@@ -534,12 +371,11 @@
 
             <div class="lg:col-span-5 grid gap-4">
                 <div class="trust-card">
-                    <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">本次测评如何进行</div>
-                    <div class="mt-3 text-lg font-bold text-stone-900" id="trust-method">观察量表 + 游戏互动 + 家长自主记录</div>
+                    <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">本次评估如何进行</div>
+                    <div class="mt-3 text-lg font-bold text-stone-900" id="trust-method">家长独立回想 + 客观观察记录</div>
                     <div class="mt-3 space-y-2 text-sm leading-7 text-stone-600" id="trust-points"></div>
                 </div>
                 <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
-
                     <div class="trust-card">
                         <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">数据与结果说明</div>
                         <p class="mt-3 text-sm leading-7 text-stone-600" id="trust-privacy-note"></p>
@@ -553,16 +389,16 @@
                 <section class="lg:col-span-8 flex flex-col">
                     <div class="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                         <div>
-                            <div class="section-kicker">测评执行区</div>
-                            <h2 class="mt-3 text-2xl font-bold text-stone-900" id="section-title">测评项目交互面板</h2>
+                            <div class="section-kicker">问卷填写区</div>
+                            <h2 class="mt-3 text-2xl font-bold text-stone-900" id="section-title">家长独立观察执行区</h2>
                             <p class="mt-3 max-w-3xl text-sm leading-7 text-stone-600" id="section-desc">
-                                本区域为核心评估操作区。请家长根据孩子本次作答表现，为每个能力维度下的具体指标进行评分。系统会同步整合作答分值、互动题表现和结果说明。
+                                本区域为核心评估填写区。请家长根据孩子近期表现，为每个能力维度下的具体指标进行评分。
                             </p>
                         </div>
                         <div class="summary-card max-w-sm">
                             <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">请家长放心</div>
                             <p class="mt-3 text-sm leading-7 text-stone-600" id="section-reassurance">
-                                当前环节更关注理解过程和参与状态，不以刷题经验作为唯一标准。
+                                请回想孩子近期的真实表现，根据日常观察进行客观记录。无需刻意测试，第一印象往往最准确。
                             </p>
                         </div>
                     </div>
@@ -590,22 +426,22 @@
                             <div class="grid gap-3 md:grid-cols-3">
                                 <div class="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm">
                                     <div class="font-bold text-stone-800">1 分</div>
-                                    <div class="mt-1 text-stone-500">完成较困难或不够稳定</div>
+                                    <div class="mt-1 text-stone-500">几乎没有或表现很不稳定</div>
                                 </div>
                                 <div class="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm">
                                     <div class="font-bold text-stone-800">2 分</div>
-                                    <div class="mt-1 text-stone-500">基本完成，但稳定度一般</div>
+                                    <div class="mt-1 text-stone-500">偶尔能做到，尚需大人引导</div>
                                 </div>
                                 <div class="rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm">
                                     <div class="font-bold text-stone-800">3 分</div>
-                                    <div class="mt-1 text-stone-500">完成较好，表现更稳定</div>
+                                    <div class="mt-1 text-stone-500">经常能做到，表现较为稳定</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="mt-6">
-                        <div class="mb-3 text-sm font-bold text-stone-500">测评步骤导航</div>
+                        <div class="mb-3 text-sm font-bold text-stone-500">填写步骤导航</div>
                         <div id="step-nav" class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3"></div>
                     </div>
 
@@ -617,7 +453,7 @@
                         <div class="summary-card">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">当前进度</div>
+                                    <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">当前记录进度</div>
                                     <div class="mt-2 text-2xl font-bold text-stone-900" id="progress-display">0 / 0</div>
                                 </div>
                                 <div class="rounded-full bg-brand-50 px-3 py-2 text-xs font-bold text-brand-700" id="progress-percent">0%</div>
@@ -642,12 +478,11 @@
                             <div class="flex items-start justify-between gap-4">
                                 <div>
                                     <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">能力图谱</div>
-                                    <div class="mt-2 text-sm leading-7 text-stone-600">图谱仅反映本次测评中的作答表现，会受到熟悉度、情绪和兴趣影响。</div>
+                                    <div class="mt-2 text-sm leading-7 text-stone-600">图谱反映您所记录的数据分布。</div>
                                 </div>
                                 <div class="text-right">
                                     <div class="text-xs text-stone-500">当前记录得分</div>
                                     <div class="mt-1 text-2xl font-bold text-brand-500" id="total-score-display">0<span class="text-sm font-normal text-stone-400">/75</span></div>
-                                    <div class="mt-2 text-xs text-stone-500" id="interactive-completion-badge">互动任务 0/0</div>
                                 </div>
                             </div>
                             <div class="chart-container mt-4">
@@ -658,7 +493,7 @@
                         <div class="summary-card">
                             <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">报告导出</div>
                             <div class="mt-3 text-lg font-bold text-stone-900">正式测评报告</div>
-                            <p class="mt-2 text-sm leading-7 text-stone-600" id="report-ready-status">完成至少一个模块后，请点击页面顶部按钮下载正式测评报告。</p>
+                            <p class="mt-2 text-sm leading-7 text-stone-600" id="report-ready-status">完成至少一个模块后，请点击页面顶部按钮下载正式报告。</p>
                         </div>
                     </div>
                 </aside>
@@ -669,7 +504,7 @@
             <div>
                 <div class="section-kicker">正式成长报告</div>
                 <h2 class="mt-3 text-2xl font-bold text-stone-900">本次成长观察结论</h2>
-                <p class="mt-3 max-w-3xl text-sm leading-7 text-stone-600">系统会结合观察量表、游戏互动题和家长填写记录，整理出更容易理解和回顾的结论、依据与建议。</p>
+                <p class="mt-3 max-w-3xl text-sm leading-7 text-stone-600">系统会结合您的填写记录，整理出更容易理解和回顾的结论、依据与建议。</p>
             </div>
 
             <div id="recommendation-panel" class="mt-6">
@@ -678,22 +513,18 @@
                     <p>请先在上方完成至少一项观察记录。<br>系统会自动整理综合结论、观察依据和培养建议。</p>
                 </div>
                 <div id="result-content" class="hidden fade-in">
-                    <div class="grid gap-4 md:grid-cols-4">
+                    <div class="grid gap-4 md:grid-cols-3">
                         <div class="report-card">
                             <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">综合等级</div>
                             <div class="mt-4" id="result-badge"></div>
                         </div>
                         <div class="report-card">
-                            <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">综合得分</div>
+                            <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">综合观察得分</div>
                             <div class="mt-4 text-3xl font-bold text-stone-900" id="report-total-display">0/75</div>
                         </div>
                         <div class="report-card">
                             <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">观察量表得分</div>
                             <div class="mt-4 text-3xl font-bold text-stone-900" id="text-score-display">0/75</div>
-                        </div>
-                        <div class="report-card">
-                            <div class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">互动任务表现</div>
-                            <div class="mt-4 text-lg font-bold leading-snug text-stone-900" id="interactive-score-display">互动任务 0/0</div>
                         </div>
                     </div>
 
@@ -710,7 +541,7 @@
                         </div>
 
                         <div class="lg:col-span-5">
-                            <div class="grid gap-4 md:grid-cols-2">
+                            <div class="grid gap-4 md:grid-cols-1">
                                 <div class="report-card h-full">
                                 <h3 class="text-xl font-bold text-stone-900">本次表现较亮眼的部分</h3>
                                 <div class="mt-4 space-y-3" id="strength-summary-list"></div>
@@ -719,9 +550,9 @@
                                 <h3 class="text-xl font-bold text-stone-900">本次判断依据</h3>
                                 <div class="mt-4 space-y-3" id="evidence-summary-list"></div>
                                 </div>
-                                <div id="interactive-summary-section" class="report-card hidden md:col-span-2">
-                                    <h3 class="text-xl font-bold text-stone-900">互动任务完成情况</h3>
-                                    <div id="interactive-summary-list" class="mt-4 grid gap-3 xl:grid-cols-2"></div>
+                                <div id="interactive-summary-section" class="report-card hidden md:col-span-1">
+                                    <h3 class="text-xl font-bold text-stone-900">任务表现记录</h3>
+                                    <div id="interactive-summary-list" class="mt-4 grid gap-3 xl:grid-cols-1"></div>
                                 </div>
                             </div>
                         </div>
@@ -732,7 +563,7 @@
                             <div>
                                 <h3 class="text-2xl font-bold text-stone-900">更适合优先安排的课程方向</h3>
                                 <p class="mt-3 max-w-3xl text-sm leading-7 text-stone-600" id="course-match-intro">
-                                    基于本次测评，下面这些方向更适合作为后续系统支持的优先选择，也更方便后续安排更有针对性的课程支持。
+                                    基于本次观察，下面这些方向更适合作为后续系统支持的优先选择，也方便后续安排有针对性的辅导。
                                 </p>
                             </div>
                             <div class="rounded-2xl bg-brand-50 px-4 py-3 text-sm font-bold text-brand-700">
@@ -822,7 +653,7 @@
 
             <div id="print-interactive-section" class="print-module hidden">
                 <div class="module-header">
-                    <div class="module-header-accent"></div>游戏化任务完成记录
+                    <div class="module-header-accent"></div>补充任务记录
                 </div>
                 <div class="module-body space-y-4" id="print-interactive-list"></div>
             </div>
@@ -843,8 +674,8 @@
     <script>
         const appData = {
             toddler: {
-                title: "幼儿阶段（3-6岁）学前核心能力与行为观察表",
-                desc: "测试形式：一对一游戏化互动。除常规观察题外，加入多道动画题与舒尔特方块等生动任务，让孩子在轻松的游戏中展现记忆保持、故事理解、情绪识别和专注控制能力。",
+                title: "幼儿阶段（3-6岁）学前核心能力观察表",
+                desc: "请家长根据对孩子近半年生活、游戏中的日常表现进行回忆和评价。这并不是为了测验技能，而是为了更科学地梳理孩子的成长发展节奏。",
                 dimensions: [
                     {
                         name: "基础认知与逻辑",
@@ -856,177 +687,65 @@
                     },
                     {
                         name: "精细动作与空间",
-                        items: ["手眼协调（穿珠）", "空间拼搭模仿", "运笔与握姿", "折纸模仿", "轨迹控制（迷宫）", "双手协同操作"]
+                        items: ["手眼协调（如穿珠）", "空间拼搭模仿", "运笔与握姿", "折纸动作模仿", "轨迹控制（如画线）", "双手协同操作"]
                     },
                     {
                         name: "专注力与行为习惯",
-                        items: ["持续专注时长", "抗干扰能力", "指令转换抑制", "面对挑战的韧性", "规则与配合度"]
+                        items: ["持续专注时长", "抗干扰能力", "指令转换适应", "面对挑战的韧性", "规则与配合度"]
                     },
                     {
                         name: "社交与情绪发展",
                         items: ["目光与互动", "情绪认知", "环境适应力", "情绪稳定性", "延迟满足与等待"]
                     }
                 ],
-                interactiveTasks: [
-                    {
-                        id: "animation-memory",
-                        type: "animation",
-                        name: "动画观察题",
-                        headline: "小动物跳跳记忆",
-                        desc: "先观看 3 次小动物依次跳出来，再选择正确的出场顺序。",
-                        dimensionIndex: 0,
-                        maxScore: 3,
-                        frames: [
-                            { emoji: "🐰", label: "小兔" },
-                            { emoji: "🐻", label: "小熊" },
-                            { emoji: "🦊", label: "小狐狸" },
-                            { emoji: "🐼", label: "小熊猫" }
-                        ],
-                        watchPrompt: "请认真观察小动物依次跳出来的顺序。",
-                        answerPrompt: "刚刚依次跳出来的是哪三个小动物？",
-                        placeholder: "动画播放后，这里会出现 3 个可选顺序。",
-                        feedbacks: {
-                            default: "点击“开始动画”后，先认真看，再来选择顺序。",
-                            ready: "看完动画后，请孩子选出正确顺序。",
-                            replay: "再观察一遍，看看能不能记得更牢。",
-                            correct1: "第一次就选对了，孩子对动态顺序信息的保持很不错。",
-                            correct2: "在再次观察后选对了，说明记忆保持能力正在形成。",
-                            correct3: "在多次观察后完成，建议后续继续做节奏型记忆游戏。",
-                            wrong1: "这次顺序没有完全记住，先记为完成 1 分，可以再播一遍继续观察。",
-                            wrongN: "已完成作答，但连续信息的记忆保持还需要练习。"
-                        },
-                        outcomes: {
-                            firstTry: "第一次观看后就能准确指出顺序，说明孩子对动态顺序信息的短时保持和观察专注表现亮眼。",
-                            secondTry: "在再次观察后完成，说明动态记忆能力已具备一定基础，继续通过节奏游戏和看图记忆可以更稳定。",
-                            repeatTry: "在多次观察后完成，孩子愿意继续尝试，说明规则跟随不错，但连续信息保持仍需要持续练习。",
-                            incorrect: "已完成作答，但顺序判断尚不稳定，提示孩子在连续动画信息的保持上还需要更多游戏化训练。"
-                        }
-                    },
-                    {
-                        id: "story-animation",
-                        type: "animation",
-                        name: "故事排序动画题",
-                        headline: "小种子的成长故事",
-                        desc: "看一看小种子怎么慢慢长大，再选出正确顺序，观察孩子对故事先后和语言理解的把握。",
-                        dimensionIndex: 1,
-                        maxScore: 3,
-                        frames: [
-                            { emoji: "🌰", label: "种子" },
-                            { emoji: "🌱", label: "发芽" },
-                            { emoji: "🌿", label: "长叶子" },
-                            { emoji: "🌼", label: "开花" }
-                        ],
-                        watchPrompt: "请认真看小种子长大的过程。",
-                        answerPrompt: "这个小故事刚刚是怎样一步一步发生的？",
-                        placeholder: "动画播放后，这里会出现 3 个故事顺序选项。",
-                        feedbacks: {
-                            default: "点击“开始动画”后，先看故事，再来选顺序。",
-                            ready: "看完动画后，请孩子选出正确的故事顺序。",
-                            replay: "再看一遍，鼓励孩子边看边说出发生了什么。",
-                            correct1: "第一次就能排对，说明孩子对故事先后和语言理解很不错。",
-                            correct2: "再次观察后能选对，说明故事顺序理解正在形成。",
-                            correct3: "在多次观察后完成，建议继续用动画绘本和连环画帮助孩子练习。",
-                            wrong1: "这次故事顺序还没完全记住，先记为完成 1 分，可以再播一遍继续观察。",
-                            wrongN: "已完成作答，但故事先后理解还需要继续练习。"
-                        },
-                        outcomes: {
-                            firstTry: "第一次观看后就能说出故事先后，说明孩子对顺序关系和语言理解把握较好。",
-                            secondTry: "在再次观察后完成，说明故事排序能力正在建立，适合继续通过绘本连环画巩固。",
-                            repeatTry: "在多次观察后完成，孩子愿意继续尝试，说明任务配合度不错，但顺序理解仍可继续训练。",
-                            incorrect: "已完成作答，但故事先后判断尚不稳定，提示孩子在情节理解和语言组织上还需要更多练习。"
-                        }
-                    },
-                    {
-                        id: "emotion-animation",
-                        type: "animation",
-                        name: "表情动画题",
-                        headline: "表情小剧场",
-                        desc: "看角色表情依次变化，再选出正确顺序，观察孩子对情绪线索的识别与理解。",
-                        dimensionIndex: 4,
-                        maxScore: 3,
-                        frames: [
-                            { emoji: "😀", label: "开心" },
-                            { emoji: "😮", label: "惊讶" },
-                            { emoji: "😢", label: "难过" },
-                            { emoji: "😠", label: "生气" }
-                        ],
-                        watchPrompt: "请观察表情是怎么变化的。",
-                        answerPrompt: "刚刚依次出现了哪些表情？",
-                        placeholder: "动画播放后，这里会出现 3 个表情顺序选项。",
-                        feedbacks: {
-                            default: "点击“开始动画”后，先认真观察表情变化，再来选择顺序。",
-                            ready: "看完动画后，请孩子选出刚刚出现的表情顺序。",
-                            replay: "再看一遍，可以引导孩子边看边说出情绪名称。",
-                            correct1: "第一次就选对了，说明孩子对情绪线索识别比较敏锐。",
-                            correct2: "再次观察后能选对，说明情绪识别能力正在发展。",
-                            correct3: "在多次观察后完成，建议继续通过表情游戏和角色扮演加强情绪理解。",
-                            wrong1: "这次表情顺序还没完全记住，先记为完成 1 分，可以再播一遍继续观察。",
-                            wrongN: "已完成作答，但情绪识别与顺序保持还需要继续练习。"
-                        },
-                        outcomes: {
-                            firstTry: "第一次观看后就能说出表情变化顺序，说明孩子对情绪线索识别和理解较敏锐。",
-                            secondTry: "在再次观察后完成，说明情绪识别能力正在建立，继续通过角色扮演和表情游戏会更稳定。",
-                            repeatTry: "在多次观察后完成，孩子愿意继续尝试，说明互动意愿不错，但情绪线索捕捉仍可继续强化。",
-                            incorrect: "已完成作答，但表情顺序判断尚不稳定，提示孩子在情绪识别和理解上还需要更多练习。"
-                        }
-                    },
-                    {
-                        id: "schulte-grid",
-                        type: "schulte",
-                        name: "舒尔特方块",
-                        headline: "找数字专注挑战",
-                        desc: "请孩子按顺序点击 1 到 9，系统会记录用时和错误次数，观察持续专注与视觉搜索表现。",
-                        dimensionIndex: 3,
-                        maxScore: 3
-                    }
-                ],
+                interactiveTasks: [], // 已完全清空互动游戏任务
                 thresholds: [
                     {
-                        min: 79, max: 90,
-                        label: "能力卓越 / 优势突显",
+                        min: 66, max: 81,
+                        label: "发展稳健 / 优势突显",
                         color: "bg-green-100 text-green-800",
-                        analysis: "孩子在认知发展、专注保持和规则理解上展现出了很好的成熟度。TA好奇心强，学习投入感足，面对任务时愿意主动尝试并持续跟进。",
-                        advice: "针对这样具备优势的孩子，建议提供更具启发性和探索性的课程，如高阶思维拓展、绘本戏剧表达、规则型专注游戏等，让孩子在富有挑战的体验中持续成长。"
+                        analysis: "从家长的观察记录来看，孩子在认知发展、专注保持和规则理解上展现出了很好的成熟度。TA好奇心强，日常投入感足，愿意主动尝试新事物并持续跟进。",
+                        advice: "针对这样具备优势的孩子，建议提供更具启发性和探索性的支持，如高阶思维拓展、绘本戏剧表达、规则型专注游戏等，让孩子在富有挑战的体验中持续成长。"
                     },
                     {
-                        min: 59, max: 78,
-                        label: "稳步发展 / 潜力待发",
+                        min: 45, max: 65,
+                        label: "稳步过渡 / 潜力待发",
                         color: "bg-blue-100 text-blue-800",
-                        analysis: "孩子整体发展符合适龄标准，在多数任务中愿意配合并能逐步进入状态。部分能力已经显现出不错的基础，同时也存在一些可以继续强化的关键环节。",
-                        advice: "建议在趣味常规课程中继续融入专项训练，例如通过节奏类记忆游戏、视觉搜索游戏和手眼协调活动，帮助孩子把已有基础逐步稳定下来，更从容地衔接后续学习。"
+                        analysis: "基于家庭表现来看，孩子整体发展符合适龄标准，在多数活动中能逐步进入状态。部分能力已经显现出不错的基础，同时也存在一些可以继续强化的环节，需要大人的从旁引导。",
+                        advice: "建议在日常或课程中继续融入专项训练，例如通过节奏类记忆游戏、视觉搜索和手工活动，帮助孩子把已有基础逐步稳定下来，更从容地衔接后续学习。"
                     },
                     {
-                        min: 0, max: 58,
+                        min: 0, max: 44,
                         label: "习惯萌芽期 / 需耐心引导",
                         color: "bg-orange-100 text-orange-800",
-                        analysis: "孩子目前仍处于能力和习惯的萌芽阶段，在注意保持、连续信息记忆或规则切换上还需要更多支持。这个阶段更需要安全感、鼓励和低压力的互动体验。",
-                        advice: "建议先从习惯养成、感统游戏和短时任务挑战入手，不急于推进知识灌输。通过更轻松的游戏节奏和明确反馈，逐步帮助孩子建立倾听习惯、专注耐力和学习自信。"
+                        analysis: "目前的观察显示，孩子仍处于能力和习惯的萌芽阶段，在注意保持、连续信息记忆或规则切换上还需要更多家庭和外界的支持。这个阶段更需要安全感、鼓励和低压力的环境。",
+                        advice: "建议先从习惯养成、感统游戏和短时任务挑战入手，不急于推进认知灌输。通过轻松的节奏和明确的正反馈，逐步帮助孩子建立倾听习惯、专注耐力和自信心。"
                     }
                 ]
             },
             primary: {
-                title: "小学阶段（7-12岁）学力基础与学习习惯测评表",
-                desc: "测试形式：量化题卡、小任务体验与自主记录结合。通过更细的切入口记录孩子的准确率、启动速度、复查习惯和情绪恢复情况，让结果更容易量化，也更方便家长理解。",
+                title: "小学阶段（7-12岁）学力基础与学习习惯观察表",
+                desc: "请家长结合孩子近期写作业、课堂反馈及自主阅读的表现进行回顾评估，帮助梳理孩子准确率、启动速度、复查习惯和情绪等真实状态。",
                 dimensions: [
                     {
                         name: "视觉与听觉信息处理",
-                        items: ["3行数字视觉追踪准确度", "相近字词/图形辨别", "4-6项视觉短时记忆", "3步口头信息复述", "短文关键信息提取"]
+                        items: ["数字视觉追踪准确度", "相近字词辨别", "视觉短时记忆", "口头信息复述", "短文关键信息提取"]
                     },
                     {
                         name: "学科核心素养",
-                        items: ["20题口算准确率", "应用题关键条件定位", "图表信息读取准确度", "短文复述完整度", "书写规范与速度"]
+                        items: ["口算准确与连贯率", "应用题关键条件定位", "图表信息读取准确度", "短文复述完整度", "书写规范与速度"]
                     },
                     {
                         name: "逻辑思维与规划",
-                        items: ["规律推理正确率", "空间图形旋转判断", "三步任务规划完整度", "草稿纸分区使用", "归纳表达条理性"]
+                        items: ["规律推理与表达", "空间想象与判断", "复杂任务规划", "草稿纸分区使用", "归纳表达条理性"]
                     },
                     {
                         name: "专注力与执行功能",
-                        items: ["接题后30秒内启动", "10分钟任务持续度", "完成后自我复查次数", "坐姿与桌面管理", "中后段疲劳控制"]
+                        items: ["作业任务启动速度", "任务持续专注度", "自我复查习惯", "坐姿与物品桌面管理", "中后段抗疲劳表现"]
                     },
                     {
                         name: "情绪管理与内驱力",
-                        items: ["遇错题后的情绪恢复", "接受反馈后的调整度", "订正任务完成态度", "时间分配意识", "自我目标表达清晰度"]
+                        items: ["遇错题后的情绪恢复", "接受反馈后的调整度", "订正任务完成态度", "时间分配意识", "自我目标与上进心"]
                     }
                 ],
                 interactiveTasks: [],
@@ -1035,22 +754,22 @@
                         min: 64, max: 75,
                         label: "自驱型学习者 / 基础扎实",
                         color: "bg-green-100 text-green-800",
-                        analysis: "孩子不仅基础知识扎实，更难得的是在信息处理效率、任务启动和自我检查上表现出较成熟的节奏。从本次测评结果看，TA能够较快进入状态，并在完成过程中维持较好的准确度与条理性，说明已经具备较清晰的学习方法基础。",
-                        advice: "建议后续不要停留在重复练习，而是尽快进入更高层次的思维训练和方法深化。机构课程可优先安排培优拔高、阅读理解深挖和策略型训练，让孩子把已有优势稳定成长期竞争力，同时避免因为练习过浅而消耗学习兴趣。"
+                        analysis: "家长的记录反馈出，孩子不仅基础知识扎实，在信息处理效率、任务启动和自我检查上同样表现出较成熟的节奏。TA能够较快进入状态，并在完成过程中维持较好的准确度与条理性。",
+                        advice: "建议后续不要停留在重复练习，而是尽快进入更高层次的思维训练和方法深化。可优先安排培优拔高、阅读理解深挖和策略型训练，把已有优势稳定成长期竞争力。"
                     },
                     {
                         min: 45, max: 63,
-                        label: "潜力蓄力股 / 优化方法",
+                        label: "潜力蓄力股 / 亟需优化方法",
                         color: "bg-blue-100 text-blue-800",
-                        analysis: "孩子的理解能力和智力基础整体不错，面对任务时也有一定的思考意愿，但当前在执行细节、复查习惯或稳定输出上仍有波动。也就是说，孩子并不是不会，而是方法还没有真正固定下来，所以结果有时不能完全反映真实水平。",
-                        advice: "这一阶段最适合做的不是单纯加题量，而是同步补“方法”和“习惯”。建议机构优先用更细化的训练帮助孩子把草稿使用、条件提取、复查动作和时间分配稳定下来，让成绩提升建立在可复用的方法上，而不是靠临场发挥。"
+                        analysis: "孩子的理解能力和基础整体不错，但当前在执行细节、复查习惯或稳定输出上仍有波动。也就是说，孩子并不是不会，而是方法还没有真正固定下来，所以家庭作业和成绩有时不能完全反映其真实水平。",
+                        advice: "这一阶段最适合做的不是盲目加题量，而是同步补“方法”和“习惯”。建议优先用更细化的训练帮助孩子把草稿使用、条件提取、复查动作和时间分配稳定下来。"
                     },
                     {
                         min: 0, max: 44,
-                        label: "蓄力成长阶段 / 系统引导",
+                        label: "蓄力成长阶段 / 需系统引导",
                         color: "bg-orange-100 text-orange-800",
-                        analysis: "孩子目前在学习任务中已经感受到一定压力，这并不等同于能力不足，更可能是底层加工效率、任务拆解方法和情绪恢复机制还没有建立起来。本次测评中如果反复出现“启动慢、容易乱、做完不查”这一类连锁反应，久而久之也会影响自信心。",
-                        advice: "建议先通过系统性的学能唤醒和低门槛阶段训练，帮助孩子把任务拆解、持续专注和错误修复一步步建立起来。比起盲目增加作业量，更适合配合持续性的课程跟进，用一段时间把学习节奏扶稳，再逐步提升难度。"
+                        analysis: "日常观察显示，孩子目前在学习任务中可能感受到了一定压力，容易出现启动慢、容易乱、做完不查的连锁反应。这并不是能力不足，更可能是底层加工效率和拆解方法没有建立起来。",
+                        advice: "建议先通过系统性的学能唤醒和低门槛的陪伴训练，帮助孩子把任务拆解、持续专注和错误修复一步步建立起来。用一段时间把学习节奏扶稳，再逐步提升难度。"
                     }
                 ]
             }
@@ -1058,39 +777,37 @@
 
         const stageProfiles = {
             toddler: {
-                trustKicker: '一对一探索式测评',
-                trustTitle: '儿童成长探索式入学测评',
-                trustIntro: '通过观察量表、动画互动与家长记录，帮助发现孩子的优势表现与当前支持点，为后续课程匹配提供更有依据的建议。',
+                trustKicker: '家庭日常观察',
+                trustTitle: '幼儿学前核心能力家长评估',
+                trustIntro: '本问卷通过科学的维度梳理，帮助家长全面回顾孩子在日常家庭生活、游戏中的真实表现。无需刻意测试孩子，第一印象往往最准确。',
                 ageRange: '3-6 岁',
-                duration: '约 20-30 分钟',
-                purpose: '成长建议与课程匹配',
-                method: '观察量表 + 动画互动 + 家长自主记录',
-                executionNote: '家长可根据孩子本次互动、回应方式和完成过程进行记录，不以答对多少题作为唯一判断标准。',
-                privacyNote: '本次测评数据仅用于成长建议与课程沟通，不对外共享，也不替代医学诊断。',
-                workspaceTitle: '幼儿组家庭测评执行区',
-                reassurance: '当前环节更关注理解过程、参与状态和规则跟随，不以刷题经验作为唯一标准。',
+                duration: '约 10-15 分钟',
+                purpose: '家庭教养建议与课程匹配',
+                method: '家长视角回顾 + 客观表现记录',
+                privacyNote: '本次记录数据仅用于生成成长建议与匹配沟通，不对外共享，也不替代任何医学发育诊断。',
+                workspaceTitle: '家长独立观察执行区',
+                reassurance: '请结合您的回忆作答。重点看孩子的习惯和日常倾向，我们不以做对多少高难度题作为评价标准。',
                 trustPoints: [
-                    '全程以轻松互动和观察为主，不给孩子贴标签。',
-                    '结果来自观察量表、动画题和专注力任务的综合判断。',
-                    '测评结束后可生成正式报告，便于家长回顾与沟通。'
+                    '纯家长填写，免除孩子的答题压力。',
+                    '题目贴近生活细节，拒绝给孩子贴简单标签。',
+                    '完成后生成正式分析报告，便于您保留与回顾。'
                 ]
             },
             primary: {
-                trustKicker: '学习习惯与学能探索',
-                trustTitle: '小学阶段学习基础与习惯测评',
-                trustIntro: '通过量化题卡、短时任务和家长记录，帮助家长更清楚地看到孩子在准确率、启动速度、复查习惯和执行稳定度上的真实状态。',
+                trustKicker: '学习习惯与学能回顾',
+                trustTitle: '小学生学习习惯家长评估',
+                trustIntro: '通过日常习惯切面，帮助家长更清楚地看到孩子在作业准确率、启动速度、复查习惯和执行稳定度上的真实状态。',
                 ageRange: '7-12 岁',
-                duration: '约 25-35 分钟',
-                purpose: '学习建议与课程匹配',
-                method: '量化题卡 + 小任务体验 + 家长自主记录',
-                executionNote: '更看重孩子的准确率、启动节奏、复查动作和修正过程，家长可以直接看到系统整理出的判断依据，而不是只看一个结论。',
-                privacyNote: '本次测评数据仅用于学习建议与课程沟通，不对外共享，也不替代学校成绩或医学诊断。',
-                workspaceTitle: '小学组家庭测评执行区',
-                reassurance: '当前环节更关注思路、执行效率和学习习惯，不以一次分数代替长期能力判断。',
+                duration: '约 10-15 分钟',
+                purpose: '学习习惯建议与专项辅导',
+                method: '纯家长视角回顾 + 客观表现记录',
+                privacyNote: '本次记录数据仅用于学习方法建议与课程沟通，不对外共享，也不替代学校的课业成绩定性。',
+                workspaceTitle: '家长独立观察执行区',
+                reassurance: '请回想孩子近期的真实表现，根据日常观察进行客观记录。无需当面测试孩子，凭第一印象填写即可。',
                 trustPoints: [
-                    '题目切口更细，更方便家长量化记录和理解结果。',
-                    '结果可追溯到准确率、复查次数、启动速度等具体表现。',
-                    '完成后可生成正式报告，便于家长理解后续提升方向。'
+                    '题目切口极细，方便家长量化回忆日常生活表现。',
+                    '结果追溯到准确率、复查次数、情绪反馈等底层原因。',
+                    '完成后生成正式分析报告，帮助理清后续培养重点。'
                 ]
             }
         };
@@ -1098,151 +815,151 @@
         const dimensionGuides = {
             toddler: [
                 {
-                    summary: '本环节主要观察孩子对颜色、数量、大小规律和顺序关系的理解。',
-                    reassure: '重点看理解和尝试过程，不考刷题经验。',
-                    performer: '主要完成：孩子参与，家长结合日常观察填写',
+                    summary: '本环节记录家长日常对孩子认知概念（颜色、数量、大小规律）的观察。',
+                    reassure: '请回想孩子在生活中的实际反应。',
+                    performer: '填写说明：请家长根据日常观察独立填写',
                     itemHints: [
-                        '观察孩子在日常生活中能否稳定分辨常见颜色和基础形状，并做出正确指认。',
-                        '观察孩子看到实物时，能否大致对应数量并理解“一样多、多少”的概念。',
-                        '观察孩子是否能按大中小、长短高低等顺序进行比较和排列。',
-                        '观察孩子能否把同类物品放在一起，并说出简单分类理由。',
-                        '观察孩子面对重复图案或生活规律时，能否发现接下来会出现什么。'
+                        '请回想孩子日常能否准确指出常见的颜色和基础形状？',
+                        '回忆孩子平时分零食或玩具时，能否理解数量的多少和对应关系？',
+                        '观察孩子玩耍时能否主动按大小、高低、长短等进行排列？',
+                        '回想孩子收拾东西时能否按类别分类（如：车放一边，积木放一边）？',
+                        '观察孩子能否发现生活中的简单重复规律（如衣服花纹、排队顺序）？'
                     ]
                 },
                 {
-                    summary: '本环节主要观察孩子听懂指令、讲述顺序和表达清晰度。',
-                    reassure: '允许孩子边想边说，更看表达过程是否自然。',
-                    performer: '主要完成：孩子参与，家长结合日常观察填写',
+                    summary: '本环节记录家长对孩子日常听取指令、表达意愿和叙事逻辑的观察。',
+                    reassure: '更看重孩子日常沟通时的流利度与自然状态。',
+                    performer: '填写说明：请家长根据日常观察独立填写',
                     itemHints: [
-                        '观察孩子听到两到三步要求后，能否按顺序完成，不频繁遗漏。',
-                        '观察孩子描述图片或经历时，是否愿意开口，并能说出主要内容。',
-                        '观察孩子是否会用“因为……所以……”这类方式表达简单因果关系。',
-                        '观察孩子讲故事或复述经历时，能否说清先做了什么、后做了什么。',
-                        '观察孩子日常说话是否较清楚，陌生人是否也能大致听懂。'
+                        '回忆孩子能否一次性听懂并完成您交代的两到三个动作指示？',
+                        '平时聊天时，孩子能否比较清楚连贯地表达自己想要什么、看到了什么？',
+                        '遇到问题时，孩子能否用“因为...所以...”这类方式尝试解释原因？',
+                        '回想孩子复述绘本或幼儿园发生的事时，先后的逻辑顺序是否清晰？',
+                        '周围不熟悉的人听孩子说话时，发音是否也容易被听懂？'
                     ]
                 },
                 {
-                    summary: '本环节主要观察孩子的手眼协调、空间模仿和精细动作控制。',
-                    reassure: '建议结合动作过程综合判断，不只看最终成品。',
-                    performer: '主要完成：孩子参与，家长结合日常观察填写',
+                    summary: '本环节记录家长对孩子手部操作灵活性和空间模仿能力的观察。',
+                    reassure: '回想孩子使用工具或做手工时的稳定性。',
+                    performer: '填写说明：请家长根据日常观察独立填写',
                     itemHints: [
-                        '观察孩子串珠、夹取小物件时，手眼配合是否较稳定，不容易频繁掉落。',
-                        '观察孩子搭积木或按样子摆放时，能否模仿出大致相同的位置和结构。',
-                        '观察孩子握笔是否自然，线条控制和落笔稳定度是否较合适。',
-                        '观察孩子折纸、翻折或沿边对齐时，双手动作是否协调，能否跟上步骤。',
-                        '观察孩子走迷宫、连线或沿线描画时，是否容易频繁出线或停顿过多。',
-                        '观察孩子做拧盖子、开拉链、双手配合操作时，双手是否能协调分工。'
+                        '观察孩子平时用勺子、系扣子或穿珠子时手部是否灵活、稳当？',
+                        '回忆孩子搭积木时，能否看着图纸或您的示范搭建出类似的结构？',
+                        '孩子平时拿笔涂画时，握笔姿势是否自然，线条控制如何？',
+                        '观察孩子做手工折纸或撕纸时，是否能大致对齐边缘？',
+                        '玩迷宫或连线游戏时，孩子能否较好地控制笔迹不频繁出界？',
+                        '观察孩子开拉链、拧瓶盖时，左右手能否很好地配合分工？'
                     ]
                 },
                 {
-                    summary: '本环节主要观察孩子持续专注、规则切换和面对挑战时的状态。',
-                    reassure: '更关注参与节奏和恢复能力，而不是要求孩子一直完美表现。',
-                    performer: '主要完成：孩子参与，家长结合日常观察填写',
+                    summary: '本环节记录家长对孩子日常专注时长、规则感和抗挫折表现的观察。',
+                    reassure: '重点评估习惯的建立程度。',
+                    performer: '填写说明：请家长根据日常观察独立填写',
                     itemHints: [
-                        '观察孩子做一件事时能否持续投入一段时间，不总是频繁分心离开。（专注时长参考：3岁约10-15分钟，4岁约15-20分钟，5-6岁约20-30分钟）',
-                        '观察孩子周围有人说话或环境有变化时，是否还能继续把事情做下去。',
-                        '观察孩子规则变化后，能否在提醒下较快调整，而不是一直按原方式继续。',
-                        '观察孩子遇到难题或做错时，是愿意继续尝试，还是很快放弃或情绪明显波动。',
-                        '观察孩子在游戏或活动中能否跟随规则，轮到别人时也能基本配合等待。'
+                        '回想孩子玩自己感兴趣的玩具时，通常能专心投入多久不乱跑？',
+                        '周围环境有声音干扰时，孩子是立刻被吸引走还是能继续手头的事？',
+                        '当游戏规则改变或活动切换时，孩子能否较快适应并跟上节奏？',
+                        '遇到拼图拼不上等小困难时，孩子是愿意继续试还是容易发脾气放弃？',
+                        '在游乐场排队玩耍时，孩子能否较好地遵守轮流等待的规则？'
                     ]
                 },
                 {
-                    summary: '本环节主要观察孩子的情绪识别、互动意愿和环境适应情况。',
-                    reassure: '建议结合表情、回应和等待表现综合判断，不做简单贴标签。',
-                    performer: '主要完成：孩子参与，家长结合日常观察填写',
+                    summary: '本环节记录家长对孩子日常情绪识别、人际互动和情绪调节的观察。',
+                    reassure: '回想孩子在社交场景下的自然流露。',
+                    performer: '填写说明：请家长根据日常观察独立填写',
                     itemHints: [
-                        '观察孩子与人交流时，是否会看向对方，并有回应、点头或简单互动。',
-                        '观察孩子看到别人开心、难过、生气时，能否大致分辨这些情绪。',
-                        '观察孩子到新环境或接触新活动时，进入状态是较快还是需要较长适应时间。',
-                        '观察孩子不顺心时，情绪是否容易平复，还是会持续哭闹或抗拒较久。',
-                        '观察孩子想要的东西不能立刻得到时，是否能短时间等待并接受解释。'
+                        '观察孩子遇到认识的人时，是否会有眼神接触并大方回应？',
+                        '平时看动画或生活里，孩子能否准确识别他人开心或难过的情绪？',
+                        '到一个相对陌生的新环境，孩子通常需要多久能放开自己去探索？',
+                        '遇到不开心的事情哭闹后，孩子能否在您的安抚下较快平复心情？',
+                        '遇到想玩的东西暂时玩不到时，孩子能否接受大人的解释并等待？'
                     ]
                 }
             ],
             primary: [
                 {
-                    summary: '本环节主要记录视觉追踪、听觉保持和信息提取是否准确、稳定。',
-                    reassure: '会结合准确率和完成方式判断，不只看快慢。',
-                    performer: '主要完成：学生作答，家长观察记录',
+                    summary: '本环节记录家长对孩子在阅读、听力中捕捉关键信息准确度的观察。',
+                    reassure: '请回想孩子日常看题或阅读时的真实状态。',
+                    performer: '填写说明：请家长根据日常观察独立填写',
                     itemHints: [
-                        '观察孩子看数字或符号时，视线移动是否稳定，是否容易漏看或看错。',
-                        '观察孩子面对相近字词或图形时，能否注意到细小差别，而不是凭感觉作答。',
-                        '观察孩子短时间看过几项信息后，能否较完整地记住并复述出来。',
-                        '观察孩子听完三步内容后，能否按顺序重复，是否经常漏掉中间信息。',
-                        '观察孩子看短文时，能否抓住关键词，而不是读完后说不出重点。'
+                        '回忆孩子平时看长串数字或题目时，是否经常看错行、跳字漏字？',
+                        '对于长得相似的字（如买/卖、己/已），孩子写作业时是否经常混淆？',
+                        '给孩子看一串号码或信息，拿走后能否立刻较准确地报出来？',
+                        '口头交代三件要办的事，孩子能否不遗漏地准确记住并复述？',
+                        '看一段文字或题目背景后，孩子能否较快找出里面的核心关键点？'
                     ]
                 },
                 {
-                    summary: '本环节主要记录口算、条件提取、复述和书写等基础学科表现。',
-                    reassure: '题目切口较细，便于量化记录和后续对比。',
-                    performer: '主要完成：学生作答，家长观察记录',
+                    summary: '本环节记录家长对孩子作业基础能力（计算、审题、书写）的观察。',
+                    reassure: '请根据近期家庭作业的平均反馈来评估。',
+                    performer: '填写说明：请家长根据日常观察独立填写',
                     itemHints: [
-                        '观察孩子做基础口算时，是否较少停顿，准确率能保持在稳定水平。',
-                        '观察孩子看应用题时，能否主动圈出或说出关键条件，不随意遗漏。',
-                        '观察孩子面对表格或图示时，能否按信息位置准确找到答案。',
-                        '观察孩子读完一段内容后，能否说出主要信息，而不是只记住零碎片段。',
-                        '观察孩子书写时字迹是否清楚、结构是否稳定，速度是否明显过慢。'
+                        '观察孩子做纯计算题时，准确率和速度是否保持在相对稳定的水平？',
+                        '做应用题时，孩子是否有意识地去圈画提取关键条件，而不是凭感觉瞎猜？',
+                        '面对带有图表、图形的题目，孩子能否准确从中读取到需要的数据？',
+                        '看完一篇课文或故事后，孩子能否较完整连贯地复述出主要内容？',
+                        '日常写作业时，字迹是否工整规范，书写速度是否严重拖慢了整体进度？'
                     ]
                 },
                 {
-                    summary: '本环节主要记录规律判断、空间旋转和多步规划是否完整、有条理。',
-                    reassure: '更关注思路有没有落地成步骤，而不是一句“会不会”。',
-                    performer: '主要完成：学生作答，家长观察记录',
+                    summary: '本环节记录家长对孩子思维条理性、空间想象和步骤规划的观察。',
+                    reassure: '重点看思路是否能落地成具体的行动步骤。',
+                    performer: '填写说明：请家长根据日常观察独立填写',
                     itemHints: [
-                        '观察孩子做规律题时，是否会先找变化规则，而不是直接猜答案。',
-                        '观察孩子看旋转图形时，能否在脑中转动方向，不轻易被表面样子干扰。',
-                        '观察孩子面对三步任务时，能否先想清顺序，再逐步完成。',
-                        '观察孩子使用草稿纸时，是否有基本分区和整理，不是一页写得很乱。',
-                        '观察孩子表达总结时，是否能先说重点，再补细节，条理较清楚。'
+                        '遇到找规律的难题，孩子能否推导并说出逻辑依据，而不是瞎填？',
+                        '遇到空间图形折叠或积木遮挡题，孩子能否在脑海里想象出大概的形状？',
+                        '面对一个复杂的周末作业，孩子是否知道分板块、分步骤去安排完成？',
+                        '回忆孩子打草稿时，是基本有分区整理，还是满纸乱涂、自己都找不到过程？',
+                        '回答复杂问题或表达自己的观点时，逻辑是否有条理，主次分明？'
                     ]
                 },
                 {
-                    summary: '本环节主要记录启动速度、持续投入、复查动作和疲劳控制。',
-                    reassure: '这是学习习惯观察，不等同于一次考试分数。',
-                    performer: '主要完成：学生作答，家长观察记录',
+                    summary: '本环节记录家长对孩子写作业时的启动速度、专注耐力和复查动作的观察。',
+                    reassure: '这是习惯观察，不用一次考试的分数来衡量。',
+                    performer: '填写说明：请家长根据日常观察独立填写',
                     itemHints: [
-                        '观察孩子拿到题后是否能较快开始，不长时间发呆、拖延或频繁走神。',
-                        '观察孩子连续做题一段时间后，是否还能维持投入，不明显分心或磨蹭。',
-                        '观察孩子完成后是否会主动回头检查，而不是马上停笔结束。',
-                        '观察孩子坐姿、桌面和学习材料是否较有秩序，不频繁东摸西找。',
-                        '观察孩子在学习后半段是否明显变慢、出错变多，还是能保持基本状态。'
+                        '家长提醒开始写作业后，孩子能否在极短时间内坐下动笔，而不是磨蹭发呆？',
+                        '写作业过程中，孩子能持续专注多久不摸鱼、不频繁找借口离开座位？',
+                        '作业写完后，孩子是否有主动回头通盘检查一遍的意识，而不是立刻扔开？',
+                        '平时书包和书桌，孩子能否保持基本的整洁有序，学习用品不用到处找？',
+                        '写作业进行到后半段时，孩子还能不能保持和刚开始时差不多的专注状态？'
                     ]
                 },
                 {
-                    summary: '本环节主要记录孩子在出错、被提醒和限时情境下的情绪与调整方式。',
-                    reassure: '建议结合实际反应综合判断，不用一次表现定义孩子。',
-                    performer: '主要完成：学生作答，家长观察记录',
+                    summary: '本环节记录家长对孩子面对挫折、时间观念及内在动力的观察。',
+                    reassure: '请回想孩子面对压力或错误时的情感反应。',
+                    performer: '填写说明：请家长根据日常观察独立填写',
                     itemHints: [
-                        '观察孩子做错题后，是否能较快平复并继续，而不是长时间懊恼或抗拒。',
-                        '观察孩子被指出问题时，是否愿意调整，而不是立刻争辩或放弃。',
-                        '观察孩子面对订正任务时，是否愿意认真改，而不是应付式完成。',
-                        '观察孩子做题时是否有基本时间感，能不能大致分配每部分的用时。',
-                        '观察孩子是否能说出自己的学习目标或想提高的地方，而不是完全没有方向感。'
+                        '遇到错题被指出来时，孩子是容易情绪崩溃还是能较快调整心态去面对？',
+                        '家长给出学习建议时，孩子是愿意听取并尝试，还是急着反弹争辩？',
+                        '要求订正作业时，孩子是认真思考哪里错了，还是敷衍了事只想抄对答案？',
+                        '做作业时，孩子对自己大概要花多少时间心里有数吗，有没有紧迫感？',
+                        '孩子对自己的学习成绩或某个特长是否有明确的期许、目标和上进心？'
                     ]
                 }
             ]
         };
 
         const scoreOptionMeta = {
-            1: { label: '1 分', hint: '完成较困难' },
-            2: { label: '2 分', hint: '基本完成' },
-            3: { label: '3 分', hint: '完成较稳定' }
+            1: { label: '1 分', hint: '较少或不稳定' },
+            2: { label: '2 分', hint: '偶尔/需提醒' },
+            3: { label: '3 分', hint: '经常且很稳定' }
         };
 
         const courseDirectionMap = {
             toddler: {
-                '基础认知与逻辑': { title: '逻辑思维启蒙课', focus: '把基础概念、顺序理解和规律发现逐步稳定下来' },
-                '语言与听觉加工': { title: '表达与绘本故事课', focus: '加强听指令、讲顺序和故事表达的完整度' },
-                '精细动作与空间': { title: '手眼协调与精细动作课', focus: '把手眼配合、空间模仿和运笔控制做得更稳' },
-                '专注力与行为习惯': { title: '专注力训练小游戏', focus: '帮助孩子把规则跟随、专注时长和任务恢复能力慢慢建立起来' },
-                '社交与情绪发展': { title: '社交情绪互动课', focus: '加强情绪识别、等待配合和环境适应能力' }
+                '基础认知与逻辑': { title: '逻辑思维启蒙支持', focus: '把基础概念、顺序理解和规律发现逐步稳定下来' },
+                '语言与听觉加工': { title: '表达与故事阅读引导', focus: '加强听指令、讲顺序和日常表达的连贯性' },
+                '精细动作与空间': { title: '手眼协调与精细手工', focus: '把手眼配合、空间模仿和运笔控制练得更稳' },
+                '专注力与行为习惯': { title: '专注与规则感培养', focus: '帮助孩子把规则跟随、专注时长和抗干扰能力慢慢建立起来' },
+                '社交与情绪发展': { title: '社交情绪互动培养', focus: '加强情绪识别、社交破冰和延迟满足的习惯建立' }
             },
             primary: {
-                '视觉与听觉信息处理': { title: '学能信息加工训练', focus: '优先提升视觉追踪、听觉保持和关键信息提取效率' },
-                '学科核心素养': { title: '阅读理解与学科基础课', focus: '把准确率、条件提取和书写规范同步拉齐' },
-                '逻辑思维与规划': { title: '思维规划与解题策略课', focus: '帮助孩子把零散思路整理成可复用的解题步骤' },
-                '专注力与执行功能': { title: '专注执行力训练课', focus: '把启动速度、持续投入和复查动作稳定下来' },
-                '情绪管理与内驱力': { title: '学习动力与情绪管理课', focus: '帮助孩子在遇到错误或压力时更快恢复并保持目标感' }
+                '视觉与听觉信息处理': { title: '学能信息加工强化', focus: '优先提升视觉追踪、听觉短时保持和信息提取的效率' },
+                '学科核心素养': { title: '基础学科素养巩固', focus: '把口算连贯性、审题条件提取和书写规范同步拉齐' },
+                '逻辑思维与规划': { title: '思维规划与解题策略', focus: '帮助孩子把发散的思路整理成可复用的解题和规划步骤' },
+                '专注力与执行功能': { title: '专注执行力专项训练', focus: '把启动速度、持续投入时长和主动复查动作稳定下来' },
+                '情绪管理与内驱力': { title: '学习动力与情绪疏导', focus: '帮助孩子在遇到错误或压力时更快恢复心态并保持目标感' }
             }
         };
 
@@ -1293,32 +1010,9 @@
         }
 
         function createInitialTaskState(task) {
-            if (task.type === 'animation') {
-                return {
-                    score: 0,
-                    completed: false,
-                    attempts: 0,
-                    sequence: [],
-                    options: [],
-                    correctIndex: null,
-                    animating: false,
-                    selectedOption: null,
-                    correct: false,
-                    feedback: task.feedbacks.default
-                };
-            }
+            // Keep for compatibility if future tasks are added, though currently empty
             return {
-                score: 0,
-                completed: false,
-                active: false,
-                grid: generateShuffledNumbers(9),
-                nextNumber: 1,
-                errors: 0,
-                clickedNumbers: [],
-                startTime: null,
-                durationMs: null,
-                lastWrong: null,
-                feedback: '点击“开始挑战”后，请孩子从 1 按顺序找数字。'
+                score: 0, completed: false, active: false
             };
         }
 
@@ -1379,8 +1073,8 @@
 
         function getDimensionGuide(dimIndex) {
             return dimensionGuides[currentTab][dimIndex] || {
-                summary: '本环节用于综合观察孩子的过程表现。',
-                reassure: '请结合孩子本次作答状态综合判断。'
+                summary: '本环节用于综合回顾。',
+                reassure: '请结合您的实际观察综合判断。'
             };
         }
 
@@ -1393,7 +1087,7 @@
             document.getElementById('trust-duration').textContent = profile.duration;
             document.getElementById('trust-purpose').textContent = profile.purpose;
             document.getElementById('trust-method').textContent = profile.method;
-            
+
             document.getElementById('trust-privacy-note').textContent = profile.privacyNote;
             document.getElementById('trust-points').innerHTML = profile.trustPoints.map(point => `
                 <div class="flex items-start gap-3">
@@ -1410,16 +1104,16 @@
                 id: `assessment-step-${index}`,
                 label: dim.name,
                 completed: getAnsweredCountForDimension(index) === dim.items.length,
-                detail: `${getAnsweredCountForDimension(index)}/${dim.items.length} 项已记录`
+                detail: `${getAnsweredCountForDimension(index)}/${dim.items.length} 项已填`
             }));
 
             const tasks = getInteractiveTasks();
             if (tasks.length) {
                 states.push({
                     id: 'assessment-step-interactive',
-                    label: '互动任务',
+                    label: '补充任务',
                     completed: tasks.every(task => interactiveState[task.id] && interactiveState[task.id].completed),
-                    detail: `${getCompletedInteractiveCount()}/${tasks.length} 项已完成`
+                    detail: `${getCompletedInteractiveCount()}/${tasks.length} 项已填`
                 });
             }
 
@@ -1437,12 +1131,12 @@
                     onclick="scrollToSection('${step.id}')"
                 >
                     <div>
-                        <div class="text-xs font-bold uppercase tracking-[0.18em] text-stone-400">步骤 ${index + 1}</div>
+                        <div class="text-xs font-bold uppercase tracking-[0.18em] text-stone-400">模块 ${index + 1}</div>
                         <div class="mt-1 font-bold text-stone-900">${step.label}</div>
                         <div class="mt-1 text-xs text-stone-500">${step.detail}</div>
                     </div>
                     <div class="text-xs font-bold ${step.completed ? 'text-green-700' : index === focusIndex ? 'text-brand-700' : 'text-stone-400'}">
-                        ${step.completed ? '已完成' : index === focusIndex ? '进行中' : '待记录'}
+                        ${step.completed ? '已完成' : index === focusIndex ? '填写中' : '待填写'}
                     </div>
                 </button>
             `).join('');
@@ -1465,32 +1159,9 @@
             const tasks = getInteractiveTasks();
             let interactiveSection = null;
             if (tasks.length) {
+                // Interactive section placeholder if needed in the future
                 interactiveSection = document.createElement('div');
-                interactiveSection.id = 'assessment-step-interactive';
-                interactiveSection.className = 'interactive-card';
-                interactiveSection.innerHTML = `
-                    <div class="flex flex-col gap-4 border-b border-orange-100 pb-4 md:flex-row md:items-center md:justify-between">
-                        <div>
-                            <div class="interactive-chip">游戏化互动测评</div>
-                            <h3 class="mt-2 text-xl font-bold text-stone-900">让孩子在“玩中测”，不再只停留在文字题目</h3>
-                            <p class="mt-2 text-sm leading-relaxed text-stone-600">多道动画题和舒尔特方块会同步计入总分，并反映在最终测评建议中，帮助家长更直观看到孩子在动态记忆、故事理解、情绪识别和专注控制中的真实表现。</p>
-                            <div class="mt-3 inline-flex rounded-full border border-brand-200 bg-white px-3 py-2 text-xs font-bold text-brand-700">主要完成：孩子互动作答，家长观察记录</div>
-                        </div>
-                        <div id="interactive-suite-score" class="task-stat bg-white text-brand-700 shadow-sm">0/${getInteractiveMaxScore()} 分</div>
-                    </div>
-                    <div class="mt-4 rounded-2xl border border-orange-100 bg-white/90 px-4 py-4 text-sm leading-7 text-stone-600">
-                        这是游戏化观察任务，主要看孩子的理解过程、专注表现与规则跟随，不以单次对错给孩子下结论。
-                    </div>
-                    <div id="interactive-task-grid" class="mt-5 grid gap-4"></div>
-                `;
-
-                const taskGrid = interactiveSection.querySelector('#interactive-task-grid');
-                tasks.forEach(task => {
-                    const mount = document.createElement('div');
-                    mount.id = `interactive-task-${task.id}`;
-                    taskGrid.appendChild(mount);
-                });
-
+                // ... setup interactive html ...
             }
 
             appData[currentTab].dimensions.forEach((dim, dimIndex) => {
@@ -1505,15 +1176,15 @@
                 header.innerHTML = `
                     <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                         <div>
-                            <div class="text-xs font-bold uppercase tracking-[0.18em] text-stone-400">模块 ${dimIndex + 1}</div>
+                            <div class="text-xs font-bold uppercase tracking-[0.18em] text-stone-400">观察记录 ${dimIndex + 1}</div>
                             <div class="mt-1 text-lg font-bold text-stone-900">${dim.name}</div>
                         </div>
-                        <div class="text-sm font-bold text-brand-700" id="dim-score-${dimIndex}">0/${getDimensionMaxScore(dimIndex)} 分</div>
+                        <div class="text-xl font-black text-orange-150 bg-orange-50 border border-orange-100 px-4 py-2 rounded-xl shadow-sm translate-y-1" id="dim-score-${dimIndex}">0/${getDimensionMaxScore(dimIndex)} 分</div>
                     </div>
                     <p class="mt-3 text-sm leading-7 text-stone-600">${guide.summary}</p>
                     <div class="mt-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                        <p class="rounded-2xl bg-white px-3 py-2 text-xs leading-6 text-stone-500">请基于对孩子的日常观察与近期表现填写本模块。${guide.reassure}</p>
-                        <div class="rounded-full border border-brand-200 bg-white px-3 py-2 text-xs font-bold text-brand-700">${guide.performer || '主要完成：学生作答，家长观察记录'}</div>
+                        <p class="rounded-2xl bg-white px-3 py-2 text-xs leading-6 text-stone-500">请基于近期表现独立回忆并填写。${guide.reassure}</p>
+                        <div class="rounded-full border border-brand-200 bg-white px-3 py-2 text-xs font-bold text-brand-700">${guide.performer}</div>
                     </div>
                 `;
                 section.appendChild(header);
@@ -1527,7 +1198,7 @@
 
                     const itemText = document.createElement('div');
                     itemText.className = 'lg:col-span-6 pr-0 lg:pr-4';
-                    const itemHint = (guide.itemHints && guide.itemHints[itemIndex]) ? guide.itemHints[itemIndex] : '请结合孩子在对应情境中的日常表现进行评分。';
+                    const itemHint = (guide.itemHints && guide.itemHints[itemIndex]) ? guide.itemHints[itemIndex] : '请结合相关情境进行客观打分。';
                     itemText.innerHTML = `
                         <div class="font-medium text-stone-800">${item}</div>
                         <div class="mt-1 text-sm leading-6 text-stone-500">${itemHint}</div>
@@ -1563,7 +1234,7 @@
 
             if (interactiveSection) {
                 container.appendChild(interactiveSection);
-                tasks.forEach(task => renderInteractiveTaskCard(task));
+                // tasks.forEach(...) logic removed
             }
         }
 
@@ -1572,276 +1243,6 @@
             btnGroup.children[value - 1].classList.add('selected');
             scores[dimIndex][itemIndex] = value;
             updateDashboard();
-        }
-
-        function renderInteractiveTaskCard(task) {
-            const mount = document.getElementById(`interactive-task-${task.id}`);
-            if (!mount) {
-                return;
-            }
-
-            if (task.type === 'animation') {
-                mount.innerHTML = renderAnimationTask(task);
-                return;
-            }
-            mount.innerHTML = renderSchulteTask(task);
-        }
-
-        function renderAnimationTask(task) {
-            const state = interactiveState[task.id];
-            const statusClass = state.score === 3
-                ? 'bg-green-50 text-green-700'
-                : state.completed
-                    ? 'bg-amber-50 text-amber-700'
-                    : 'bg-white text-stone-500';
-
-            const optionsHtml = state.options.length
-                ? state.options.map((option, index) => {
-                    const className = getAnimationOptionClass(state, index);
-                    return `
-                        <button
-                            class="sequence-option ${className}"
-                            onclick="submitAnimationAnswer('${task.id}', ${index})"
-                            ${state.animating ? 'disabled' : ''}
-                        >
-                            ${formatVisualSequence(option, task.frames)}
-                        </button>
-                    `;
-                }).join('')
-                : `<div class="rounded-2xl border border-dashed border-stone-300 bg-white px-4 py-5 text-sm text-stone-400 sm:col-span-3">${task.placeholder}</div>`;
-
-            return `
-                <div class="rounded-[1.15rem] border border-orange-100 bg-white p-5">
-                    <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                        <div>
-                            <div class="interactive-chip">${task.name} · 计入「${appData[currentTab].dimensions[task.dimensionIndex].name}」</div>
-                            <h4 class="mt-3 text-lg font-bold text-stone-900">${task.headline}</h4>
-                            <p class="mt-1 text-sm leading-relaxed text-stone-600">${task.desc}</p>
-                        </div>
-                        <div class="task-stat ${statusClass}">${state.completed ? '已完成' : '未完成'} · ${state.score}/${task.maxScore}</div>
-                    </div>
-
-                    <div class="mt-4 rounded-2xl border border-stone-200 bg-stone-50 p-4">
-                        <div class="grid grid-cols-2 gap-3 sm:grid-cols-4" id="animation-stage-${task.id}">
-                            ${task.frames.map((frame, index) => `
-                                <div class="animal-tile" id="animation-tile-${task.id}-${index}">
-                                    <span class="text-3xl">${frame.emoji}</span>
-                                    <span class="text-sm font-semibold text-stone-600">${frame.label}</span>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div class="mt-4 flex flex-wrap gap-3">
-                            <button class="task-btn task-btn-primary" onclick="startAnimationTask('${task.id}')">${state.sequence.length ? '再播一遍' : '开始动画'}</button>
-                            <button class="task-btn task-btn-secondary" onclick="resetAnimationTask('${task.id}')">重置本题</button>
-                        </div>
-                        <p class="mt-4 text-sm font-medium text-stone-600">${state.animating ? task.watchPrompt : state.sequence.length ? task.answerPrompt : task.feedbacks.default}</p>
-                        <div class="mt-3 grid gap-3 sm:grid-cols-3">
-                            ${optionsHtml}
-                        </div>
-                        <p class="mt-3 text-sm leading-relaxed text-stone-500">${state.feedback}</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderSchulteTask(task) {
-            const state = interactiveState[task.id];
-            const statusClass = state.score === 3
-                ? 'bg-green-50 text-green-700'
-                : state.completed
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'bg-white text-stone-500';
-
-            return `
-                <div class="rounded-[1.15rem] border border-orange-100 bg-white p-5">
-                    <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                        <div>
-                            <div class="interactive-chip">${task.name} · 计入「${appData[currentTab].dimensions[task.dimensionIndex].name}」</div>
-                            <h4 class="mt-3 text-lg font-bold text-stone-900">${task.headline}</h4>
-                            <p class="mt-1 text-sm leading-relaxed text-stone-600">${task.desc}</p>
-                        </div>
-                        <div class="task-stat ${statusClass}">${state.completed ? '已完成' : '未完成'} · ${state.score}/${task.maxScore}</div>
-                    </div>
-
-                    <div class="mt-4 rounded-2xl border border-stone-200 bg-stone-50 p-4">
-                        <div class="mb-4 flex flex-wrap items-center gap-3">
-                            <button class="task-btn task-btn-primary" onclick="startSchulteTask()">${state.active ? '重新开始' : state.completed ? '再测一次' : '开始挑战'}</button>
-                            <button class="task-btn task-btn-secondary" onclick="resetSchulteTask()">重置本题</button>
-                            <div class="task-stat bg-white text-stone-600 shadow-sm">目标 ${state.active ? state.nextNumber : state.completed ? '完成' : '待开始'}</div>
-                            <div class="task-stat bg-white text-stone-600 shadow-sm">错误 ${state.errors}</div>
-                            <div class="task-stat bg-white text-stone-600 shadow-sm">${state.durationMs ? `用时 ${formatSeconds(state.durationMs)} 秒` : '系统自动计时'}</div>
-                        </div>
-                        <div class="schulte-grid">
-                            ${state.grid.map(number => `
-                                <button
-                                    class="schulte-cell ${getSchulteCellClass(state, number)}"
-                                    onclick="handleSchulteCellClick(${number})"
-                                    ${!state.active ? 'disabled' : ''}
-                                >
-                                    ${number}
-                                </button>
-                            `).join('')}
-                        </div>
-                        <p class="mt-4 text-sm leading-relaxed text-stone-500">${state.feedback}</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        function startAnimationTask(taskId) {
-            const task = getTaskById(taskId);
-            const state = interactiveState[task.id];
-            if (state.animating) {
-                return;
-            }
-
-            if (!state.sequence.length) {
-                const sequence = generateAnimationSequence(task.frames.length, 3);
-                const optionsPayload = buildAnimationOptions(sequence, task.frames.length);
-                state.sequence = sequence;
-                state.options = optionsPayload.options;
-                state.correctIndex = optionsPayload.correctIndex;
-                state.selectedOption = null;
-                state.correct = false;
-                state.feedback = task.feedbacks.ready;
-            } else {
-                state.selectedOption = null;
-                state.feedback = task.feedbacks.replay;
-            }
-
-            state.animating = true;
-            renderInteractiveTaskCard(task);
-            playAnimationSequence(task.id, state.sequence);
-            updateDashboard();
-        }
-
-        function resetAnimationTask(taskId) {
-            const task = getTaskById(taskId);
-            interactiveState[task.id] = createInitialTaskState(task);
-            renderInteractiveTaskCard(task);
-            updateDashboard();
-        }
-
-        function submitAnimationAnswer(taskId, optionIndex) {
-            const task = getTaskById(taskId);
-            const state = interactiveState[task.id];
-            if (state.animating || !state.options.length) {
-                return;
-            }
-
-            state.attempts += 1;
-            state.completed = true;
-            state.selectedOption = optionIndex;
-
-            if (optionIndex === state.correctIndex) {
-                state.correct = true;
-                state.score = Math.max(state.score, Math.max(1, 4 - state.attempts));
-                if (state.attempts === 1) {
-                    state.feedback = task.feedbacks.correct1;
-                } else if (state.attempts === 2) {
-                    state.feedback = task.feedbacks.correct2;
-                } else {
-                    state.feedback = task.feedbacks.correct3;
-                }
-            } else {
-                state.correct = false;
-                state.score = Math.max(state.score, 1);
-                state.feedback = state.attempts === 1
-                    ? task.feedbacks.wrong1
-                    : task.feedbacks.wrongN;
-            }
-
-            renderInteractiveTaskCard(task);
-            updateDashboard();
-        }
-
-        function playAnimationSequence(taskId, sequence) {
-            const highlightDuration = 650;
-            sequence.forEach((frameIndex, stepIndex) => {
-                setTimeout(() => {
-                    const tile = document.getElementById(`animation-tile-${taskId}-${frameIndex}`);
-                    if (tile) {
-                        tile.classList.add('active');
-                        setTimeout(() => tile.classList.remove('active'), highlightDuration - 120);
-                    }
-                }, stepIndex * highlightDuration);
-            });
-
-            setTimeout(() => {
-                const state = interactiveState[taskId];
-                const task = getTaskById(taskId);
-                if (!state || !task) {
-                    return;
-                }
-                state.animating = false;
-                renderInteractiveTaskCard(task);
-            }, sequence.length * highlightDuration + 120);
-        }
-
-        function startSchulteTask() {
-            const task = getTaskById('schulte-grid');
-            const state = interactiveState[task.id];
-
-            state.active = true;
-            state.completed = false;
-            state.score = 0;
-            state.grid = generateShuffledNumbers(9);
-            state.nextNumber = 1;
-            state.errors = 0;
-            state.clickedNumbers = [];
-            state.startTime = Date.now();
-            state.durationMs = null;
-            state.lastWrong = null;
-            state.feedback = '请从 1 开始，依次找到 2、3、4...直到 9。';
-
-            renderInteractiveTaskCard(task);
-            updateDashboard();
-        }
-
-        function resetSchulteTask() {
-            const task = getTaskById('schulte-grid');
-            interactiveState[task.id] = createInitialTaskState(task);
-            renderInteractiveTaskCard(task);
-            updateDashboard();
-        }
-
-        function handleSchulteCellClick(number) {
-            const task = getTaskById('schulte-grid');
-            const state = interactiveState[task.id];
-            if (!state.active) {
-                return;
-            }
-
-            if (number === state.nextNumber) {
-                state.clickedNumbers.push(number);
-                state.lastWrong = null;
-
-                if (number === 9) {
-                    state.active = false;
-                    state.completed = true;
-                    state.durationMs = Date.now() - state.startTime;
-                    state.score = calculateSchulteScore(state.durationMs, state.errors);
-                    state.feedback = buildSchulteFeedback(state.score, state.durationMs, state.errors);
-                } else {
-                    state.nextNumber += 1;
-                    state.feedback = `做得很好，继续找 ${state.nextNumber}。`;
-                }
-                renderInteractiveTaskCard(task);
-                updateDashboard();
-                return;
-            }
-
-            state.errors += 1;
-            state.lastWrong = number;
-            state.feedback = `这次要先找 ${state.nextNumber}，再试试看。`;
-            renderInteractiveTaskCard(task);
-
-            setTimeout(() => {
-                if (interactiveState[task.id] && interactiveState[task.id].lastWrong === number) {
-                    interactiveState[task.id].lastWrong = null;
-                    renderInteractiveTaskCard(task);
-                }
-            }, 320);
         }
 
         function calculateDimensionScores() {
@@ -1862,12 +1263,12 @@
 
             const ratio = score / max;
             if (ratio >= 0.72) {
-                return { label: '得分较高', className: 'bg-green-100 text-green-700' };
+                return { label: '表现较好', className: 'bg-green-100 text-green-700' };
             }
             if (ratio >= 0.45) {
                 return { label: '中等区间', className: 'bg-blue-100 text-blue-700' };
             }
-            return { label: '仍可提升', className: 'bg-orange-100 text-orange-700' };
+            return { label: '亟需提升', className: 'bg-orange-100 text-orange-700' };
         }
 
         function updateDimensionHeaders(dimScores) {
@@ -1892,22 +1293,22 @@
 
             const progressTip = document.getElementById('progress-tip');
             if (totalScore === 0) {
-                progressTip.textContent = '完成任一模块后，系统会同步更新本次测评摘要。';
+                progressTip.textContent = '完成任一模块的记录后，系统会同步更新本次观察摘要。';
                 return;
             }
             if (completed < total) {
-                progressTip.textContent = `建议继续完成剩余 ${total - completed} 个步骤，正式报告会更完整、更有说服力。`;
+                progressTip.textContent = `建议继续回想并填完剩余 ${total - completed} 个模块，导出的正式报告会更客观全面。`;
                 return;
             }
-            progressTip.textContent = '主要模块已完成，可以结合右侧摘要与下方正式报告查看完整结论。';
+            progressTip.textContent = '主要模块已填写完毕，请点击页面顶部按钮导出 PDF 报告查看完整分析。';
         }
 
         function buildLiveSnapshotItems(dimScores, totalScore) {
             if (totalScore === 0) {
                 return [
-                    '从任一模块开始记录，系统会边测边生成本次测评摘要。',
-                    '建议至少完成两个模块后再查看初步结论。',
-                    getInteractiveTasks().length ? '幼儿组的动画题和专注力任务也会一并纳入后续结论。' : '当前阶段更偏向过程观察与学习习惯记录。'
+                    '系统将自动对家长的勾选记录进行归纳分析。',
+                    '建议至少填完两个维度的评价后再查看初步结论。',
+                    '评价仅作为客观行为的映射，无需过度焦虑分数。'
                 ];
             }
 
@@ -1926,20 +1327,12 @@
                     .slice()
                     .sort((a, b) => (b.score / b.max) - (a.score / a.max))[0];
                 const status = getDimensionStatusMeta(strongest.score, strongest.max).label;
-                items.push(`${appData[currentTab].dimensions[strongest.index].name} 当前呈现 ${status}，可作为沟通中的优势或重点观察点。`);
-            }
-
-            const tasks = getInteractiveTasks();
-            const completedTasks = tasks.filter(task => interactiveState[task.id] && interactiveState[task.id].completed);
-            if (completedTasks.length) {
-                items.push(`已完成 ${completedTasks.length}/${tasks.length} 项互动任务，结论里会加入更具体的作答表现依据。`);
-            } else if (tasks.length) {
-                items.push('建议补全互动任务，这样系统给出的判断依据会更完整。');
+                items.push(`${appData[currentTab].dimensions[strongest.index].name} 环节目前呈现 ${status}，可视为孩子现阶段的相对优势点。`);
             }
 
             const nextStep = buildModuleStates().find(step => !step.completed);
             if (nextStep) {
-                items.push(`下一步建议继续完成「${nextStep.label}」，让报告里的依据链更完整。`);
+                items.push(`下一步建议继续梳理「${nextStep.label}」，让判断逻辑链条更闭环。`);
             }
 
             return items.slice(0, 3);
@@ -1986,17 +1379,10 @@
             const strongestName = appData[currentTab].dimensions[strongest.index].name;
             const weakestName = appData[currentTab].dimensions[weakest.index].name;
 
-            if (currentTab === 'primary') {
-                if (strongest.index === weakest.index) {
-                    return ` 从目前已完成的模块看，孩子在「${strongestName}」上的表现相对更稳定，说明已有一定方法基础。建议继续补全其余模块，这样结果会更清楚地区分“基础不错但方法未稳”和“底层能力确实需要加强”这两种不同情况。`;
-                }
-                return ` 从本次已完成的模块看，孩子在「${strongestName}」上的表现相对更稳定，而「${weakestName}」仍是当前更需要重点关注的环节。这样的差异往往意味着孩子并非全面落后，而是某些关键方法或执行细节还没有稳定下来，所以需要更有针对性的支持。`;
-            }
-
             if (strongest.index === weakest.index) {
-                return ` 从目前已完成的模块看，孩子在「${strongestName}」上的参与状态和完成质量相对更稳定。建议继续补全后续环节，这样能更完整地看到孩子在不同任务中的表现节奏。`;
+                return ` 从目前已填写的模块看，孩子在「${strongestName}」上的表现记录相对稳定。建议继续补全余下模块，这样能更全景式地看到孩子在不同维度的发展节奏。`;
             }
-            return ` 从本次已完成的模块看，孩子在「${strongestName}」上的表现相对更稳，而「${weakestName}」仍需要更多支持。这样的表现差异说明，孩子已经具备部分可发展的优势点，只是还需要更有针对性的引导来把能力稳定下来。`;
+            return ` 从家长的综合记录看，孩子在「${strongestName}」方面表现相对最稳，具备可挖掘的优势；而「${weakestName}」环节存在较为明显的波折。这说明孩子现阶段不是全面滞后，而是特定维度的能力养成还需要更加系统的外部环境和家庭干预。`;
         }
 
         function buildDimensionAdviceNarrative(dimScores) {
@@ -2006,13 +1392,9 @@
             }
 
             const focusNames = answered.slice(0, Math.min(2, answered.length)).map(item => `「${appData[currentTab].dimensions[item.index].name}」`);
-            const focusText = focusNames.join('和');
+            const focusText = focusNames.join('与');
 
-            if (currentTab === 'primary') {
-                return ` 建议接下来优先围绕${focusText}做阶段性系统支持，把孩子当前最容易波动的几个关键动作拆开训练，例如启动速度、信息提取、复查动作或情绪恢复。比起单纯增加作业量，更适合配合连续性的课程跟进，这样更容易把短期提升沉淀成稳定习惯。`;
-            }
-
-            return ` 建议接下来优先围绕${focusText}安排更连续的游戏化支持，让孩子在低压力、强反馈的节奏里逐步把能力稳定下来。相比零散练习，配合连续性的课程引导往往更容易让孩子建立成功体验和学习自信。`;
+            return ` 建议接下来将教养和支持的优先级倾斜到${focusText}板块。通过降低此部分的单次挑战门槛，配合持续且高频率的正向反馈，让孩子慢慢在这些痛点环节建立成功体验，最终化为潜意识的习惯。`;
         }
 
         function buildStrengthItems(dimScores) {
@@ -2028,23 +1410,13 @@
                 .filter(item => item.answered > 0)
                 .sort((a, b) => (b.score / b.max) - (a.score / a.max));
 
-            dimensionRank.slice(0, 2).forEach(item => {
+            dimensionRank.slice(0, 3).forEach(item => {
                 const label = getDimensionStatusMeta(item.score, item.max).label;
-                items.push(`${appData[currentTab].dimensions[item.index].name}：${label}，当前已记录 ${item.answered}/${appData[currentTab].dimensions[item.index].items.length} 项，其中 3 分 ${item.counts[3]} 项。`);
+                items.push(`家长在【${appData[currentTab].dimensions[item.index].name}】方面给出了较高的整体评价（${label}）。已记录的 ${item.answered} 个生活切面中，有 ${item.counts[3]} 项表现非常稳定。`);
             });
 
-            getInteractiveTasks()
-                .filter(task => {
-                    const state = interactiveState[task.id];
-                    return state && state.completed && state.score >= Math.ceil(task.maxScore / 2);
-                })
-                .slice(0, 2)
-                .forEach(task => {
-                    items.push(`${task.name}：${buildTaskOutcome(task, interactiveState[task.id])}`);
-                });
-
             if (!items.length) {
-                items.push('完成至少一个模块后，这里会自动提炼孩子本次表现较亮眼的部分。');
+                items.push('完成问卷填写后，系统会自动提炼孩子表现最优异的成长维度。');
             }
 
             return items.slice(0, 4);
@@ -2059,18 +1431,13 @@
                     counts: getScoreCounts(index)
                 }))
                 .filter(item => item.answered > 0)
-                .map(item => `观察量表 · ${appData[currentTab].dimensions[item.index].name}：已记录 ${item.answered}/${appData[currentTab].dimensions[item.index].items.length} 项，其中 3 分 ${item.counts[3]} 项、2 分 ${item.counts[2]} 项、1 分 ${item.counts[1]} 项。`);
+                .map(item => `家长客观观察记录表 · ${appData[currentTab].dimensions[item.index].name}维度：录入 ${item.answered} 项，其中“非常稳定” ${item.counts[3]} 项、“偶尔做到” ${item.counts[2]} 项、“不稳定” ${item.counts[1]} 项。`);
 
-            const taskItems = getInteractiveTasks()
-                .filter(task => interactiveState[task.id] && interactiveState[task.id].completed)
-                .map(task => `互动任务 · ${task.name}：${buildTaskOutcome(task, interactiveState[task.id])}`);
-
-            const items = [...taskItems, ...dimensionItems];
-            if (!items.length) {
-                items.push('完成至少一个模块后，这里会自动列出支持结论的测评依据。');
+            if (!dimensionItems.length) {
+                dimensionItems.push('完成数据录入后，将在这里罗列支撑后续排课、教养建议的数据来源证据。');
             }
 
-            return items.slice(0, 6);
+            return dimensionItems.slice(0, 6);
         }
 
         function buildCourseMatchItems(dimScores) {
@@ -2087,8 +1454,8 @@
             if (!answeredDimensions.length) {
                 return [{
                     badge: '待生成',
-                    title: '完成测评后可生成课程承接建议',
-                    body: '完成至少一个模块后，这里会结合孩子当前的关键短板与发展节奏，给出更贴合的课程方向和阶段支持建议。'
+                    title: '完成问卷后可生成专项建议',
+                    body: '完成后，会结合关键短板给到最贴合的课外支持方向。'
                 }];
             }
 
@@ -2098,7 +1465,7 @@
                 return {
                     badge: '优先支持方向',
                     title: course.title,
-                    body: `当前在「${dimName}」这一块更需要系统巩固。建议把支持重点放在${course.focus}，配合阶段性的课程跟进会更容易把单次表现稳定成方法和习惯。`
+                    body: `根据家长的数据反馈，在「${dimName}」上存在迫切巩固需求。建议将干预重心放在${course.focus}，避免用零散说教代替系统培养。`
                 };
             });
 
@@ -2133,9 +1500,6 @@
 
         function renderCourseMatches(dimScores) {
             const items = buildCourseMatchItems(dimScores);
-            document.getElementById('course-match-intro').textContent = dimScores.some(score => score > 0)
-                ? '基于本次测评，下面这些方向更适合作为后续系统支持的优先选择。如果希望孩子的变化更稳定，建议尽早配合阶段性课程跟进。'
-                : '基于本次测评，下面这些方向更适合作为后续系统支持的优先选择，也更方便后续安排更有针对性的课程支持。';
             document.getElementById('course-match-list').innerHTML = items.map(item => `
                 <div class="course-card">
                     <div class="course-badge">${item.badge}</div>
@@ -2149,24 +1513,10 @@
             const dimScores = calculateDimensionScores();
             const totalScore = dimScores.reduce((a, b) => a + b, 0);
             const totalMax = getTotalMaxScore();
-            const interactiveMax = getInteractiveMaxScore();
-            const interactiveTotal = getInteractiveTotalScore();
-            const completedCount = getCompletedInteractiveCount();
 
             document.getElementById('total-score-display').innerHTML = `${totalScore}<span class="text-sm text-stone-400 font-normal">/${totalMax}</span>`;
             document.getElementById('text-score-display').textContent = `${getTextTotalScore()}/${getTextMaxScore()}`;
             document.getElementById('report-total-display').textContent = `${totalScore}/${totalMax}`;
-            document.getElementById('interactive-score-display').textContent = interactiveMax
-                ? `${interactiveTotal}/${interactiveMax} · 已完成 ${completedCount}/${getInteractiveTasks().length} 项`
-                : '当前阶段无互动任务';
-            document.getElementById('interactive-completion-badge').textContent = interactiveMax
-                ? `互动任务 ${completedCount}/${getInteractiveTasks().length}`
-                : '当前阶段无互动任务';
-
-            const interactiveSuite = document.getElementById('interactive-suite-score');
-            if (interactiveSuite) {
-                interactiveSuite.textContent = `${interactiveTotal}/${interactiveMax} 分`;
-            }
 
             const chartMax = Math.max(...appData[currentTab].dimensions.map((dim, index) => getDimensionMaxScore(index)));
             radarChartInstance.data.labels = appData[currentTab].dimensions.map(d => d.name.replace('与', ' / '));
@@ -2204,92 +1554,20 @@
             badge.className = `inline-flex rounded-full px-3 py-1 text-sm font-bold ${currentLevel.color}`;
             badge.textContent = currentLevel.label;
 
-            document.getElementById('result-analysis').textContent = `${currentLevel.analysis}${buildDimensionAnalysisNarrative(dimScores)}${buildInteractiveAnalysisSuffix()}`;
-            document.getElementById('result-advice').textContent = `${currentLevel.advice}${buildDimensionAdviceNarrative(dimScores)}${buildInteractiveAdviceSuffix()}`;
+            document.getElementById('result-analysis').textContent = `${currentLevel.analysis}${buildDimensionAnalysisNarrative(dimScores)}`;
+            document.getElementById('result-advice').textContent = `${currentLevel.advice}${buildDimensionAdviceNarrative(dimScores)}`;
 
             renderStrengthSummary(dimScores);
             renderEvidenceSummary(dimScores);
             renderCourseMatches(dimScores);
-            renderInteractiveSummary();
 
             resultContent.classList.remove('fade-in');
             void resultContent.offsetWidth;
             resultContent.classList.add('fade-in');
         }
 
-        function renderInteractiveSummary() {
-            const section = document.getElementById('interactive-summary-section');
-            const list = document.getElementById('interactive-summary-list');
-            const tasks = getInteractiveTasks();
-
-            if (!tasks.length) {
-                section.classList.add('hidden');
-                list.innerHTML = '';
-                return;
-            }
-
-            section.classList.remove('hidden');
-            list.innerHTML = tasks.map(task => {
-                const state = interactiveState[task.id];
-                return `
-                    <div class="avoid-break-item bg-stone-50 rounded-lg p-4 border border-stone-100">
-                        <div class="flex justify-between items-start">
-                            <div class="font-bold text-sm text-stone-800">${task.name}</div>
-                            <div class="text-xs font-bold text-brand bg-orange-100 px-2 py-0.5 rounded">${(state && state.completed) ? `${state.score}/${task.maxScore} 分` : '未完成'}</div>
-                        </div>
-                        <p class="mt-2 text-xs leading-relaxed text-stone-600">${buildTaskOutcome(task, state)}</p>
-                    </div>
-                `;
-            }).join('');
-        }
-
         function getThresholdForScore(totalScore) {
             return appData[currentTab].thresholds.find(t => totalScore >= t.min && totalScore <= t.max) || appData[currentTab].thresholds[0];
-        }
-
-        function buildInteractiveAnalysisSuffix() {
-            const tasks = getInteractiveTasks();
-            if (!tasks.length) {
-                return '';
-            }
-
-            const completed = getCompletedInteractiveCount();
-            const total = tasks.length;
-            const score = getInteractiveTotalScore();
-            const max = getInteractiveMaxScore();
-
-            if (completed < total) {
-                return ` 当前游戏化互动题完成 ${completed}/${total} 项，现阶段结论会更偏向基础观察结果，补全动画题与舒尔特方块后能获得更完整的动态记忆、故事理解与专注画像。`;
-            }
-            if (score >= max - 1) {
-                return ' 在游戏化互动题中，孩子对动画顺序观察、故事理解、表情识别和按序搜索任务的投入度都比较高，短时保持、情绪识别与持续专注得分也相对更高。';
-            }
-            if (score >= Math.ceil(max * 0.6)) {
-                return ' 游戏化任务显示孩子在动画观察、故事先后理解和视觉搜索中能够逐步进入状态，这部分能力正处在稳定发展过程中。';
-            }
-            return ' 游戏化任务提示孩子在连续信息保持、情绪线索识别和目标搜索上还需要更多支持，后续训练中可以重点关注。';
-        }
-
-        function buildInteractiveAdviceSuffix() {
-            const tasks = getInteractiveTasks();
-            if (!tasks.length) {
-                return '';
-            }
-
-            const completed = getCompletedInteractiveCount();
-            const score = getInteractiveTotalScore();
-            const max = getInteractiveMaxScore();
-
-            if (completed < tasks.length) {
-                return ' 建议在正式沟通前尽量补全动画题和舒尔特方块，让家长看到孩子在真实互动任务中的表现依据。';
-            }
-            if (score >= max - 1) {
-                return ' 课程上可适度加入更有挑战的节奏记忆游戏、动画故事复述、表情角色扮演和进阶视觉追踪任务，继续放大孩子的优势。';
-            }
-            if (score >= Math.ceil(max * 0.6)) {
-                return ' 可继续通过“听口令做动作”“动画故事排顺序”“表情模仿”和“数字找一找”等短时任务，把表现逐步稳定成习惯。';
-            }
-            return ' 建议优先安排节奏短、反馈快的专注力小游戏，例如动画看一看、故事排顺序、表情模仿和目标搜索活动，先帮孩子建立成功体验。';
         }
 
         function updateExportButtonState(totalScore) {
@@ -2297,123 +1575,14 @@
                 button.disabled = totalScore === 0;
             });
             document.getElementById('report-ready-status').textContent = totalScore === 0
-                ? '完成至少一个模块后，请点击页面顶部按钮导出正式报告。'
-                : '当前已有记录，请点击页面顶部按钮打印/导出报告。';
-        }
-
-        function setExportBusyState(isBusy) {
-            const btn = document.getElementById('export-pdf-btn');
-            const statusText = document.getElementById('report-ready-status');
-
-            if (isBusy) {
-                btn.disabled = true;
-                btn.innerHTML = '<span>⏳</span><span>正在生成报告...</span>';
-                statusText.textContent = '正在生成并下载 PDF，请稍候…';
-            } else {
-                const totalScore = calculateDimensionScores().reduce((a, b) => a + b, 0);
-                btn.disabled = totalScore === 0;
-                btn.innerHTML = '<span>🖨️</span><span>下载正式测评报告</span>';
-                statusText.textContent = totalScore === 0
-                    ? '完成至少一个模块后，请点击页面顶部按钮导出正式报告。'
-                    : '当前已有记录，请点击页面顶部按钮打印/导出报告。';
-            }
-        }
-
-        function buildExportFilename() {
-            const stageName = currentTab === 'toddler' ? '幼儿阶段' : '小学阶段';
-            const date = new Date();
-            const pad = value => String(value).padStart(2, '0');
-            const stamp = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-            const sName = document.getElementById('input-student-name').value.trim();
-            const namePrefix = sName ? `${sName}-` : '';
-            return `${namePrefix}${stageName}-测评报告-${stamp}.pdf`;
-        }
-
-        async function waitForPDFRenderReady() {
-            if (document.fonts && document.fonts.ready) {
-                try {
-                    await document.fonts.ready;
-                } catch (error) {
-                    console.warn('字体加载等待失败，继续导出 PDF。', error);
-                }
-            }
-
-            const chartImage = document.getElementById('print-chart-image');
-            if (chartImage && chartImage.src && !chartImage.complete) {
-                await new Promise(resolve => {
-                    const cleanup = () => {
-                        chartImage.removeEventListener('load', cleanup);
-                        chartImage.removeEventListener('error', cleanup);
-                        resolve();
-                    };
-                    chartImage.addEventListener('load', cleanup, { once: true });
-                    chartImage.addEventListener('error', cleanup, { once: true });
-                });
-            }
-
-            await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-            await new Promise(resolve => setTimeout(resolve, 250)); // 确保DOM完全静止
-        }
-
-        async function downloadPDFReport() {
-            const source = document.querySelector('#print-report .print-shell');
-            document.body.classList.add('pdf-exporting');
-
-            try {
-                await waitForPDFRenderReady();
-
-                const options = {
-                    margin: [10, 10, 10, 10], // 上右下左边距，单位毫米
-                    filename: buildExportFilename(),
-                    image: { type: 'jpeg', quality: 1.0 },
-                    html2canvas: {
-                        scale: 2, // 提高清晰度
-                        useCORS: true,
-                        backgroundColor: '#ffffff',
-                        windowWidth: 860 // 锁定视口宽度，防止栅格变形
-                    },
-                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                    pagebreak: {
-                        mode: ['css', 'legacy'],
-                        avoid: ['.avoid-break-item', '.print-module'] // 精准保护不断行
-                    }
-                };
-
-                await window.html2pdf().set(options).from(source).save();
-                document.getElementById('report-ready-status').textContent = 'PDF 已成功下载！如未看到文件，请检查浏览器下载列表。';
-            } catch (error) {
-                console.error('PDF Export Error:', error);
-                document.getElementById('report-ready-status').textContent = '自动下载失败，已为您唤起浏览器打印（可选择另存为PDF）。';
-                setTimeout(() => window.print(), 300);
-            } finally {
-                document.body.classList.remove('pdf-exporting');
-            }
-        }
-
-        async function exportPDF() {
-            const totalScore = calculateDimensionScores().reduce((a, b) => a + b, 0);
-            if (totalScore === 0) {
-                alert('请先完成至少一项测评内容后再导出。');
-                return;
-            }
-
-            // 1. 准备打印数据，填充隐藏的打印专用 DOM
-            preparePrintReport();
-
-            // 2. 更新页面上的状态提示
-            document.getElementById('report-ready-status').textContent = '已为您唤起浏览器打印，请在打印界面中选择“另存为 PDF”。';
-
-            // 3. 延迟 300 毫秒，确保图表的 Base64 数据完全写入 img 标签，且 DOM 更新完毕
-            setTimeout(() => {
-                window.print();
-            }, 300);
+                ? '完成至少一项打分后，请点击顶部按钮生成报告。'
+                : '系统已备好报告，请点击顶部导出按钮。';
         }
 
         function preparePrintReport() {
             const totalScore = calculateDimensionScores().reduce((a, b) => a + b, 0);
             const threshold = getThresholdForScore(totalScore);
             const dimScores = calculateDimensionScores();
-            const tasks = getInteractiveTasks();
             const strengths = buildStrengthItems(dimScores);
             const evidence = buildEvidenceItems(dimScores);
             const courseMatches = buildCourseMatchItems(dimScores);
@@ -2425,26 +1594,15 @@
             document.getElementById('print-student-name').textContent = sName;
             document.getElementById('print-student-age').textContent = sAge;
 
-            // 头部信息
             document.getElementById('print-title').textContent = appData[currentTab].title;
-
-            // 【修复点】：增加元素存在性判断，避免因找不到 print-subtitle 导致程序崩溃
-            const subtitleEl = document.getElementById('print-subtitle');
-            if (subtitleEl) {
-                subtitleEl.textContent = `${stageProfiles[currentTab].trustTitle} · ${stageProfiles[currentTab].purpose}`;
-            }
 
             document.getElementById('print-time').textContent = new Date().toLocaleString('zh-CN', { hour12: false });
 
             // 核心分数
             document.getElementById('print-total-score').textContent = `${totalScore} / ${getTotalMaxScore()}`;
-            document.getElementById('print-breakdown').textContent = tasks.length
-                ? `量表 ${getTextTotalScore()}/${getTextMaxScore()} · 互动 ${getInteractiveTotalScore()}/${getInteractiveMaxScore()}`
-                : `量表 ${getTextTotalScore()}/${getTextMaxScore()} · 当前无互动任务`;
+            document.getElementById('print-breakdown').textContent = `全维度观察量表得分：${getTextTotalScore()}/${getTextMaxScore()}`;
             document.getElementById('print-level').textContent = threshold.label;
-            document.getElementById('print-interactive-overview').textContent = tasks.length
-                ? `互动题完成 ${getCompletedInteractiveCount()}/${tasks.length} 项`
-                : '当前阶段未设置互动任务';
+            document.getElementById('print-interactive-overview').textContent = '家庭独立记录版';
 
             // 剖析与建议
             document.getElementById('print-analysis').textContent = document.getElementById('result-analysis').textContent;
@@ -2460,28 +1618,6 @@
                     <div class="mt-1 text-xl font-black text-stone-800">${dimScores[index]} <span class="text-xs font-normal text-stone-400">/ ${getDimensionMaxScore(index)}</span></div>
                 </div>
             `).join('');
-
-            // 互动任务记录
-            const printInteractiveSection = document.getElementById('print-interactive-section');
-            const printInteractiveList = document.getElementById('print-interactive-list');
-            if (tasks.length) {
-                printInteractiveSection.classList.remove('hidden');
-                printInteractiveList.innerHTML = tasks.map(task => {
-                    const state = interactiveState[task.id];
-                    return `
-                        <div class="avoid-break-item bg-stone-50 rounded-lg p-4 border border-stone-100">
-                            <div class="flex justify-between items-start">
-                                <div class="font-bold text-sm text-stone-800">${task.name}</div>
-                                <div class="text-xs font-bold text-brand bg-orange-100 px-2 py-0.5 rounded">${(state && state.completed) ? `${state.score}/${task.maxScore} 分` : '未完成'}</div>
-                            </div>
-                            <p class="mt-2 text-xs leading-relaxed text-stone-600">${buildTaskOutcome(task, state)}</p>
-                        </div>
-                    `;
-                }).join('');
-            } else {
-                printInteractiveSection.classList.add('hidden');
-                printInteractiveList.innerHTML = '';
-            }
 
             // 亮点与依据
             document.getElementById('print-strengths-list').innerHTML = strengths.map(item => `
@@ -2503,157 +1639,20 @@
             `).join('');
         }
 
-        function getAnimationOptionClass(state, index) {
-            if (!state || state.selectedOption === null) {
-                return '';
-            }
-            if (index === state.correctIndex) {
-                return 'correct';
-            }
-            if (index === state.selectedOption && index !== state.correctIndex) {
-                return 'wrong';
-            }
-            return '';
-        }
-
-        function getSchulteCellClass(state, number) {
-            if (!state) return '';
-            const classes = [];
-            if (state.clickedNumbers && state.clickedNumbers.includes(number)) {
-                classes.push('correct');
-            }
-            if (state.lastWrong === number) {
-                classes.push('error');
-            }
-            return classes.join(' ');
-        }
-
-        function getSummaryPillClass(state, task) {
-            if (!state || !state.completed) {
-                return 'summary-pill bg-stone-100 text-stone-600';
-            }
-            if (state.score === task.maxScore) {
-                return 'summary-pill bg-green-100 text-green-700';
-            }
-            if (state.score >= Math.ceil(task.maxScore / 2)) {
-                return 'summary-pill bg-blue-100 text-blue-700';
-            }
-            return 'summary-pill bg-orange-100 text-orange-700';
-        }
-
-        function buildTaskOutcome(task, state) {
-            if (!state || !state.completed) {
-                return '本项尚未完成，建议完成后再与家长沟通最终结论，这样会更完整。';
+        async function exportPDF() {
+            const totalScore = calculateDimensionScores().reduce((a, b) => a + b, 0);
+            if (totalScore === 0) {
+                alert('请先完成至少一项测评内容后再导出。');
+                return;
             }
 
-            if (task.type === 'animation') {
-                if (state.correct && state.attempts === 1) {
-                    return task.outcomes.firstTry;
-                }
-                if (state.correct && state.attempts === 2) {
-                    return task.outcomes.secondTry;
-                }
-                if (state.correct) {
-                    return task.outcomes.repeatTry;
-                }
-                return task.outcomes.incorrect;
-            }
+            preparePrintReport();
 
-            const seconds = formatSeconds(state.durationMs);
-            if (state.score === 3) {
-                return `按顺序顺利完成了 1 到 9 的搜索，用时 ${seconds} 秒、错误 ${state.errors} 次，持续专注和视觉搜索表现优秀。`;
-            }
-            if (state.score === 2) {
-                return `完成了舒尔特方块挑战，用时 ${seconds} 秒、错误 ${state.errors} 次，说明孩子能逐步进入状态，专注力处于逐步建立阶段。`;
-            }
-            return `已完成挑战，用时 ${seconds} 秒、错误 ${state.errors} 次，目标搜索和按序执行还需要更多短时、高反馈的练习。`;
-        }
+            document.getElementById('report-ready-status').textContent = '已为您唤起浏览器打印，请在打印界面中选择“另存为 PDF”。';
 
-        function formatVisualSequence(sequence, frames) {
-            return sequence.map(index => `${frames[index].emoji} ${frames[index].label}`).join('  →  ');
-        }
-
-        function generateAnimationSequence(poolSize, length) {
-            return shuffleArray(Array.from({ length: poolSize }, (_, index) => index)).slice(0, length);
-        }
-
-        function buildAnimationOptions(sequence, poolSize) {
-            const options = [sequence.slice()];
-            const seen = new Set([sequence.join('-')]);
-
-            while (options.length < 3) {
-                let candidate = sequence.slice();
-                if (Math.random() > 0.5) {
-                    const first = Math.floor(Math.random() * candidate.length);
-                    let second = Math.floor(Math.random() * candidate.length);
-                    while (second === first) {
-                        second = Math.floor(Math.random() * candidate.length);
-                    }
-                    [candidate[first], candidate[second]] = [candidate[second], candidate[first]];
-                } else {
-                    const replaceIndex = Math.floor(Math.random() * candidate.length);
-                    const available = Array.from({ length: poolSize }, (_, index) => index).filter(index => !candidate.includes(index));
-                    if (available.length) {
-                        candidate[replaceIndex] = available[Math.floor(Math.random() * available.length)];
-                    } else {
-                        candidate = shuffleArray(candidate);
-                    }
-                }
-
-                const key = candidate.join('-');
-                if (!seen.has(key)) {
-                    seen.add(key);
-                    options.push(candidate);
-                }
-            }
-
-            const shuffledOptions = shuffleArray(options.map(option => option.slice()));
-            return {
-                options: shuffledOptions,
-                correctIndex: shuffledOptions.findIndex(option => option.join('-') === sequence.join('-'))
-            };
-        }
-
-        function generateShuffledNumbers(count) {
-            return shuffleArray(Array.from({ length: count }, (_, index) => index + 1));
-        }
-
-        function calculateSchulteScore(durationMs, errors) {
-            const seconds = durationMs / 1000;
-            if (seconds <= 18 && errors <= 1) {
-                return 3;
-            }
-            if (seconds <= 30 && errors <= 3) {
-                return 2;
-            }
-            return 1;
-        }
-
-        function buildSchulteFeedback(score, durationMs, errors) {
-            const seconds = formatSeconds(durationMs);
-            if (score === 3) {
-                return `完成得很稳，用时 ${seconds} 秒，错误 ${errors} 次，孩子在规则跟随和视觉搜索上表现很不错。`;
-            }
-            if (score === 2) {
-                return `挑战完成，用时 ${seconds} 秒，错误 ${errors} 次，继续做短时目标搜索游戏会更稳定。`;
-            }
-            return `任务已完成，用时 ${seconds} 秒，错误 ${errors} 次，建议后续继续通过舒尔特方块和按序找图游戏来锻炼。`;
-        }
-
-        function formatSeconds(durationMs) {
-            if (!durationMs && durationMs !== 0) {
-                return '--';
-            }
-            return (durationMs / 1000).toFixed(1);
-        }
-
-        function shuffleArray(array) {
-            const cloned = array.slice();
-            for (let i = cloned.length - 1; i > 0; i -= 1) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [cloned[i], cloned[j]] = [cloned[j], cloned[i]];
-            }
-            return cloned;
+            setTimeout(() => {
+                window.print();
+            }, 300);
         }
 
         function initChart() {
@@ -2667,7 +1666,7 @@
                 data: {
                     labels: ['', '', '', '', ''],
                     datasets: [{
-                        label: '能力评估值',
+                        label: '能力观察评估值',
                         data: [0, 0, 0, 0, 0],
                         rawScores: [0, 0, 0, 0, 0],
                         maxScores: [0, 0, 0, 0, 0],
